@@ -1,0 +1,434 @@
+{{ 'age-gateway.scss.css' | asset_url | stylesheet_tag }}
+
+<section class="age-gateway">
+  <div class="age-gateway__wrap">
+    <form action="" class="age-gateway-form">
+      {%- if section.settings.age_gate_logo != blank -%}
+        <div class="age-gateway-form__logo">
+          <img src="{{ section.settings.age_gate_logo | image_url: width: 330 }}">
+        </div>
+        {% endif %}
+      {% if request.page_type == 'index' %}
+        <div class="age-gateway-form__brands">
+          <input type="hidden" name="theme_id" id="theme_id" value="{{ theme.id }}">
+          <ul class="age-gateway-form__brands__list list-unstyled">
+            <li class="age-gateway-form__brands__item">
+              <div class="form-radio">
+                <input type="radio" class="radio-input" name="brand" id="age_gateway_glenfiddich" value="glenfiddich" required>
+                <label class="radio-circle" for="age_gateway_glenfiddich"></label>
+                <label class="radio-label" for="age_gateway_glenfiddich">
+                  {%- if section.settings.age_gate_icon_first != blank -%}
+                    <img src="{{ section.settings.age_gate_icon_first | img_url: 'x20' }}" >
+                  {%- else -%}
+                    <!-- {% render 'logo-glenfiddich' %} -->
+                    glenfiddich
+                  {%- endif -%}
+                </label>
+              </div>
+              {%- liquid
+                assign glenfiddich_link = '/'
+                if section.settings.age_gate_brand_link_first != blank
+                  assign glenfiddich_link = section.settings.age_gate_brand_link_first
+                endif
+              -%}
+              <input type="hidden" class="brand-link-input" name="glenfiddichLink" id="glenfiddichLink" value="{{ glenfiddich_link }}">
+            </li>
+            <li class="age-gateway-form__brands__item">
+              <div class="form-radio">
+                <input type="radio" class="radio-input" name="brand" id="age_gateway_theBalvenie" value="theBalvenie">
+                <label class="radio-circle" for="age_gateway_theBalvenie"></label>
+                <label class="radio-label" for="age_gateway_theBalvenie">
+                  {%- if section.settings.age_gate_icon_second != blank -%}
+                    <img src="{{ section.settings.age_gate_icon_second | img_url: 'x20' }}">
+                  {%- else -%}
+                    <!-- {% render 'logo-the-balvenie' %} -->
+                    the balvenie
+                  {%- endif -%}
+                </label>
+              </div>
+              {%- liquid
+                assign theBalvenie_link = '/'
+                if section.settings.age_gate_brand_link_second != blank
+                  assign theBalvenie_link = section.settings.age_gate_brand_link_second
+                endif
+              -%}
+              <input type="hidden" class="brand-link-input" name="theBalvenieLink" id="theBalvenieLink" value="{{ theBalvenie_link }}">
+            </li>
+            <li class="age-gateway-form__brands__item">
+              <div class="form-radio">
+                <input type="radio" class="radio-input" name="brand" id="age_gateway_monkeyShoulder" value="monkeyShoulder">
+                <label class="radio-circle" for="age_gateway_monkeyShoulder"></label>
+                <label class="radio-label" for="age_gateway_monkeyShoulder">
+                  {%- if section.settings.age_gate_icon_third != blank -%}
+                  <img src="{{ section.settings.age_gate_icon_third | img_url: 'x20' }}">
+                  {%- else -%}
+                    <!-- {% render 'logo-monkey-shoulder' %} -->
+                    monkey shoulder
+                  {%- endif -%}
+                </label>
+              </div>
+              {%- liquid
+                assign monkeyShoulder_link = '/'
+                if section.settings.age_gate_brand_link_third != blank
+                  assign monkeyShoulder_link = section.settings.age_gate_brand_link_third
+                endif
+              -%}
+              <input type="hidden" class="brand-link-input" name="monkeyShoulderLink" id="monkeyShoulderLink" value="{{ monkeyShoulder_link }}">
+            </li>
+            <li class="age-gateway-form__brands__item">
+              <div class="form-radio">
+                <input type="radio" class="radio-input" name="brand" id="age_gateway_hendrick" value="hendrick">
+                <label class="radio-circle" for="age_gateway_hendrick"></label>
+                <label class="radio-label" for="age_gateway_hendrick">
+                  {%- if section.settings.age_gate_icon_four != blank -%}
+                    <img src="{{ section.settings.age_gate_icon_four | img_url: 'x20' }}">
+                  {%- else -%}
+                    <!-- {{ 'hendrick-logo.png' | asset_url | img_tag: 'logo' }} -->
+                    hendrick's
+                  {%- endif -%}
+                </label>
+              </div>
+              {%- liquid
+                assign hendrick_link = '/'
+                if section.settings.age_gate_brand_link_four != blank
+                  assign hendrick_link = section.settings.age_gate_brand_link_four
+                endif
+              -%}
+              <input type="hidden" class="brand-link-input" name="hendrickLink" id="hendrickLink" value="{{ hendrick_link }}">
+            </li>
+          </ul>
+          <p class="age-gate-error" id="age-gate-error--brands"></p>
+        </div>
+      {% endif %}
+      <div class="age-gateway-form__birthday">
+        <p class="age-gateway-form__birthday__label">{{ section.settings.age_gate_bd_title }}</p>
+        <div class="age-gateway-form__birthday__inputs">
+          <input class="form-input--border-bottom" type="number" onchange="convertDateFormat" placeholder="DD" name="day" min="1" max="31" required="">
+          <input class="form-input--border-bottom" type="number" onchange="convertDateFormat" placeholder="MM" name="month" min="1" max="12" required="">
+          <input class="form-input--border-bottom" type="number" onchange="convertDateFormat" placeholder="YYYY" name="year" min="1900" max="2022" required="">
+        </div>
+        <p class="age-gate-error" id="age-gate-error--birthday"></p>
+      </div>
+      <div class="age-gateway-form__checkbox">
+        <div class="form-checkbox">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">{{ section.settings.age_gate_remember }}</label>
+        </div>
+      </div>
+      <button type="submit" title="LETS GO!" class="button--link age-gateway-form__button">{{ section.settings.age_gate_button }}</button>
+      <div class="age-gateway-form__term-condition">{{ section.settings.age_gate_privacy }}</div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const ageGateWrapper = document.querySelector('.section-age-gateway') || false;
+  
+  const convertDateFormat = (e) => {
+    const element = e.target;
+    const value = element.value;
+    return element.value = value.length < 2 ? `0${value}`: value;
+  };
+
+  if(ageGateWrapper) {
+
+    const form = ageGateWrapper.querySelector('.age-gateway-form') || false;
+    const brandsForm = ageGateWrapper.querySelector('.age-gateway-form .age-gateway-form__brands') || false;
+    const ageLimit = {{ section.settings.age_gate_limit }};
+    const birthdayError = ageGateWrapper.querySelector('.age-gate-error#age-gate-error--birthday') || false;
+    const brandError = ageGateWrapper.querySelector('.age-gate-error#age-gate-error--brands') || false;
+    const buttonSubmit = ageGateWrapper.querySelector('.age-gateway-form__button') || false;
+
+    const checkStopScroll = function() {
+      if(ageGateWrapper.classList.contains('show')) {
+        document.querySelector('html').classList.add('stop-scrolling');
+      } else {
+        document.querySelector('html').classList.remove('stop-scrolling');
+      }
+    };
+
+    const displayError = function(type, errMessage) {
+      if(type =='brand') {
+        brandError.textContent = errMessage;
+        brandError.classList.add('active');
+      }
+
+      if(type =='birthday') {
+        birthdayError.textContent = errMessage;
+        birthdayError.classList.add('active');
+      }
+    }
+
+    const hiddenError = function(type) {
+      if(type =='brand') {
+        brandError.classList.remove('active');
+      }
+
+      if(type =='birthday') {
+        birthdayError.classList.remove('active');
+      }
+    }
+
+    const onSubmitAgeGateForm = function(e) {
+      e.preventDefault();
+
+      // Validate brand required
+      if(brandsForm) {
+        const brandSelected = ageGateWrapper.querySelector('input[name="brand"]:checked') || false;
+
+        if(brandSelected) {
+          hiddenError('brand');
+        } else {
+          displayError('brand', '{{section.settings.age_gate_brand_error_message}}');
+        }
+      }
+
+      // Validate dob
+      const day = ageGateWrapper.querySelector('input[name="day"]').value ? ageGateWrapper.querySelector('input[name="day"]').value : null;
+      const month = ageGateWrapper.querySelector('input[name="month"]').value ? ageGateWrapper.querySelector('input[name="month"]').value : null;
+      const year = ageGateWrapper.querySelector('input[name="year"]').value ? ageGateWrapper.querySelector('input[name="year"]').value : null;
+
+      if(day == null || month == null || year == null) {
+        displayError('birthday','{{section.settings.age_gate_bd_invalid_message}}');
+      } else {
+        hiddenError('birthday');
+
+        const selectDate = new Date(Number(year) + ageLimit, month - 1, day);
+        const currentDate = new Date();
+        const currentYear = new Date().getFullYear();
+
+        function daysInMonth(m, y) {
+          switch (m) {
+            case 2 :
+              return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;
+            case 4 : case 6 : case 9 : case 11 :
+              return 30;
+            default :
+              return 31;
+          }
+        }
+
+        function isValidDate(d, m, y) {
+          return m >= 0 && m <= 12 && d > 0 && d <= daysInMonth(m, y) && y >= 1900 && y <= currentYear;
+        }
+
+        // Validate date value
+        if(!isValidDate(Number(day), Number(month), Number(year))) {
+          displayError('birthday', '{{section.settings.age_gate_bd_invalid_message}}');
+        } else {
+          hiddenError('birthday');
+
+          // Validate age limit
+          if(currentDate < selectDate) {
+            displayError('birthday', '{{section.settings.age_gate_bd_error_message}}');
+          } else {
+            hiddenError('birthday');
+          }
+        }
+      }
+
+      let errorElement = ageGateWrapper.querySelectorAll('.age-gate-error.active') || false;
+
+      if(errorElement.length == 0) {
+        // Handle Remember => Save info to LocalStorage
+        const remeberNode = document.querySelector('#remember');
+        if(remeberNode && remeberNode.checked) {
+          window.localStorage.setItem('age_confirmed_custom', 'true');
+        }
+
+        // Handle SessionStorage
+        window.sessionStorage.setItem('age_confirmed', true);
+
+        // Handle Brand Selected
+        if(brandsForm) {
+          const glenfiddichBrandLink =  document.querySelector('.age-gateway-form #glenfiddichLink').value;
+          const theBalvenieBrandLink =  document.querySelector('.age-gateway-form #theBalvenieLink').value;
+          const monkeyShoulderBrandLink =  document.querySelector('.age-gateway-form #monkeyShoulderLink').value;
+          const hendrickBrandLink = document.querySelector('.age-gateway-form #hendrickLink').value;
+          const brandSelectedVal = ageGateWrapper.querySelector('input[name="brand"]:checked').value;
+
+          window.sessionStorage.setItem('age_brand', brandSelectedVal);
+
+          if(brandSelectedVal == 'glenfiddich') {
+            window.location.href = glenfiddichBrandLink;
+          }
+          if(brandSelectedVal == 'theBalvenie') {
+            window.location.href = theBalvenieBrandLink;
+          }
+          if(brandSelectedVal == 'monkeyShoulder') {
+            window.location.href = monkeyShoulderBrandLink;
+          }
+          if(brandSelectedVal == 'hendrick') {
+            window.location.href = hendrickBrandLink;
+          }
+        } else {
+          // Handle Hidden the popup
+          ageGateWrapper.classList.remove('show');
+          checkStopScroll();
+        }
+      }
+    }
+
+    const handleBrandSelected = function() {
+      let current_theme_id = ageGateWrapper.querySelector('#theme_id').value;
+      let brandlinks = ageGateWrapper.querySelectorAll('.age-gateway-form__brands__item .brand-link-input');
+      let current_url = new URL(window.location.href);
+      let current_url_brand = current_url.searchParams.get("brand");
+
+      if(current_url_brand != null) {
+        brandlinks.forEach(brandLink => {
+          
+          if(brandLink.value != '/') {
+            let url = new URL(brandLink.value);
+            const preview_theme_id = url.searchParams.get("preview_theme_id");
+            const preview_theme_name = url.searchParams.get("brand");
+
+            if(preview_theme_id && preview_theme_name && current_theme_id == preview_theme_id && current_url_brand == preview_theme_name) {
+              brandLink.parentElement.querySelector('.form-radio .radio-input').checked = true;
+            }
+          }
+        })
+      }
+    }
+
+    // Handle brand selected 
+    if(brandsForm) {
+      handleBrandSelected();
+    }
+
+    // Handle display popup
+    if(window.localStorage.getItem('age_confirmed_custom') || window.sessionStorage.getItem('age_confirmed')) {
+      ageGateWrapper.classList.remove('show');
+    }
+
+    checkStopScroll();
+
+    const inputs = ageGateWrapper.querySelectorAll('.age-gateway-form__birthday__inputs > input')
+    if(inputs) {
+      inputs.forEach(input => {
+        input.addEventListener('change', convertDateFormat);
+      })
+    }
+
+    if(buttonSubmit) {            
+      buttonSubmit.addEventListener('click', onSubmitAgeGateForm);
+    }
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Age Gateway",
+  "class": "section-age-gateway show",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Age Gateway"
+    },
+    {
+      "type": "image_picker",
+      "id": "age_gate_logo",
+      "label": "Logo"
+    },
+    {
+      "id": "age_gate_icon_first",
+      "type": "image_picker",
+      "label": "Glenfiddich"
+    },
+    {
+      "id": "age_gate_brand_link_first",
+      "type": "url",
+      "label": "Glenfiddich Link"
+    },
+    {
+      "id": "age_gate_icon_second",
+      "type": "image_picker",
+      "label": "The Balvenie"
+    },
+    {
+      "id": "age_gate_brand_link_second",
+      "type": "url",
+      "label": "The Balvenie Link"
+    },
+    {
+      "id": "age_gate_icon_third",
+      "type": "image_picker",
+      "label": "Monkey Shoulder"
+    },
+    {
+      "id": "age_gate_brand_link_third",
+      "type": "url",
+      "label": "Monkey Shoulder Link"
+    },
+    {
+      "id": "age_gate_icon_four",
+      "type": "image_picker",
+      "label": "Hendrick's"
+    },
+    {
+      "id": "age_gate_brand_link_four",
+      "type": "url",
+      "label": "Hendrick's Link"
+    },
+    {
+      "type": "range",
+      "id": "age_gate_limit",
+      "min": 15,
+      "max": 25,
+      "step": 1,
+      "default": 18,
+      "unit": "age",
+      "label": "Age Limit"
+    },
+    {
+      "id": "age_gate_confirm",
+      "type": "text",
+      "label": "Confirmation Checkbox Label",
+      "default": "I confirm I am of a legal drinking age 18 years old"
+    },
+    {
+      "id": "age_gate_button",
+      "type": "text",
+      "label": "Button Text",
+      "default": "LET'S GO!"
+    },
+    {
+      "id": "age_gate_remember",
+      "type": "text",
+      "label": "Remember Checkbox Label",
+      "default": "Remember Me. Only check this box if you are not using a shared computer."
+    },
+    {
+      "id": "age_gate_bd_title",
+      "type": "text",
+      "label": "Help text",
+      "default": "To experience this site you must be of legal drinking age in Singapore."
+    },
+    {
+      "id": "age_gate_bd_invalid_message",
+      "type": "text",
+      "label": "Birthday Invalid Message",
+      "default": "Please enter a valid date of birth."
+    },
+    {
+      "id": "age_gate_bd_error_message",
+      "type": "text",
+      "label": "Birthday Error Message",
+      "default": "*You are too young to view this website."
+    },
+    {
+      "id": "age_gate_brand_error_message",
+      "type": "text",
+      "label": "Brand Required Message",
+      "default": "Please select a brand to enter the site."
+    },
+    {
+      "id": "age_gate_privacy",
+      "type": "richtext",
+      "label": "Terms & Conditions",
+      "default": "<p>By entering our website you agree to our <a href=\"\/pages\/terms-and-conditions\">Terms & Conditions<\/a> and <a href=\"\/pages\/privacy-policy\">Privacy Policy<\/a>. For information on alcohol responsibility, visit <a href=\"https:\/\/drinkaware.co.uk\">drinkaware.co.uk<\/a>.<\/p>"
+    }
+  ]
+}
+
+{% endschema %}

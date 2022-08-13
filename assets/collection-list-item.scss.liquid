@@ -1,0 +1,97 @@
+// Breakpoint
+$tablet-screen: 768px;
+$desktop-screen: 1024px;
+$desktop-screen-large: 1440px;
+
+$color-primary-background: {{ settings.primary_background }};
+
+.card-collection {
+  .card-collection__heading {
+    @media (min-width: $desktop-screen) {
+      display: flex;
+    }
+
+    .card-collection__heading__title {
+      margin: 0;
+      font-size: var(--font-size-h5);
+      line-height: 26.4px;
+
+      @media (min-width: $desktop-screen) {
+        width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+        padding-right: calc(var(--grid-desktop-horizontal-spacing) / 2);
+        font-size: var(--font-size-h4);
+        line-height: 38.88px
+      }
+    }
+
+    .card-collection__heading__desc {
+      margin: 15px 0 0;
+
+      @media (min-width: $desktop-screen) {
+        margin: 0;
+        width: calc(100% - (33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3));
+        padding-left: var(--grid-desktop-horizontal-spacing);
+      }
+    }
+  }
+
+  .card-collection__list {
+    row-gap: 30px;
+    margin-top: 30px;
+
+    @media (min-width: $desktop-screen) {
+      row-gap: 50px;
+      margin-top: 50px;
+    }
+
+    .card-collection__item {
+      @media (min-width: $tablet-screen) {
+        max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+      }
+
+      @media (min-width: $desktop-screen) {
+        max-width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+      }
+    }
+
+    .card-information  {
+      position: absolute;
+      left: 0;
+      bottom: 6px;
+
+      @media (min-width: $desktop-screen) {
+        bottom: 10px;
+      }
+
+      .card__title {
+        font-size: var(--font-size-h5);
+        color: $color-primary-background;
+        margin: 0 110px 0 15px;
+        line-height: 1.2;
+        max-width: 192px;
+  
+        @media (min-width: $desktop-screen) {
+          font-size: calc(var(--font-size-h4) - 8px);
+          max-width: 230px;
+          margin: 0 140px 0 20px;
+        }
+  
+        .product__title__year-old {
+          &.highlight {
+            display: block;
+            font-size: calc(var(--font-size-extra-large-text) + 2px);
+            color: inherit;
+          }
+        }
+      }
+  
+      .card__button {
+        margin-top: 9%;
+      }
+    }
+
+    .media {
+      position: static;
+    }
+  }
+}

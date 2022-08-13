@@ -1,0 +1,161 @@
+{{ 'audio.scss.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .section-audio {
+    padding-top: 56px;
+    padding-bottom: 83px;
+    background-color: {{ section.settings.section_bg_color }};
+    {% if section.settings.section_bg_image %}
+      background-image: url({{ section.settings.section_bg_image | img_url: '1200x1200' }});
+      background-size: cover;
+      background-position: center;
+    {% endif %}
+  }
+
+  @media (min-width: 1200px) {
+  .section-audio {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  }
+
+  .audio__iframe__content .iframe {
+    background-image: url('{{ section.settings.audio_bg | img_url: "720x720" }}');
+    background-position: center center;
+    background-size: cover;
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+</style>
+<div class="section-audio">
+  <div class="audio">
+    <div class="audio__wrap page-width">
+      <div class="audio__content">
+        <h3 class="audio__content__title">
+          {{ section.settings.audio_title }}
+        </h3>
+        <p class="audio__content__subtitle">
+          {{ section.settings.audio_subtitle }}
+        </p>
+        <button onclick="playAudio('iframeAudio')" class="audio__content__btn-play-audio ms-button">
+          {{ section.settings.audio_text_button }}
+        </button>
+      </div>
+      {% if section.settings.url_audio != blank %}
+        <div class="audio__iframe">
+          <div class="audio__iframe__content">
+            <iframe id="iframeAudio" class="iframe" width="100%" height="100%"
+            src="{{ section.settings.url_audio }}" 
+            frameborder="0">
+            </iframe>
+            <div class="audio__iframe__content__loading">
+              <div class="loading-wrap">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="audio__notify">Please add link audio</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function playAudio(id) {
+    let idIframe = document.getElementById(id);
+    let linkAudio = idIframe.getAttribute('src');
+    let linkAudioNew = linkAudio += '&autoplay=1';
+    idIframe.setAttribute('allow', 'autoplay')
+    document.querySelector('.audio__iframe__content__loading').classList.add('show');
+    idIframe.setAttribute('src', `${linkAudioNew}`)
+    idIframe.addEventListener('load', function () {
+      document.querySelector('.audio__iframe__content__loading').classList.remove('show')
+    })
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Play with Monkey - Audio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "url_audio",
+      "label": "URL Audio"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Audio Border Width",
+      "min": 1,
+      "max": 20,
+      "unit": "px",
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Audio Border Color"
+    },
+    {
+      "type": "image_picker",
+      "id": "audio_bg",
+      "label": "Audio Background"
+    },
+    {
+      "type": "text",
+      "id": "audio_title",
+      "label": "Audio title"
+    },
+    {
+      "type": "text",
+      "id": "audio_subtitle",
+      "label": "Audio subtitle"
+    },
+    {
+      "type": "text",
+      "id": "audio_text_button",
+      "label": "Audio button name"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background color"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bg_image",
+      "label": "Section background image"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top section",
+      "min": 36,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 156
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom section",
+      "min": 36,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 156
+    }
+  ],
+  "presets": [
+    {
+      "name": "Audio"
+    }
+  ] 
+}
+{% endschema %}

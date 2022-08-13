@@ -1,0 +1,157 @@
+{{ 'featured-article.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+  #featured-article-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  #featured-article-{{ section.id }} .featured-article__content__item__title,
+  #featured-article-{{ section.id }} a {
+    color: inherit;
+  }
+
+{%- endstyle -%}
+
+<div id="featured-article-{{section.id}}" class="featured-article">
+  <div class="page-width">
+    {%- if section.settings.section_subtitle != blank or section.settings.section_title != blank -%}
+      <div class="featured-article__heading">
+        {%- if section.settings.section_subtitle != blank -%}
+          <p class="featured-article__heading__subtitle">{{ section.settings.section_subtitle }}</p>
+        {% endif %}
+        {%- if section.settings.section_title != blank -%}
+          <h3 class="featured-article__heading__title">{{ section.settings.section_title }}</h3>
+        {% endif %}
+      </div>
+    {% endif %}
+    {%- if section.blocks.size > 0 -%}
+      <ul class="featured-article__content {% if section.settings.choose_layout_option == 'left_content' %}featured-article__content--text-left{% endif %} {% if section.settings.choose_layout_option == 'zigzag_content' %}featured-article__content--text-zigzag{% endif %}">
+        {%- for block in section.blocks -%}
+          <li class="featured-article__content__item">
+            {%- if block.settings.article_image != blank -%}
+              <div class="featured-article__content__item__image">
+                <img src="{{ block.settings.article_image | image_url: width: 800 }}" alt="{{ block.settings.article_title }}">
+              </div>
+            {% endif %}
+            <div class="featured-article__content__item__wrap">
+              {%- if block.settings.article_title != blank -%}
+                <h5 class="featured-article__content__item__title">{{block.settings.article_title}}</h5>
+              {% endif %}
+              {%- if block.settings.article_description != blank -%}
+                <div class="featured-article__content__item__description">{{ block.settings.article_description }}</div>
+              {% endif %}
+              {%- if block.settings.button_text != blank -%}
+                <a class="featured-article__content__item__button button--link" href="{{block.settings.button_link}}">{{ block.settings.button_text }}</a>
+              {% endif %}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Article",
+  "tag": "section",
+  "class": "section shopify-section__featured-article",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "article_item",
+      "name": "Article Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "article_image",
+          "label": "Article Image"
+        },
+        {
+          "type": "text",
+          "id": "article_title",
+          "label": "Article Title",
+          "default": "Artitle title text"
+        },
+        {
+          "type": "richtext",
+          "id": "article_description",
+          "label": "Article Description"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Discover"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Featured Article"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Section Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Section title"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Layout display"
+    },
+    {
+      "type": "select",
+      "id": "choose_layout_option",
+      "options": [
+        {
+          "value": "left_content",
+          "label": "text align left"
+        },
+        {
+          "value": "right_content",
+          "label": "text align right"
+        },
+        {
+          "value": "zigzag_content",
+          "label": "text align zigzag"
+        }
+      ],
+      "label": "Choose layout option",
+      "default": "zigzag_content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Article"
+    }
+  ]
+}
+{% endschema %}

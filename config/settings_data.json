@@ -1,0 +1,385 @@
+{
+  "current": {
+    "heading_font_type": "specific_fonts",
+    "heading_font_name": "Agrandir-Regular",
+    "heading_scale": 100,
+    "text_font_type": "specific_fonts",
+    "text_font_name": "Agrandir-Regular",
+    "text_font": "poppins_n4",
+    "body_scale": 100,
+    "button_font_type": "specific_fonts",
+    "button_font_name": "PPFormulaCondensed-Regular",
+    "highlight_font_type": "specific_fonts",
+    "currency_code_enabled": true,
+    "cart_type": "drawer",
+    "btn_empty_link": "shopify:\/\/collections",
+    "social_twitter_link": "",
+    "social_facebook_link": "https:\/\/www.facebook.com\/glenfiddichSEA",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https:\/\/www.instagram.com\/glenfiddichsea",
+    "social_tiktok_link": "",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "page_width": 1350,
+    "page_width_large": 1600,
+    "spacing_sections": 0,
+    "spacing_grid_horizontal": 30,
+    "spacing_grid_vertical": 30,
+    "buttons_border_thickness": 1,
+    "buttons_border_opacity": 100,
+    "buttons_radius": 0,
+    "buttons_shadow_opacity": 0,
+    "buttons_shadow_horizontal_offset": 0,
+    "buttons_shadow_vertical_offset": 4,
+    "buttons_shadow_blur": 5,
+    "variant_pills_border_thickness": 1,
+    "variant_pills_border_opacity": 15,
+    "variant_pills_radius": 0,
+    "variant_pills_shadow_opacity": 0,
+    "variant_pills_shadow_horizontal_offset": 0,
+    "variant_pills_shadow_vertical_offset": 4,
+    "variant_pills_shadow_blur": 5,
+    "inputs_border_thickness": 1,
+    "inputs_border_opacity": 55,
+    "inputs_radius": 0,
+    "inputs_shadow_opacity": 0,
+    "inputs_shadow_horizontal_offset": 0,
+    "inputs_shadow_vertical_offset": 4,
+    "inputs_shadow_blur": 5,
+    "card_style": "standard",
+    "card_image_padding": 0,
+    "card_text_alignment": "left",
+    "card_color_scheme": "background-2",
+    "card_border_thickness": 0,
+    "card_border_opacity": 10,
+    "card_corner_radius": 0,
+    "card_shadow_opacity": 0,
+    "card_shadow_horizontal_offset": 0,
+    "card_shadow_vertical_offset": 4,
+    "card_shadow_blur": 5,
+    "text_boxes_border_thickness": 0,
+    "text_boxes_border_opacity": 10,
+    "text_boxes_radius": 0,
+    "text_boxes_shadow_opacity": 0,
+    "text_boxes_shadow_horizontal_offset": 0,
+    "text_boxes_shadow_vertical_offset": 4,
+    "text_boxes_shadow_blur": 5,
+    "media_border_thickness": 1,
+    "media_border_opacity": 5,
+    "media_radius": 0,
+    "media_shadow_opacity": 0,
+    "media_shadow_horizontal_offset": 0,
+    "media_shadow_vertical_offset": 4,
+    "media_shadow_blur": 5,
+    "popup_border_thickness": 1,
+    "popup_border_opacity": 10,
+    "popup_corner_radius": 0,
+    "popup_shadow_opacity": 0,
+    "popup_shadow_horizontal_offset": 0,
+    "popup_shadow_vertical_offset": 4,
+    "popup_shadow_blur": 5,
+    "drawer_border_thickness": 1,
+    "drawer_border_opacity": 10,
+    "drawer_shadow_opacity": 0,
+    "drawer_shadow_horizontal_offset": 0,
+    "drawer_shadow_vertical_offset": 4,
+    "drawer_shadow_blur": 5,
+    "badge_position": "bottom left",
+    "badge_corner_radius": 40,
+    "sale_badge_color_scheme": "accent-2",
+    "sold_out_badge_color_scheme": "inverse",
+    "accent_icons": "text",
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "addressbook_id_glenfiddich": "13596945",
+    "addressbook_id_balvenie": "13772650",
+    "addressbook_id_monkey_shoulder": "13772661",
+    "addressbook_id_hendrick": "13772658",
+    "colors_solid_button_labels": "#ffffff",
+    "colors_accent_1": "#121212",
+    "gradient_accent_1": "",
+    "colors_accent_2": "#334fb4",
+    "gradient_accent_2": "",
+    "colors_text": "#121212",
+    "colors_outline_button_labels": "#121212",
+    "colors_background_1": "#ffffff",
+    "gradient_background_1": "",
+    "colors_background_2": "#f3f3f3",
+    "gradient_background_2": "",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "background-1",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "pages_has_header_brand": "index, list-collections, collection, product, our-story, personalize, personalize.personalize-detail, events, event-no-1, event-page-no-2",
+          "shop_logo": "shopify:\/\/shop_images\/Since1887.png",
+          "top_header_menu": "menu-top-header",
+          "color_text_link": "#ffffff",
+          "logo": "shopify:\/\/shop_images\/logo-glenfiddich.png",
+          "logo_black": "shopify:\/\/shop_images\/logo-glenfiddich-black.png",
+          "logo_width": 90,
+          "menu": "main-menu",
+          "margin_bottom": 0
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "background_top": "#121212",
+          "text_color_top": "#ffffff",
+          "link_color_top": "#ffffff",
+          "pages_has_footer_brand": "index, list-collections, collection, product, our-story, personalize, personalize.personalize-detail, events, event-no-1, event-page-no-2",
+          "logo": "shopify:\/\/shop_images\/logo-glenfiddich_380f7e46-c38f-4d22-8c11-7fb46ad88bc8.png",
+          "logo_width": 140,
+          "show_social": true,
+          "background_bottom": "#1A1825",
+          "text_color_bottom": "#ffffff",
+          "link_color_bottom": "#ffffff",
+          "shop_name": "SINCE1887.SG",
+          "brand_list": "menu-top-header",
+          "copyright": "SKILLFULLY CRAFTED. ENJOY RESPONSIBLY.\n<br>\n<br>\n©2020 William Grant &amp; Sons Ltd Terms &amp; Conditions | Privacy &amp; Cookies Notice Registered in Scotland. Registered Number SC131772\n<br>\nRegistered Office: The Glenfiddich Distillery, Dufftown, Banffshire AB55 4DH info@glenfiddich.com VAT No: 554690029 William Grant &amp; Sons Ltd is a member of the Scotch Whisky Association (S.W.A.)\n<br>\nThis content is intended only for those over the legal drinking age in their country. Please share mindfully.",
+          "show_payment_icons": true,
+          "payment_display_visa": true,
+          "payment_display_visa_electron": false,
+          "payment_display_american_express": true,
+          "payment_display_master": true,
+          "payment_display_maestro": false,
+          "payment_display_paypal": false,
+          "payment_display_amazon_payments": false,
+          "payment_display_apple_pay": false,
+          "payment_display_wallet": false,
+          "icon_visa": "shopify:\/\/shop_images\/visa.png",
+          "icon_master": "shopify:\/\/shop_images\/mastercard.png",
+          "icon_american_express": "shopify:\/\/shop_images\/amex.png",
+          "menu_bottom": "footer-menu-bottom"
+        }
+      },
+      "main-password-header": {
+        "type": "main-password-header",
+        "settings": {
+          "logo_max_width": 100,
+          "color_scheme": "background-1"
+        }
+      },
+      "main-password-footer": {
+        "type": "main-password-footer",
+        "settings": {
+          "color_scheme": "background-1"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "age-gateway": {
+        "type": "age-gateway",
+        "settings": {
+          "age_gate_logo": "shopify:\/\/shop_images\/age-gate-logo.png",
+          "age_gate_icon_first": "shopify:\/\/shop_images\/glenfiddich-logo.png",
+          "age_gate_brand_link_first": "",
+          "age_gate_icon_second": "shopify:\/\/shop_images\/the-balvenie-logo_a0428a9a-180c-4f8d-b541-5067f2557040.png",
+          "age_gate_brand_link_second": "",
+          "age_gate_icon_third": "shopify:\/\/shop_images\/monkey-shoulder-logo_3ea6f240-206c-435d-ae1e-8d30775417cb.png",
+          "age_gate_brand_link_third": "",
+          "age_gate_icon_four": "shopify:\/\/shop_images\/hendrick-logo.png",
+          "age_gate_brand_link_four": "",
+          "age_gate_limit": 18,
+          "age_gate_confirm": "I confirm I am of a legal drinking age 18 years old",
+          "age_gate_button": "LET'S GO!",
+          "age_gate_remember": "Remember Me. Only check this box if you are not using a shared computer.",
+          "age_gate_bd_title": "To experience this site you must be of legal drinking age in Singapore.",
+          "age_gate_bd_invalid_message": "Please enter a valid date of birth.",
+          "age_gate_bd_error_message": "*You are too young to view this website.",
+          "age_gate_privacy": "<p>By entering our website you agree to our <a href=\"\/pages\/terms-and-conditions\">Terms & Conditions<\/a> and <a href=\"\/pages\/privacy-policy\">Privacy Policy<\/a>. <\/p><p>For information on alcohol responsibility, visit <a href=\"https:\/\/drinkaware.co.uk\">drinkaware.co.uk<\/a>.<\/p>"
+        }
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#ffffff",
+      "colors_accent_1": "#121212",
+      "gradient_accent_1": "",
+      "colors_accent_2": "#334fb4",
+      "gradient_accent_2": "",
+      "colors_text": "#121212",
+      "colors_outline_button_labels": "#121212",
+      "colors_background_1": "#ffffff",
+      "gradient_background_1": "",
+      "colors_background_2": "#f3f3f3",
+      "gradient_background_2": "",
+      "type_header_font": "assistant_n4",
+      "heading_scale": 100,
+      "type_body_font": "assistant_n4",
+      "body_scale": 100,
+      "page_width": 1200,
+      "spacing_sections": 0,
+      "spacing_grid_horizontal": 30,
+      "spacing_grid_vertical": 30,
+      "buttons_border_thickness": 1,
+      "buttons_border_opacity": 100,
+      "buttons_radius": 0,
+      "buttons_shadow_opacity": 0,
+      "buttons_shadow_horizontal_offset": 0,
+      "buttons_shadow_vertical_offset": 4,
+      "buttons_shadow_blur": 5,
+      "variant_pills_border_thickness": 1,
+      "variant_pills_border_opacity": 55,
+      "variant_pills_radius": 40,
+      "variant_pills_shadow_opacity": 0,
+      "variant_pills_shadow_horizontal_offset": 0,
+      "variant_pills_shadow_vertical_offset": 4,
+      "variant_pills_shadow_blur": 5,
+      "inputs_border_thickness": 1,
+      "inputs_border_opacity": 55,
+      "inputs_radius": 0,
+      "inputs_shadow_opacity": 0,
+      "inputs_shadow_horizontal_offset": 0,
+      "inputs_shadow_vertical_offset": 4,
+      "inputs_shadow_blur": 5,
+      "card_style": "standard",
+      "card_image_padding": 0,
+      "card_text_alignment": "left",
+      "card_color_scheme": "background-2",
+      "card_border_thickness": 0,
+      "card_border_opacity": 10,
+      "card_corner_radius": 0,
+      "card_shadow_opacity": 0,
+      "card_shadow_horizontal_offset": 0,
+      "card_shadow_vertical_offset": 4,
+      "card_shadow_blur": 5,
+      "text_boxes_border_thickness": 0,
+      "text_boxes_border_opacity": 10,
+      "text_boxes_radius": 0,
+      "text_boxes_shadow_opacity": 0,
+      "text_boxes_shadow_horizontal_offset": 0,
+      "text_boxes_shadow_vertical_offset": 4,
+      "text_boxes_shadow_blur": 5,
+      "media_border_thickness": 1,
+      "media_border_opacity": 5,
+      "media_radius": 0,
+      "media_shadow_opacity": 0,
+      "media_shadow_horizontal_offset": 0,
+      "media_shadow_vertical_offset": 4,
+      "media_shadow_blur": 5,
+      "popup_border_thickness": 1,
+      "popup_border_opacity": 10,
+      "popup_corner_radius": 0,
+      "popup_shadow_opacity": 0,
+      "popup_shadow_horizontal_offset": 0,
+      "popup_shadow_vertical_offset": 4,
+      "popup_shadow_blur": 5,
+      "drawer_border_thickness": 1,
+      "drawer_border_opacity": 10,
+      "drawer_shadow_opacity": 0,
+      "drawer_shadow_horizontal_offset": 0,
+      "drawer_shadow_vertical_offset": 4,
+      "drawer_shadow_blur": 5,
+      "badge_position": "bottom left",
+      "badge_corner_radius": 40,
+      "sale_badge_color_scheme": "accent-2",
+      "sold_out_badge_color_scheme": "inverse",
+      "accent_icons": "text",
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tiktok_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "predictive_search_enabled": true,
+      "predictive_search_show_vendor": false,
+      "predictive_search_show_price": false,
+      "currency_code_enabled": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "announcement-bar-0": {
+              "type": "announcement",
+              "settings": {
+                "text": "Welcome to our store",
+                "color_scheme": "background-1",
+                "link": ""
+              }
+            }
+          },
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {}
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "color_text_link": "#fff",
+            "logo_width": 90,
+            "menu": "main-menu",
+            "margin_bottom": 0
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "footer-0": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "footer-1": {
+              "type": "link_list",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "footer-0",
+            "footer-1"
+          ],
+          "settings": {
+            "text_color_top": "#ffffff",
+            "link_color_top": "#ffffff",
+            "show_social": true,
+            "text_color_bottom": "#ffffff",
+            "link_color_bottom": "#ffffff"
+          }
+        },
+        "main-password-header": {
+          "type": "main-password-header",
+          "settings": {
+            "logo_max_width": 100,
+            "color_scheme": "background-1"
+          }
+        },
+        "main-password-footer": {
+          "type": "main-password-footer",
+          "settings": {
+            "color_scheme": "background-1"
+          }
+        }
+      }
+    }
+  }
+}

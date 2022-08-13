@@ -1,0 +1,133 @@
+.ms-history {
+  padding: 56px 0 0;
+
+  @media screen and (min-width: 1024px) {
+    padding: 175px 0 0;
+  }
+
+  .ms-history__heading__title {
+    font-size: calc(var(--font-size-h2) + 2px);
+    letter-spacing: -0.03em;
+    margin: 0 auto 30px;
+
+    @media screen and (min-width: 1024px) {
+      font-size: var(--font-size-h1);
+      margin: 0 auto 80px;
+    }
+  }
+
+  .ms-history__list {
+    padding-bottom: 180px;
+
+    @media screen and (min-width: 1024px) {
+      padding-bottom: 0;
+    }
+  }
+
+  .ms-history__item {
+    padding-top: 56px;
+
+    @media screen and (min-width: 1024px) {
+      padding: 32px 0;
+    }
+
+    &:nth-child(even) {
+      @media screen and (min-width: 1024px) {
+        padding: 112px 0;
+      }
+
+      .ms-history__item__wrap {
+        @media screen and (min-width: 1024px) {
+          flex-direction: row-reverse;
+        }
+      }
+
+      .ms-history__item__content {
+        @media screen and (min-width: 1024px) {
+          padding: 0 0 0 50px;
+        }
+      }
+    }
+  }
+
+  .ms-history__item__wrap {
+    @media screen and (min-width: 1024px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .ms-history__item__content {
+    text-align: center;
+
+    @media screen and (min-width: 1024px) {
+      text-align: left;
+      width: calc(100% / 3);
+      width: 40%;
+      padding-right: 50px;
+    }
+
+    @media screen and (min-width: 1400px) {
+      padding-right: 100px;
+    }
+  }
+
+  .ms-history__item__title {
+    margin: 0 0 10px;
+  }
+
+  .ms-history__item__description {
+    margin-bottom: 32px;
+    font-size: calc(var(--font-size-base) + 2px);
+
+    @media screen and (min-width: 1024px) {
+      margin-bottom: 0;
+    }
+
+    @media screen and (min-width: 1200px) {
+      font-size: calc(var(--font-size-base) + 8px);
+    }
+  }
+
+  .ms-history__item__image {
+    @media screen and (min-width: 1024px) {
+      width: calc(100% / 3 * 2);
+      width: 60%;
+    }
+  }
+
+  .ms-history__item__image__inner {
+    width: 100%;
+    // height: 0;
+    // padding-top: calc(302 / 343 * 100%);
+    position: relative;
+
+    @media screen and (min-width: 1024px) {
+      // padding-top: calc(404 / 810 * 100%);
+    }
+
+    img {
+      width: 100%;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   object-fit: cover;
+    }
+
+    .image-desktop {
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: block;
+      }
+    }
+
+    .image-mobile {
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+    }
+  }
+}

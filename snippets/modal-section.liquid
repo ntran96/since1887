@@ -1,0 +1,32 @@
+<script src="{{ 'modal-section.js' | asset_url }}" defer="defer"></script>
+
+{{ 'modal-section.scss.css' | asset_url | stylesheet_tag }}
+
+<div class="modal-section">
+  <div class="modal-section-overlay">
+    <div class="modal__content modal-section__content" role="dialog" aria-modal="true" aria-label="DialogHeading">
+      <div class="modal-inner">
+        <button type="button" class="modal__close-button" aria-label="{{ 'accessibility.close' | t }}" onclick="closeModal(event)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6L18.7742 18.7742" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 18.7734L18.7742 5.99924" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <h2 class="modal-section__heading">
+          {{ modal_heading }}
+        </h2>
+        <p class="modal-section__message">
+          {{ modal_message }}
+        </p>
+        <div class="buttons-wrapper">
+          <button class="btn btn--primary button-submit" type="submit" name="checkout" form="cart" aria-label="Yes">
+            {{ modal_button_yes }}
+          </button>
+          <button class="btn btn--secondary button-cancel" data-actions="close-modal"  onclick="closeModal(event)" aria-haspopup="dialog" aria-label="NO">
+            {{ modal_button_no }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

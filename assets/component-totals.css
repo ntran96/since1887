@@ -1,0 +1,33 @@
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  letter-spacing: .03em;
+}
+
+.totals .totals__subtotal-value,
+.cart-total__label {
+  font-weight: 600;
+}
+
+.cart-total > * + * {
+  flex: 0 0 30%;
+  max-width: 30%;
+  margin-left: 15px;
+  text-align: right;
+}
+
+
+
+.cart-original-price .cart-total__price {
+  font-size: calc(var(--global-text-fs) - 2px);
+  color: var(--grey);
+}
+
+@media screen and (min-width: 768px) {
+  #main-cart-footer .cart-total .cart-total__label {
+    flex: 0 0 calc(70% - 15px);
+    max-width: calc(70% - 15px);
+    text-align: right;
+  }
+}

@@ -1,0 +1,29 @@
+.page-title {
+  margin-top: 0;
+}
+
+.main-page-title {
+  margin-bottom: 3rem;
+  font-size: var(--font-size-large-text)
+}
+
+@media screen and (min-width: 750px) {
+  .main-page-title {
+    margin-bottom: 4rem;
+    font-size: var(--font-size-h3)
+  }
+}
+
+.page-placeholder-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.page-placeholder {
+  width: 52.5rem;
+  height: 52.5rem;
+}
+
+.global-font * {
+  font-family: var(--font-global-family);
+}

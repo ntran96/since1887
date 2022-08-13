@@ -1,0 +1,37 @@
+$mobile-tablet: 768px;
+$laptop: 1024px;
+$laptop-L: 1440px;
+
+.custom-article {
+
+}
+
+.custom-article__blocks {
+  > * {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.custom-article__heading {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.custom-article__description {
+  font-size: var(--font-size-base-mobile);
+
+  @media (min-width: $laptop) {
+    font-size: var(--font-size-base);
+  }
+}
+
+.custom-article__image {
+
+}
+
+.custom-article__buttons {
+  .button + .button {
+    margin-left: 20px;
+  }
+}

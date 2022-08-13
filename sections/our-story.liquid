@@ -1,0 +1,103 @@
+{{ 'our-story.scss.css' | asset_url | stylesheet_tag }}
+
+<section class="our-story">
+  {%- if section.settings.title != blank -%}
+    <div class="our-story__heading">
+      <h3 class="our-story__heading__title uppercase">{{ section.settings.title }}</h3>
+    </div>
+  {% endif %}
+  {%- if section.blocks.size > 0 -%}
+    <ul class="our-story__timeline list-unstyled">
+      {%- for block in section.blocks -%}
+        <li class="timeline-item" id="timeline-item-{{block.id}}">
+          {%- style -%}
+            #timeline-item-{{block.id}} .timeline-item__background:after {
+              opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.0 }};
+            }
+          {%- endstyle -%}
+          {% if block.settings.image_background != blank %}
+            <div class="timeline-item__background">
+              <img src="{{ block.settings.image_background | image_url: width: 1920 }}">
+            </div>
+          {% endif %}
+          <div class="timeline-item__content">
+            {%- if block.settings.year != blank -%}
+              <span class="timeline-item__content__year">{{ block.settings.year }}</span>
+            {% endif %}
+            {%- if block.settings.image != blank -%}
+              <div class="timeline-item__content__image">
+                <img src="{{ block.settings.image | image_url: width: 615 }}">
+              </div>
+            {% endif %}
+            {%- if block.settings.description != blank -%}
+              <p class="timeline-item__content__description">{{ block.settings.description}}</p>
+            {% endif %}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "blocks": [
+    {
+      "type": "story_item",
+      "name": "Story Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Story Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_background",
+          "label": "Story Background"
+        },
+        {
+          "type": "range",
+          "id": "image_overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Image overlay opacity",
+          "default": 85
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Story Year",
+          "default": "1887"
+        },
+        {
+          "type": "html",
+          "id": "description",
+          "label": "Description",
+          "default": "William Grant fulfils a lifelong ambition and starts building his own distillery with the help of his nine children and a single stone mason. He names it Glenfiddich, Gaelic for Valley of the Deer. After a year of hard labour the first drop of spirit falls from our copper stills on Christmas Day 1887."
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Here is our story."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story"
+    }
+  ]
+}
+{% endschema %}

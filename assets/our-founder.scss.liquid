@@ -1,0 +1,104 @@
+$tablet-screen: 768px;
+$desktop-screen: 1200px;
+$desktop-screen-large: 1440px;
+
+$color-primary-background: {{ settings.primary_background }};
+
+.our-founder {
+  padding: 60px 0 30px;
+  // background: radial-gradient(48.78% 50.12% at 50% 50%, #2B2B24 0%, #010101 100%);
+  background: #010101;
+  color: $color-primary-background;
+
+  @media (min-width: $desktop-screen) {
+    padding: 135px 0 0;
+  }
+
+  .our-founder__wrap {
+    padding: 0 20px;
+
+    @media (min-width: $desktop-screen) {
+      padding: 0;
+    }
+  }
+
+  .our-founder__heading {
+    @media (min-width: $desktop-screen) {
+      padding: 0 100px;
+      display: flex;
+    }
+
+    @media (min-width: $desktop-screen-large) {
+      padding: 0 195px;
+    }
+
+    .our-founder__heading__title {
+      color: inherit;
+      margin: 0 0 30px;
+      font-size: 30px;
+      line-height: 40px;
+
+      @media (min-width: $desktop-screen) {
+        width: 50%;
+        margin: 0;
+        font-size: var(--font-size-h3);
+        line-height: 60px;
+      }
+    }
+
+    .our-founder__heading__subtitle {
+      color: inherit;
+      font-size: var(--font-size-h5);
+      line-height: 30px;
+      letter-spacing: 0.06em;
+      margin: 0;
+
+      @media (min-width: $desktop-screen) {
+        font-size: calc(var(--font-size-h5) + 8px);
+        line-height: 40px;
+        width: 50%;
+        padding-left: 80px;
+      }
+
+      @media (min-width: $desktop-screen-large) {
+        padding-left: 136px;
+      }
+    }
+  }
+
+  .our-founder__info {
+    margin-top: 60px;
+
+    @media (min-width: $desktop-screen) {
+      margin-top: 0;
+      display: flex;
+    }
+
+    .our-founder__info__image {
+      line-height: 0;
+
+      @media (min-width: $desktop-screen) {
+        width: 50%;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .our-founder__info__desc {
+      margin: 30px 0 0;
+
+      @media (min-width: $desktop-screen) {
+        width: 50%;
+        padding: 50px 100px 50px 80px;
+        margin: 0;
+      }
+
+      @media (min-width: $desktop-screen-large) {
+        padding: 85px 195px 85px 136px;
+      }
+    }
+  }
+}

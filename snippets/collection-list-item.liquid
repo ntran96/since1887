@@ -1,0 +1,106 @@
+{% comment %}
+    Renders a collection card
+
+    Accepts:
+    - card_collection: {Object} Collection Liquid object
+    - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+    - columns: {Number}
+    
+    Usage:
+    {% render 'collection-list-item' %}
+{% endcomment %}
+
+{%- liquid
+  assign ratio = 1
+  if card_collection.featured_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif card_collection.featured_image and media_aspect_ratio == 'adapt'
+    assign ratio = card_collection.featured_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == nil
+    assign ratio = 1
+  endif
+-%}
+
+<div class="card-collection">
+  <div class="card-collection__heading">
+    <h4 class="card-collection__heading__title uppercase" {%- if card_collection.description == blank -%}style="width: 100%;"{%- endif -%}>
+      <span class="full-unstyled-link">
+        {%- if card_collection.title != blank -%}
+          {{ card_collection.title | escape }} 
+          {%- if show_product_number -%}
+            ({{ card_collection.all_products_count }})
+          {%- endif -%}
+        {%- else -%}
+          {{ 'onboarding.collection_title' | t }}
+        {%- endif -%}
+      </span>
+      {% comment %} Title has link {% endcomment %}
+      {% comment %} <a{% if card_collection == blank %} role="link" aria-disabled="true"{% else %} href="{{ card_collection.url }}"{% endif %} class="full-unstyled-link">
+        {%- if card_collection.title != blank -%}
+          {{ card_collection.title | escape }} 
+          {%- if show_product_number -%}
+            ({{ card_collection.all_products_count }})
+          {%- endif -%}
+        {%- else -%}
+          {{ 'onboarding.collection_title' | t }}
+        {%- endif -%}
+      </a> {% endcomment %}
+    </h4>
+    {%- if card_collection.description != blank -%}
+      <div class="card-collection__heading__desc">
+        {{- card_collection.description -}}
+      </div>
+    {%- endif -%}
+  </div>
+  <ul class="card-collection__list grid grid--1-col grid--2-col-tablet grid--3-col-desktop list-unstyled" role="list">
+    {%- for product in card_collection.products limit: products_to_show -%}
+      {% comment %} Product Title {% endcomment %}
+        {% assign first_character = product.title | split: ' ' | first | strip %}
+        {% assign text_character = product.title | remove_first: first_character %}
+        {%- capture product_title -%}
+          <span class="product__title__year-old">{{ first_character }}</span>
+          {{ text_character }}
+        {%- endcapture -%}
+      {% comment %} End Product Title {% endcomment %}
+      <li class="card-collection__item grid__item">
+        <div class="card__inner {% if product.featured_image or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+          {%- if product.featured_image -%}
+            <div class="card__media">
+              <a class="media media--transparent media--hover-effect" href="{{ product.url }}" >
+                <img
+                  srcset="{%- if product.featured_image.width >= 165 -%}{{ product.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if product.featured_image.width >= 330 -%}{{ product.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                    {%- if product.featured_image.width >= 535 -%}{{ product.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                    {%- if product.featured_image.width >= 750 -%}{{ product.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                    {%- if product.featured_image.width >= 1000 -%}{{ product.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                    {%- if product.featured_image.width >= 1500 -%}{{ product.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {%- if product.featured_image.width >= 3000 -%}{{ product.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                    {{ product.featured_image | image_url }} {{ product.featured_image.width }}w"
+                  src="{{ product.featured_image | image_url: width: 1500 }}"
+                  sizes="
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                  (min-width: 750px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                  calc(100vw - 3rem)"
+                  alt=""
+                  height="{{ product.featured_image.height }}"
+                  width="{{ product.featured_image.width }}"
+                  loading="lazy"
+                  class="motion-reduce"
+                >
+              </a>
+            </div>
+            <div class="card-information">
+              <h4 class="card__title uppercase">
+                <a href="{{ product.url }}" class="full-unstyled-link">
+                  {{ product_title }}
+                </a>
+              </h4>
+              <a href="{{ product.url }}" class="card__button button--link">{{ 'products.product.discover_text' | t }}</a>
+            </div>
+          {%- endif -%}
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>

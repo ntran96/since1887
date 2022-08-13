@@ -1,0 +1,50 @@
+{{ 'ms-video.scss.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.video_url != blank -%}
+  <div class="ms-video">
+    <div class="ms-video__wrap {% if section.settings.not_full_width %} page-width {% endif %}">
+      <div class="ms-video__item">
+        {%- if section.settings.video_url.type == 'youtube' -%}
+          <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.description | escape }}"></iframe>
+        {%- else -%}
+          <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?title=0&byline=0&portrait=0" class="js-vimeo ms-video-vimeo" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.description | escape }}"></iframe>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MS Video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "MS Video"
+    },
+    {
+      "type": "video_url",
+      "accept": ["vimeo", "youtube"],
+      "id": "video_url",
+      "label": "Video URL"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Video alt text",
+      "info": "Describe the video to make it accessible for customers using screen readers."
+    },
+    {
+      "type": "checkbox",
+      "id": "not_full_width",
+      "label": "Not full width",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "MS Video"
+    }
+  ]
+}
+{% endschema %}

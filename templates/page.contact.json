@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "class_custom": "global-font"
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Contact us",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form"
+  ]
+}

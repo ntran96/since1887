@@ -1,0 +1,416 @@
+{{ 'custom-bottle.scss.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'personalize-page.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<personalize-custom class="custom-bottle">
+  <div class="page-width">
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-bar__step active" data-step="1">
+        <div class="progress-bar__step__icon">
+          {% render 'wine-bottle-black' %}
+        </div>
+        <span class="progress-bar__step__text">
+          Choose a bottle
+        </span> 
+      </div>
+
+      <div class="progress-bar__step active" data-step="2">
+        <div class="progress-bar__step__icon">
+          {% render 'icon-message-black' %}
+        </div>
+        <span class="progress-bar__step__text">
+          Add message
+        </span> 
+      </div>
+
+      <div class="progress-bar__step" data-step="3">
+        <div class="progress-bar__step__icon">
+          {% render 'icon-tick-black' %}
+        </div>
+        <span class="progress-bar__step__text">
+          Voila!
+        </span> 
+      </div>
+    </div>
+
+    <!-- Choose a bottle -->
+    <div class="custom-bottle-section choose-bottle">
+      <h3 class="custom-bottle-section__heading uppercase">
+        1. Choose a bottle
+      </h3>
+
+      {%- capture data_slider -%}
+        data-component-class-name='.choose-bottle-list'
+        data-pagination=true
+        data-navigation=true
+        data-slides-per-view-mobile=1.5
+        data-slides-per-view-tablet=2
+        data-slides-per-view-laptop=4
+        data-slides-per-view-desktop=4
+      {%- endcapture -%}
+
+      <swiper-component class="choose-bottle-list" {{ data_slider }}>
+        <div class="swiper-custom swiper-container">
+          <div class="swiper-wrapper">
+            {%- assign current_idx = 0 -%}
+
+            {%- for product in collections.all.products -%}
+              {%- liquid 
+                assign is_personalize = false
+
+                for tag in product.tags
+                  if tag == '_personalize' or tag contains 'personalize'
+                    assign is_personalize = true
+                    break
+                  endif 
+                endfor  
+
+                if product.selected_or_first_available_variant.metafields.data.cover_bottle
+                  assign cover_bottle = product.selected_or_first_available_variant.metafields.data.cover_bottle | img_url: 'x450'
+                elsif product.metafields.data.cover_bottle 
+                  assign cover_bottle = product.metafields.data.cover_bottle | img_url: 'x450'
+                endif
+              -%}
+
+              {%- if is_personalize and product.available -%}
+                <div class="swiper-slide choose-bottle-item {% if current_idx == 0 %} active{% endif %}" data-product-id="{{ product.id }}">
+                  <div class="choose-bottle-item__image">
+                    {%- if cover_bottle != blank -%}
+                      <img src="{{ cover_bottle }}" />
+                    {%- else -%}
+                      <img src="{{ product.featured_media | img_url: 'x450' }}" />
+                    {%- endif -%}
+                  </div>
+
+                  {%- liquid 
+                    assign money_price = product.selected_or_first_available_variant.price | money
+                    if settings.currency_code_enabled
+                      assign money_price = product.selected_or_first_available_variant.price | money_with_currency
+                    endif
+                  -%}
+
+                  <div class="price choose-bottle-item__price">
+                    <div class="price__container">
+                      <div class="price__regular">
+                        <span class="price-item price-item--regular">
+                          {{ money_price }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {%- if product.title != blank -%}
+                    <h6 class="choose-bottle-item__product-name uppercase">
+                      {{ product.title }}
+                    </h6>
+                  {% endif %}
+
+                  {%- liquid 
+                    if product.variants.size > 1 or product.has_only_default_variant == false
+                      assign show_variants_selectors = true
+                    else
+                      assign show_variants_selectors = false
+                    endif
+
+                    if product.metafields.data.personalize_image 
+                      assign personalize_image = product.metafields.data.personalize_image | img_url: 'large'
+                    else
+                      assign personalize_image = product.featured_image.src | img_url: 'large'
+                    endif
+                  -%}
+
+                  {%- if show_variants_selectors -%}
+                    <div class="choose-bottle-item__variant-box">
+                      <div class="relative custom-select">
+                        <select class="choose-bottle-item__select" data-variant-selected {% unless current_idx == 0 %} disabled{% endunless %}>
+                          {%- for variant in product.variants -%}
+                            {%- liquid 
+                              if variant.metafields.data.cover_bottle
+                                assign cover_bottle = variant.metafields.data.cover_bottle | img_url: 'x450'
+                              elsif product.metafields.data.cover_bottle 
+                                assign cover_bottle = product.metafields.data.cover_bottle | img_url: 'x450'
+                              elsif variant.image
+                                assign cover_bottle = variant.image.src | img_url: 'x450'
+                              else
+                                assign cover_bottle = product.featured_image.src | img_url: 'x450'
+                              endif
+                            -%}
+
+                              <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} 
+                                {% unless variant.available %}
+                                  class="sold-out"
+                                  disabled="disabled"
+                                {% endunless %} 
+                                value="{{ variant.id }}"
+                                data-personalize-image="{{ personalize_image }}"
+                                data-cover-bottle-image="{{ cover_bottle }}"
+                                data-price="{{ variant.price }}"
+                                data-variant-name="{{ variant.title | downcase }}"
+                              >
+                                {{ variant.title }}
+                              </option>
+                            {%- endfor -%}
+                        </select>
+                        <span class="icon-dropdown">
+                          {% render 'icon-down' %} 
+                        </span>
+                      </div>
+                    </div>
+                  
+                  {%- else -%}
+                    {%- liquid 
+                      if product.selected_or_first_available_variant.metafields.data.cover_bottle
+                        assign cover_bottle = product.selected_or_first_available_variant.metafields.data.cover_bottle | img_url: 'x450'
+                      elsif product.metafields.data.cover_bottle 
+                        assign cover_bottle = product.metafields.data.cover_bottle | img_url: 'x450'
+                      else
+                        assign cover_bottle = product.featured_image.src | img_url: 'x450'
+                      endif
+                    -%}
+
+                    <input type="hidden" 
+                      data-variant-selected 
+                      {% unless current_idx == 0 %} disabled{% endunless %} 
+                      value="{{ product.selected_or_first_available_variant.id }}"
+                      data-personalize-image="{{ personalize_image }}" 
+                      data-cover-bottle-image="{{ cover_bottle }}"
+                      data-price="{{ product.selected_or_first_available_variant.price }}"
+                      data-variant-name="{{ product.selected_or_first_available_variant.title | downcase }}"
+                    />
+                  {%- endif -%}
+                </div>
+
+                {%- assign current_idx = current_idx | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </swiper-component>
+    </div>
+
+    <!-- Add message -->
+    <div class="custom-bottle-section add-message">
+      <h3 class="custom-bottle-section__heading uppercase">
+        2. Add message
+      </h3>
+
+      <p class="add-message__form__heading__desc">
+        Please note that we are not able to process any personalised messages containing offensive or inappropriate content.
+      </p>
+
+      {%- for product in collections.all.products -%}
+        {%- liquid 
+            assign is_personalize = false
+
+            for tag in product.tags
+              if tag == '_personalize' or tag contains 'personalize'
+                assign is_personalize = true
+                break
+              endif 
+            endfor
+        -%}
+
+        {%- if is_personalize and product.available -%}
+          <product-form class="product-form" data-cart-type="{{ settings.cart_type }}">
+
+            {%- assign product_form_id = 'personalize-product-' | append: product.id -%}
+      
+            {%- form 'product', product, id: product_form_id, class: 'add-message__form', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" value="1" />
+              {%- liquid 
+                assign title_variable = product.title
+
+                unless product.has_only_default_variant
+                  assign title_variable = title_variable | append: '- ' | append: product.selected_or_first_available_variant.title
+                endunless 
+              -%}
+              <input type="hidden" name="title" value="{{ title_variable }}" />
+              
+              <div class="add-message__form__heading d-mobile">
+                <h4 class="add-message__form__heading__title uppercase">
+                  personalise your label
+                </h4>
+              </div>
+
+              {%- liquid 
+                if product.metafields.data.personalize_image 
+                  assign personalize_image = product.metafields.data.personalize_image  
+                else
+                  assign personalize_image = product.featured_image.src
+                endif
+              -%}
+
+              <div class="d-flex flex-wrap item">
+                <div class="add-message__form__image">
+                  <div class="add-message__form__image__inner">
+                    
+                    <img alt="{{ product.title }} personalize image" 
+                      src="{{ personalize_image | img_url: 'large' }}" 
+                      width="{{ personalize_image.width }}"
+                      height="{{ personalize_image.height }}"
+                      loading="lazy"
+                    />
+  
+                    <div class="personalize-label__wrapper">
+                      <span data-actions="render-personalize-text-1"></span>
+                      <span data-actions="render-personalize-text-2"></span>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="add-message__form__content">
+                  <div class="add-message__form__heading d-desktop">
+                    <h4 class="add-message__form__heading__title uppercase">
+                      personalise your label
+                    </h4>                  
+                  </div>
+        
+                  <div class="wrap-field">     
+                    <label class="wrap-field__label" for="bottle-1_personalize-line-1">
+                      Line 1
+                    </label>
+                    <span class="wrap-field__required">(required)</span>
+                    <input
+                      required
+                      type="text"
+                      name="properties[bottle1-personalize-1]"
+                      class="wrap-field__input input_name"
+                      id="bottle-1_personalize-line-1"
+                      minlength="0"
+                      maxlength="22"
+                      placeholder="Line 1 (maximum 22 characters)"
+                    >
+                    <span class="error-message">This is a required field.</span>
+                  </div>
+  
+                  <div class="wrap-field">     
+                    <label class="wrap-field__label" for="bottle-1_personalize-line-2">Line 2</label>
+                    <input
+                      disabled
+                      type="text"
+                      name="properties[bottle1-personalize-2]"
+                      class="wrap-field__input input_name"
+                      id="bottle-1_personalize-line-2"
+                      minlength="0"
+                      maxlength="32"
+                      placeholder="Line 2 (maximum 32 characters)"
+                    >
+                  </div>
+  
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap item hidden" data-personalize-twin-item>
+                <div class="add-message__form__image">
+                  <div class="add-message__form__image__inner">
+                    <img alt="{{ product.title }} personalize image" 
+                      src="{{ personalize_image | img_url: 'large' }}" 
+                      width="auto"
+                      height="auto"
+                      loading="lazy"
+                    />
+  
+                    <div class="personalize-label__wrapper">
+                      <span data-actions="render-personalize-text-3"></span>
+                      <span data-actions="render-personalize-text-4"></span>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="add-message__form__content">
+                  <div class="add-message__form__heading d-desktop">
+                    <h4 class="add-message__form__heading__title uppercase">
+                      personalise your label
+                    </h4>                  
+                  </div>
+        
+                  <div class="wrap-field">     
+                    <label class="wrap-field__label" for="bottle-2_personalize-line-1">
+                      Line 1
+                    </label>
+                    <span class="wrap-field__required">(required)</span>
+                    <input
+                      required
+                      disabled
+                      type="text"
+                      name="properties[bottle2-personalize-1]"
+                      class="wrap-field__input input_name"
+                      id="bottle-2_personalize-line-1"
+                      minlength="0"
+                      maxlength="22"
+                      placeholder="Line 1 (maximum 22 characters)"
+                    >
+                    <span class="error-message">This is a required field.</span>
+                  </div>
+  
+                  <div class="wrap-field">     
+                    <label class="wrap-field__label" for="bottle-2_personalize-line-2">Line 2</label>
+                    <input
+                      disabled
+                      type="text"
+                      name="properties[bottle2-personalize-2]"
+                      class="wrap-field__input input_name"
+                      id="bottle-2_personalize-line-2"
+                      minlength="0"
+                      maxlength="32"
+                      placeholder="Line 2 (maximum 32 characters)"
+                    >                  
+                  </div>
+  
+                </div>
+              </div>
+              
+              <div class="add-message__form__content__btn">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                    <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                    <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                    <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                    <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                  </svg>
+                  <span class="product-form__error-message"></span>
+                </div>
+
+                <button type="submit" class="btn btn--secondary btn__submit-persionalize" name="add">
+                  <span>
+                    submit personaliSation
+                  </span>
+                  <div class="loading-overlay__spinner hidden">
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                  </div>
+                </button>
+
+              </div>
+            {%- endform -%}
+    
+          </product-form>
+
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</personalize-custom>
+
+{% schema %}
+{
+  "name": "Custom Bottle",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Custom Bottle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Bottle"
+    }
+  ]
+}
+{% endschema %}

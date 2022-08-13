@@ -1,0 +1,160 @@
+$tablet-screen: 768px;
+$desktop-screen: 1200px;
+
+$font-size-smaller-text: var(--font-size-subtitle);
+$font-size-large-text: var(--font-size-navigation);
+
+.our-event {
+  text-transform: uppercase;
+  padding: 55px 0;
+
+  @media (min-width: $desktop-screen) {
+    padding: 140px 0 150px;
+  }
+
+  .our-event__heading {
+    @media (min-width: $tablet-screen) {
+      text-align: center;
+    }
+
+    .our-event__heading__subtitle {
+      font-size: $font-size-smaller-text;
+      margin-bottom: 15px;
+
+      @media (min-width: $desktop-screen) {
+        font-size: $font-size-large-text;
+        margin-bottom: 24px;
+      }
+
+      &.our-event__heading__subtitle--ms {
+        font-size: $font-size-large-text;
+      }
+    }
+
+    .our-event__heading__title {
+      // font-size: var(--font-size-h4);
+      margin: 0;
+
+      // @media (min-width: $desktop-screen) {
+      //   font-size: var(--font-size-h3);
+      // }
+    }
+  }
+
+  .our-event__content {
+    margin-top: 15px;
+    row-gap: 0;
+
+    @media (min-width: $tablet-screen) {
+      margin-top: 50px;
+    }
+
+    @media (min-width: $desktop-screen) {
+      margin-top: 115px;
+    }
+
+    &.our-event__content--ms {
+      margin-top: 24px;
+      
+      @media (min-width: $desktop-screen) {
+        margin-top: 48px;
+      }
+    }
+
+    .our-event__content__item {
+      margin-bottom: 40px;
+
+      @media (min-width: $tablet-screen) {
+        margin-bottom: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:nth-child(even) {
+        @media (min-width: $tablet-screen) {
+          padding-top: 67px;
+        }
+      }
+
+      &.grid__item {
+        @media (min-width: $tablet-screen) {
+          max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+        }
+      }
+    }
+
+    .our-event__content__item__image {
+      display: block;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      position: relative;
+      margin-bottom: 30px;
+
+      @media (min-width: $tablet-screen) {
+        padding-top: calc((220 / 402) * 100%);
+        margin-bottom: 24px;
+      }
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .our-event__content__item__date {
+      font-size: $font-size-smaller-text ;
+      // color: #BB9F84; Add color event date in section settings
+      margin-bottom: 10px;
+      letter-spacing: .05em;
+
+      @media (min-width: $tablet-screen) {
+        margin-bottom: 4px;
+      }
+    }
+
+    .our-event__content__item__title-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    .our-event__content__item__title {
+      // font-size: var(--font-size-h5);
+      margin: 0;
+      
+      @media (min-width: $tablet-screen) {
+        // min-height: 52px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+      }
+
+      // title block Monkey shoulder
+      &.our-event__content__item__title--ms {
+        font-size: var(--font-size-large-text);
+      }
+    }
+
+    .our-event__content__item__button {
+      margin-top: 20px;
+      // font-size: $font-size-large-text;
+      font-family: var(--font-button-family);
+      // letter-spacing: .06em;
+
+      @media (min-width: $tablet-screen) {
+        margin-top: 37px;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}

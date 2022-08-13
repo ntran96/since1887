@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    {%- render 'setting-styles' -%}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'top-header.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'footer.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'checkout.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'customer.scss.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      window.theme = {
+        moneyFormat: "{{ shop.money_format }}",
+        moneyWithCurrencyFormat: "{{ shop.money_with_currency_format }}"
+      }
+    </script>
+    
+    <!-- Hotjar Tracking Code for https://staging-since1887sg.myshopify.com/ -->
+    <!-- <script>
+      (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:3049233,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script> -->
+
+  </head>
+  <body>
+    {{ skip_to_content_link }}
+    {% section 'header' %}
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="page-checkout">
+        <div class="theme-name">{{ theme.name }}</div>
+        <div class="main">
+            {% render 'checkout-breadcrum' %}
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {% section 'footer' %}
+    {{ tracking_code }}
+
+    <script src="{{ 'shopify-money.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'checkout.js' | asset_url }}" defer="defer"></script>
+    <!-- <script src="{{ 'validate.js' | asset_url }}" defer="defer"></script> -->
+
+    <script>
+      function injectCompareAtPrice(event) {
+
+        const line_items = [
+          {%- for line in checkout.line_items -%}
+            {
+              'vendor': '{{ line.product.vendor }}',
+              'variant_id': {{ line.variant_id | default: '' }},
+              'compare_at_price': {{ line.variant.compare_at_price | default: 0 }},
+              'quantity': {{ line.quantity | default: 0 }},
+              'line_price': {{ line.line_price | default: 0 }},
+              'properties': {{ line.properties | json }},
+              'handle': '{{ line.product.handle }}',
+              'key': '{{ line.key }}'
+            },
+          {%- endfor -%}
+        ];
+
+        const soldOutItems = [
+          {%- for line in checkout.unavailable_line_items -%}
+            {
+              'title': '{{ line.product.title }}',
+              'variant_id': {{ line.variant_id | default: '' }},
+            },
+          {%- endfor -%}
+        ]
+
+        const taxPrice = '{{ checkout.tax_price }}'
+
+        const totalTabBody = document.querySelector('.total-line-table__tbody') 
+        const taxPriceEl = document.createElement('tr')
+        taxPriceEl.classList.add('total-line', 'total-line--tax')
+        const contentTaxEl = `
+          <th class="total-line__name" scope="row">
+              <span>
+                Taxes
+              </span>
+          </th>
+          <td class="total-line__price">
+            <span class="skeleton-while-loading order-summary__emphasis">
+              Included
+            </span>
+          </td>`
+        taxPriceEl.innerHTML = contentTaxEl
+        if (totalTabBody) {
+          totalTabBody.append(taxPriceEl)
+        }
+
+        const subtotalPrice = '{{ checkout.line_items_subtotal_price | money_with_currency }}'
+        const subtotalPriceEl = document.querySelector('.total-line--subtotal .total-line__price span[data-checkout-subtotal-price-target]')
+        if (subtotalPriceEl) {
+          subtotalPriceEl.innerHTML = `${subtotalPrice}`
+        }
+
+        const shipPrice = '{{ checkout.shipping_price }}'
+        const shipPriceEl = document.querySelector('.total-line--shipping .total-line__price span[data-checkout-total-shipping-target]')
+        if (shipPriceEl) {
+          if (document.querySelector('.step').getAttribute('data-step') == 'contact_information') {
+            shipPriceEl.innerHTML = 'Calculated at next step'
+          } else {
+            if (shipPrice > 0) {
+              shipPriceEl.innerHTML = `${Shopify.formatMoney(shipPrice, window.theme.moneyWithCurrencyFormat)}`
+            } else {
+              shipPriceEl.innerHTML = 'Free'
+            } 
+          }
+        }
+
+        const methodShip = '{{ checkout.shipping_method.title }}'
+        const methodShipEl = document.querySelector('.review-block__content[data-review-section="shipping-cost"]') || false
+        if (methodShipEl) {
+          methodShipEl.innerHTML = `${methodShip} | ${Shopify.formatMoney(shipPrice, window.theme.moneyWithCurrencyFormat)}`
+        }
+        
+        const totalPrice = '{{ checkout.total_price | money_with_currency }}'
+        const totalPriceEl = document.querySelector('.total-line-table__footer .total-line__price span[data-checkout-payment-due-target]')
+        totalPriceEl.innerHTML = `${totalPrice}`
+
+        const totalPriceElMobile = document.querySelector('.total-recap__final-price[data-checkout-payment-due-target]')
+        totalPriceElMobile.innerHTML = `${totalPrice}`
+  
+        let shipEl = document.querySelector('.total-line--shipping')
+        let dicountEl = document.querySelector('.total-line--reduction') || false
+        if (dicountEl) {
+          shipEl.after(dicountEl)
+          let dicountPrice = document.querySelector('span[data-checkout-discount-amount-target]')
+          dicountPrice.innerHTML = `- ${Shopify.formatMoney(dicountPrice.getAttribute('data-checkout-discount-amount-target'), window.theme.moneyWithCurrencyFormat)}`
+        }
+
+        let shipStandard = document.getElementById('checkout_shipping_rate_id_shopify-standard-5_00') || false
+        if (shipStandard) {
+          document.querySelector('.radio__label[for="checkout_shipping_rate_id_shopify-standard-5_00"] .content-box__emphasis').innerHTML =
+          `${Shopify.formatMoney(shipStandard.getAttribute('data-checkout-total-shipping-cents'), window.theme.moneyWithCurrencyFormat)}`
+        }
+
+        let shipExpedited= document.getElementById('checkout_shipping_rate_id_shopify-expedited-7_50') || false
+        if (shipExpedited) {
+          document.querySelector('.radio__label[for="checkout_shipping_rate_id_shopify-expedited-7_50"] .content-box__emphasis').innerHTML =
+          `${Shopify.formatMoney(shipExpedited.getAttribute('data-checkout-total-shipping-cents'), window.theme.moneyWithCurrencyFormat)}`
+        }
+
+        let inputRadio = document.querySelectorAll('.input-radio[data-checkout-total-shipping]')
+        inputRadio.forEach(el => {
+          el.onchange = function () {
+            setTimeout(function () {
+              totalPriceEl.innerHTML = `${Shopify.formatMoney(totalPriceEl.getAttribute('data-checkout-payment-due-target'), window.theme.moneyWithCurrencyFormat)}`
+              totalPriceElMobile.innerHTML = `${Shopify.formatMoney(totalPriceElMobile.getAttribute('data-checkout-payment-due-target'), window.theme.moneyWithCurrencyFormat)}`
+              shipPriceEl.innerHTML = `${Shopify.formatMoney(shipPriceEl.getAttribute('data-checkout-total-shipping-target'), window.theme.moneyWithCurrencyFormat)}`
+              if (shipPriceEl.getAttribute('data-checkout-total-shipping-target') == 0) {
+                shipPriceEl.innerHTML = 'Free'
+              }
+              subtotalPriceEl.innerHTML = `${subtotalPrice}`
+            }, 0.1)
+          }
+        })
+
+        let propItemStock = document.querySelectorAll('.product__description__property.page-main__small-text') || false
+        if (propItemStock) {
+          propItemStock.forEach(el => {
+              let contentPropStock = el.innerHTML.split(':')
+              let newContentStock = contentPropStock[1]
+              el.innerHTML = `${newContentStock}`
+          })
+        }
+
+        const lineItemElms = document.querySelectorAll('[data-variant-id]');
+        
+        line_items.forEach(function(item, idx) {
+          try {
+            const lineItem = lineItemElms[idx];         
+
+            if(item.vendor) {
+              const productTitleElm = lineItem.querySelector('.product__description__name');
+
+              const vendorElm = document.createElement('span');
+              vendorElm.classList.add('product__description__vendor');
+              vendorElm.classList.add('order-summary__emphasis');
+              vendorElm.innerHTML = item.vendor;
+
+              productTitleElm.parentNode.insertBefore(vendorElm, productTitleElm)
+            }
+
+            lineItem.querySelectorAll('.product__description__property').forEach(ele => {
+              setTimeout(function () {
+                let contentProp = ele.innerHTML.split(':')
+                let newContent = contentProp[1]
+                ele.innerHTML = `${newContent}`
+              }, 0.1)
+            })
+
+            const el = lineItem.querySelector(`.product__price`);
+
+            if(el) {
+              const content = `
+                <span class="order-summary__emphasis skeleton-while-loading">
+                  ${item.line_price === 0 ? 'Free' : Shopify.formatMoney(item.line_price, window.theme.moneyWithCurrencyFormat)}
+                </span>
+                `;
+              const compareLinePrice = item.quantity*item.compare_at_price;
+              const linePrice = item.quantity*item.compare_at_price
+  
+              if(compareLinePrice > item.line_price) {
+                el.innerHTML = `
+                  <del class='order-summary__small-text compare-price'>
+                    ${Shopify.formatMoney(compareLinePrice, window.theme.moneyWithCurrencyFormat)}
+                  </del>
+                  </br>
+                  ${content}
+                `;
+  
+                const oldCompareElm = el.querySelector('del.order-summary__small-text:not(.compare-price)');
+                
+                if(oldCompareElm) {
+                  oldCompareElm.style.display = "none";
+                  const nextSibling = oldCompareElm.nextElementSibling;
+  
+                  if (nextSibling.tagName.toLowerCase() === 'br') {
+                    nextSibling.style.display = 'none';
+                  }
+                }
+  
+                const reductionPriceElm = lineItem.querySelector(`.reduction-code .reduction-code__text`);
+                // const discountCodeElm = document.querySelector('.order-summary__section--discount .reduction-code__text');
+  
+                if(reductionPriceElm) {
+                  // const discountCode = discountCodeElm.textContent.trim();
+                  const discountCode = reductionPriceElm.textContent.trim().split('(')[0].trim();
+                  const newDiscount = compareLinePrice - item.line_price;
+                  reductionPriceElm.innerHTML = `${discountCode} (-${Shopify.formatMoney(newDiscount, window.theme.moneyWithCurrencyFormat)})`
+                }
+              } else {
+                el.innerHTML = content
+              }
+            }
+
+
+          } catch (ex) {
+            console.error('Error rendering compare_at_price', ex);
+          }
+        })
+        
+        if (soldOutItems.length > 0) {
+          handleContinueCheckout(line_items, soldOutItems)
+        }
+
+      }
+
+      function fetchBuyXGetYDiscountData() {
+        // return Promise.resolve({
+        //   discountName: 'Test',
+        //   customerSpends: {
+        //     amount: 500,
+        //     items: [
+        //       '21-year-old-gran-reserva',
+        //       'glenfiddich-12-year-old',
+        //       'glenfiddich-15-year-old',
+        //       'glenfiddich-18-year-old',
+        //       'glenfiddich-50-year-old',
+        //       'testing-copy-of-year-old-single-malt-scotch-whisky'
+        //     ]
+        //   },
+        //   customerGets: {
+        //     quantity: 2,
+        //     items: ['free-gift', 'free-gift-2', 'free-gift-3']
+        //   }
+        // });
+        return fetch(`https://wgs-services.azurewebsites.net/Discount/api/discounts/GetAutomationDiscount`, {
+          method: 'get',
+          headers: {
+            'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
+            'issuer': '0'
+          },
+          
+        }).then(res => res.json());
+      }
+
+      function hasFreeGiftProperty(item) {
+        const properties = item.properties;
+        return properties.some(([key]) => key === '_is_free_gift');
+      }
+
+      function handleContinueCheckout(lineItems, soldOutItems) {
+        const continueButtonElm = document.querySelector('#continue_button');
+        if (continueButtonElm) {
+          continueButtonElm.addEventListener('click', evt => {
+            evt.preventDefault();
+            console.log('line items', lineItems);
+            console.log('sold out items', soldOutItems);
+
+            const freeGiftItems = lineItems.filter(hasFreeGiftProperty);
+
+            if (!soldOutItems.length || !freeGiftItems || !freeGiftItems.length) { // CASE 1: There is no sold out or there is no free gifts
+              continueButtonElm.closest('form').submit();
+              return;
+            }
+
+            // CASE 2: there is sold out items
+            // fetch buyxgety data
+            fetchBuyXGetYDiscountData().then(data => {
+              console.log('data', data);
+              if(!data.discountName) {
+                continueButtonElm.closest('form').submit();
+                return;
+              }
+
+              const spendItems = data.customerSpends?.items;
+              const spendAmount = data.customerSpends?.amount * 100;
+
+              const items = lineItems
+                .filter(item => spendItems.includes(item.handle))
+                .filter(item => soldOutItems.every(soldOutItem => soldOutItem.variant_id !== item.variant_id));
+
+              const amount = items.reduce((acc, cur) => acc += cur.line_price, 0);
+              
+              if (amount >= spendAmount) { // CASE 2.1: ----
+                continueButtonElm.closest('form').submit();
+                return;
+              }
+ 
+              // CASE 2.2: remove freegift items
+              const dataToUpdates = freeGiftItems
+                .reduce((acc, cur) => {
+                  acc[cur.variant_id] = 0;
+                  return acc;
+                }, {});
+
+              fetch(`/cart/update.js`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-Requested-With':'xmlhttprequest',
+                },
+                body: JSON.stringify({updates: dataToUpdates})
+              }).then((response) => {
+                const freeGiftTemplate = freeGiftItems.map((item, idx) => {
+                  const index = soldOutItems.length + idx;
+                  return `
+                    <input
+                      type="hidden"
+                      name="checkout[line_items][${index}][id]"
+                      id="checkout_line_items_${index}_id"
+                      value="${item.key}"
+                      autocomplete="off" />
+                    <input
+                      type="hidden"
+                      name="checkout[line_items][${index}][quantity]"
+                      id="checkout_line_items_${index}_quantity"
+                      value="0"
+                      autocomplete="off" />
+                  `;
+                }).join('');
+
+                continueButtonElm.insertAdjacentHTML('beforebegin', freeGiftTemplate);
+
+                continueButtonElm.closest('form').submit();
+              })
+            })
+          });
+        }
+      }
+
+      document.addEventListener('page:load', injectCompareAtPrice);
+      document.addEventListener('page:change', injectCompareAtPrice);
+      document.addEventListener('rebuy.refresh', injectCompareAtPrice);
+    </script>
+
+  </body>
+</html>

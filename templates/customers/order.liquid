@@ -1,0 +1,35 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'account.scss.css' | asset_url | stylesheet_tag }}
+
+<div class="customer account">
+  <div class="account__nav">
+    <div class="account__nav__selected" onclick="handleDropdownMobi(event)">
+      <span class="account__nav__selected__text">{{ 'customer.account.profile' | t }}</span>
+      <span class="account__nav__selected__icon">
+        {% render 'icon-arrow-down-with-bg' %}
+      </span>
+    </div>
+    <div class="account__nav__list">
+      <button id="btnMyProfile" class="account__nav__btn page__nav__top__link button-global button-global--basic" onclick="openContent(event, 'myProfile', 'tab', 'myProfile')">{{ 'customer.account.profile' | t }}</button>
+      <button id="btnAddressBook" class="account__nav__btn page__nav__top__link button-global button-global--basic" onclick="openContent(event, 'addressBook', 'tab', 'addressBook')">{{ 'customer.addresses.title' | t }}</button>
+      <button id="btnMyOrder" class="account__nav__btn page__nav__top__link button-global button-global--basic active" onclick="openContent(event, 'myOrder', 'tab', 'myOrder')">{{ 'customer.orders.title' | t }}</button>
+      <a class="account__nav__link" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
+    </div>
+  </div>
+  <div id="myProfile" class="account__tab page__nav__content page-width">
+    {% include 'my-profile' %} 
+  </div>
+  <div id="addressBook" class="account__tab page__nav__content page-width" data-customer-addresses>
+    {% include 'address-customer' %}
+  </div>
+  <div id="myOrder" class="account__tab page__nav__content page-width active">
+     {% include 'order-customer' %}
+  </div>
+  <div class="account__success account__success--password page-width">
+    <h4 class="account__success__title">{{ 'customer.reset_password.success_reset' | t }}</h4>
+    <p class="account__success__text">{{ 'customer.reset_password.success_text' | t }}</p>
+    <a href="{{ routes.account_url }}" class="account__success__btn btn btn--primary">{{ 'customer.account.go_to_account' | t }}</a>
+  </div>
+</div>
+
+<script src="{{ 'nav-tab.js' | asset_url }}" defer></script>

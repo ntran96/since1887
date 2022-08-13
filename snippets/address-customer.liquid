@@ -1,0 +1,221 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
+{%- paginate customer.addresses by 5 -%}
+  <h3 class="account__tab__title">{{ 'customer.addresses.title' | t }}</h3>
+
+  <ul class="account__tab__list" role="list">
+    {% if customer.addresses != blank %}
+      {% include 'address-body' address: customer.default_address %}
+      {%- for address in customer.addresses -%}
+        {%- if address == customer.default_address -%}
+          <script>
+            document.getElementById('address_default_address_{{ address.id }}').checked = true
+          </script>
+          {% continue %}
+        {%- endif -%}
+        {% include 'address-body' %}
+      {%- endfor -%}
+    {% endif %}
+    <!-- Add Address -->
+    <li class="account__tab__list__item">
+      <div class="account__tab__list__item-wrap account__tab__list__item--add">
+        <div data-address>
+          <button
+            class="button-global button-add"
+            type="button"
+            aria-expanded="false"
+            aria-controls="AddAddress"
+          >
+            <span class="icon-create">
+              {% include 'icon-create' %}
+            </span>
+            {{ 'customer.addresses.add_new' | t }}
+          </button>
+          <div id="AddAddress">
+            <button class="button-global button-global--grey button-back" aria-expanded="true" type="reset">
+              {% include 'icon-arrow-left-black' %}
+              {{ 'customer.addresses.back' | t }}
+            </button>
+            <h4 class="account__tab__title" id="AddressNewHeading">{{ 'customer.addresses.add_new' | t }}</h4>
+            {%- form 'customer_address', customer.new_address, aria-labelledBy: 'AddressNewHeading' -%}
+              <div class="field-flex">
+                <div class="wrap-field">
+                  <label class="wrap-field__label" for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                  <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                  <input class="wrap-field__input" type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" placeholder="{{ 'customer.addresses.first_name' | t }}" required>
+                  <span class="error-message">{{ 'customer.addresses.error-text' | t }}</span>
+                </div>
+                <div class="wrap-field">
+                  <label class="wrap-field__label" for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                  <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                  <input class="wrap-field__input" type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" placeholder="{{ 'customer.addresses.last_name' | t }}" required>
+                  <span class="error-message">{{ 'customer.addresses.error-text' | t }}</span>
+                </div>
+              </div>
+              <div class="wrap-field">
+                <label class="wrap-field__label" for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                <input class="wrap-field__input" type="tel" value="65" maxlength="10" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}" autocomplete="tel" placeholder="{{ 'customer.addresses.phone' | t }}" required>
+                <span class="error-message">{{ 'customer.addresses.error-text' | t }}</span>
+                <span class="error-message error-message--phone">{{ 'customer.addresses.error-phone' | t }}</span>
+              </div>
+              <div class="wrap-field">
+                <label class="wrap-field__label" for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                <input class="wrap-field__input" type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" placeholder="{{ 'customer.addresses.address1' | t }}" required>
+                <span class="error-message">{{ 'customer.addresses.error-text' | t }}</span>
+              </div>
+              <div class="wrap-field">
+                <label class="wrap-field__label" for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                <input class="wrap-field__input" type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2" placeholder="{{ 'customer.addresses.address2' | t }}">
+              </div>
+              <div class="wrap-field wrap-field--city-new">
+                <label class="wrap-field__label" for="AddressCityNew">{{ 'customer.addresses.city' | t }} {{ form.city }}</label>
+                <input class="wrap-field__input" type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" placeholder="{{ 'customer.addresses.city' | t }}">
+              </div>
+              <div class="wrap-field" id="AddressProvinceContainerNew" style="display: none">
+                <label class="wrap-field__label" for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                <div class="select wrap-field__input">
+                  <select
+                    id="AddressProvinceNew"
+                    name="address[province]"
+                    data-default="{{ form.province }}"
+                    autocomplete="address-level1"
+                  >
+                  </select>
+                  {% include 'icon-down' %}
+                </div>
+              </div>
+              <div class="field-flex">
+                <div class="wrap-field">
+                  <label class="wrap-field__label" for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                  <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                  <input class="wrap-field__input" type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code" placeholder="{{ 'customer.addresses.zip' | t }}" required>
+                  <span class="error-message">{{ 'customer.addresses.error-text' | t }}</span>
+                  <span class="error-message error-message--zip">{{ 'customer.addresses.error-zip' | t }}</span>
+                </div>
+                <div class="wrap-field">
+                  <label class="wrap-field__label" for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                  <span class="wrap-field__required">{{ 'customer.addresses.required' | t }}</span>
+                  <div class="select wrap-field__input">
+                    <select
+                      id="AddressCountryNew"
+                      name="address[country]"
+                      data-default="{{ form.country }}"
+                      autocomplete="country"
+                      required
+                    >
+                      {{ all_country_option_tags }}
+                    </select>
+                    {% include 'icon-down' %}
+                  </div>
+                </div>
+              </div>
+              <div class="address-form__checkbox">
+                {{ form.set_as_default_checkbox }}
+                <label for="address_default_address_new">{{ 'customer.addresses.set_default' | t }}</label>
+              </div>
+              <div class="address-form__button">
+                <button class="button-global button-global--white" id="btn-save">{{ 'customer.addresses.add' | t }}</button>
+                <button class="button-global button-global--secondary" aria-expanded="true" type="reset">{{ 'customer.addresses.cancel' | t }}</button>
+              </div>
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  {%- if paginate.pages > 1 -%}
+    {%- if paginate.parts.size > 0 -%}
+      <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+        <ul role="list">
+        {%- if paginate.previous -%}
+          <li>
+            <a href="{{ paginate.previous.url }}&tab=addressBook" aria-label="{{ 'general.pagination.previous' | t }}">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+            <li>
+              <a href="{{ part.url }}&tab=addressBook" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+            </li>
+            {%- else -%}
+              {%- if part.title == paginate.current_page -%}
+              <li aria-current="page">
+                <span aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+              </li>  
+              {%- else -%}
+              <li>
+                <span>{{ part.title }}</span>
+              </li>  
+              {%- endif -%}
+            {%- endif -%}
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+          <li>
+            <a href="{{ paginate.next.url }}&tab=addressBook" aria-label="{{ 'general.pagination.next' | t }}" >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  {%- endif -%}
+{%- endpaginate -%}
+
+<script>
+  document.querySelector('#AddressCountryNew option[value="Singapore"]').setAttribute('selected', 'selected')
+
+  // hidden field city in Singapore
+  if (document.getElementById('AddressCountryNew').value == 'Singapore') {
+    document.querySelector('.wrap-field--city-new').classList.add('hidden')
+  }
+
+  document.getElementById('AddressCountryNew').onchange = function () {
+    if (document.getElementById('AddressCountryNew').value == 'Singapore') {
+      document.querySelector('.wrap-field--city-new').classList.add('hidden')
+    } else {
+      document.querySelector('.wrap-field--city-new').classList.remove('hidden')
+    }
+  }
+
+  let selectCity = document.querySelectorAll('.wrap-field__input__select-city') || false;
+  if (selectCity) {
+    selectCity.forEach(el => {
+      if (el.value == 'Singapore') {
+        document.getElementById(`${el.getAttribute('data-city-id')}`).classList.add('hidden');
+      }
+
+      el.onchange = function () {
+        if (el.value == 'Singapore') {
+          document.getElementById(`${el.getAttribute('data-city-id')}`).classList.add('hidden');
+        } else {
+          document.getElementById(`${el.getAttribute('data-city-id')}`).classList.remove('hidden');
+        }
+      }
+    })
+  }
+
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  }
+
+  // Open Delete Confirm Modal
+  function openConfirmModal(event) {
+    let deleteConfirmModal = event.target.closest('.account__tab__list__item').querySelector('.modal-section');
+    document.body.classList.add('overflow-hidden');
+    deleteConfirmModal.setAttribute('open', true);
+  }
+</script>

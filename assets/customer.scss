@@ -1,0 +1,284 @@
+$color-base-text: #000;
+$color-grey2-text: #9F9F9F;
+$mobile-tablet: 768px;
+$laptop: 1024px;
+$laptop-L: 1440px;
+$font-size-ex-smaller: calc(var(--global-text-fs) - 6px);
+$font-size-small: calc(var(--global-text-fs) - 2px);
+$color-error: #D45757;
+$font-size-heading: 22px;
+
+.page {
+  font-family: var(--font-global-family);
+  
+  .page__title {
+    text-align: center;
+    font-size: var(--font-size-large-text);
+    text-transform: uppercase;
+    font-family: var(--font-global-family);
+    margin: 90px 0 60px;
+  }
+}
+
+.page__nav__top {
+  text-align: center;
+
+  .page__nav__top__link {
+    padding: 16px 0;
+    border: none;
+    background: transparent;
+    text-align: center;
+    width: 148px;
+    border-bottom: 1px solid $color-grey2-text;
+    cursor: pointer;
+    font-weight: var(--font-button-weight);
+    font-family: var(--font-global-family);
+    font-size: var(--global-text-fs);
+
+    &.active {
+      border-bottom: 1px solid $color-base-text;
+      box-shadow: inset 0 -1px $color-base-text;
+      font-weight: bold;
+    }
+
+    &:last-child {
+      margin-left: -6px;
+    }
+
+    @media (min-width: $mobile-tablet) {
+      width: 309px;
+    }
+  }
+}
+
+.page__nav__content {
+  display: none;
+  font-family: var(--font-global-family);
+
+  &.active {
+    display: block;
+  }
+}
+
+.form-error {
+  background-color: #FFDDE0;
+  border: 1px solid #FFBCBE;
+  color: $color-error;
+  margin-bottom: 16px;
+  border-radius: 4px;
+
+  .form__message {
+    font-size: calc(var(--global-text-fs) + 2px);
+    color: $color-error;
+    text-decoration: underline;
+    text-align: left;
+    margin-left: 8px;
+  }
+
+  ul {
+    padding: 10px !important;
+    margin: 0 !important;
+    list-style: none;
+    
+    li {
+      text-align: center;
+    }
+
+    a {
+      font-size: var(--global-text-fs);
+      color: $color-error;
+
+      &:hover {
+        color: #FFA19E;
+        text-decoration-thickness: auto;
+      }
+    }
+  }
+}
+
+.wrap-field {
+  text-align: left;
+  position: relative;
+  margin-bottom: 20px;
+
+  .wrap-field__label {
+    margin-bottom: 5px;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.wrap-field__label--heading {
+      font-size: $font-size-heading;
+      text-transform: uppercase;
+    }
+
+    &[for='checkout_reduction_code'] {
+      max-width: 302px;
+      white-space: pre-wrap;
+    }
+
+    &[for="checkout_credit_card_expiry"],
+    &[for="checkout_credit_card_verification_value"] {
+      @media (min-width: $laptop) and (max-width: 1170px) {
+        max-width: 116px;
+      }
+    }
+  }
+
+  .wrap-field__required {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $color-grey2-text;
+    font-size: $font-size-ex-smaller;
+
+    @media (min-width: $mobile-tablet) {
+      font-size: $font-size-small;
+    }
+  }
+
+  .wrap-field__input {
+    width: 100%;
+    font-family: var(--font-global-family);
+    border: 1px solid var(--border-input);
+
+    &:focus-visible {
+      box-shadow: none;
+    }
+
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        border-color: var(--black);
+      }
+    }
+
+    &#checkout_reduction_code {
+      height: 40px;
+      padding: 0 8px;
+    }
+
+    &.wrap-field__input--error {
+      border-color: $color-error;
+    }
+
+    select {
+      font-family: var(--font-global-family);
+      font-size: var(--global-text-fs);
+      padding-left: 1rem;
+    }
+  }
+  .wrap-field__input-flex {
+    display: flex;
+
+    .wrap-field__input {
+      margin-right: 15px;
+
+      &.wrap-field__input--error {
+        border-color: $color-error;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.text-wrap {
+  font-size: $font-size-small;
+  
+  a {
+    font-size: var(--size-small-text);
+    font-weight: bold;
+    display: inline !important;
+  }
+}
+
+.form-check {
+  text-align: left;
+}
+
+.customer {
+  &.login,
+  &.recover {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &.recover-result {
+    display: none;
+    margin-top: 90px !important;
+
+    &.active {
+      display: block;
+    }
+
+    .form__message {
+      display: block;
+      font-size: var(--font-size-large-text);
+      text-transform: uppercase;
+    }
+
+    .form__message__button {
+      background-color: var(--global-btn1-bg);
+      text-decoration: none;
+      color: var(--global-btn1-color);
+      font-size: var(--global-text-fs);
+      border: 1px solid transparent;
+      margin-top: 40px;
+
+      &:hover {
+        color: var(--global-btn1-bg);
+        background-color: var(--global-btn1-color);
+        border-color: var(--global-btn1-border-color);
+      }
+    }
+  }
+
+  #btnLogin {
+    min-width: 240px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid var(--global-btn2-border-color);
+    color: var(--global-btn2-color);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--global-text-fs);
+    font-weight: var(--font-global-weight);
+
+
+    @media (min-width: $mobile-tablet) {
+      min-width: 280px;
+      min-height: 40px;
+    }
+  }
+}
+
+.error-message {
+  display: none;
+  font-size: $font-size-ex-smaller;
+  line-height: normal;
+  margin-top: 5px;
+  color: $color-error;
+
+  @media (min-width: $mobile-tablet) {
+    font-size: $font-size-small;
+  }
+
+  &.active {
+    display: block;
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}

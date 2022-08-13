@@ -1,0 +1,213 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "class_custom": "global-font"
+      }
+    },
+    "1656868668f47464bb": {
+      "type": "image-banner",
+      "settings": {
+        "layout": "full_bleed",
+        "image": "shopify:\/\/shop_images\/Gran_Cru_Video_Background.jpg",
+        "image_overlay_opacity": 50,
+        "subheading": "4th July 2022",
+        "heading": "Ladies night out",
+        "descriptions": "Glenfiddich free drink at the old man Singapore",
+        "button_text": "Book now",
+        "link": "",
+        "heading_size": "h3",
+        "highlight_description": false,
+        "desktop_content_alignment": "center",
+        "background_color": "",
+        "text_color": "#ffffff",
+        "subheading_color": "",
+        "show_text_below": false
+      }
+    },
+    "16568689392ee56752": {
+      "type": "our-event",
+      "blocks": {
+        "8e72a923-357d-4916-b142-e0a3158ce8e4": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/Glenfiddich_21_year_old_colour.gif",
+            "event_date": "",
+            "event_title": "1 free drink of glenfiddich 21 years old",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "83d8a4a9-5d41-4ca8-965d-31a62310ab54": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/Glenfiddich_12_Year_Old_-_Scampi_Sashimi.jpg",
+            "event_date": "",
+            "event_title": "Scampi sashimi quick snack",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "8f542ca8-5a45-4fbf-919c-904339c39b54": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/Glenfiddich_12_Year_Old_-_Monkey_Shoulder.jpg",
+            "event_date": "",
+            "event_title": "various type of cocktail",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "e5103db0-55dc-46c9-bb01-40f1a7c3bdf5": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/Image_Placeholder.png",
+            "event_date": "",
+            "event_title": "and so much more to expect...",
+            "button_text": "",
+            "event_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "8e72a923-357d-4916-b142-e0a3158ce8e4",
+        "83d8a4a9-5d41-4ca8-965d-31a62310ab54",
+        "8f542ca8-5a45-4fbf-919c-904339c39b54",
+        "e5103db0-55dc-46c9-bb01-40f1a7c3bdf5"
+      ],
+      "settings": {
+        "section_subtitle": "WHAT'S THIS ALL ABOUT?",
+        "section_title": "IT'S ALL ABLOUT YOU, LADIES!"
+      }
+    },
+    "16568694744d20ee92": {
+      "type": "featured-article",
+      "blocks": {
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Gran_Cru_Video_Background.jpg",
+            "article_title": "The perfect girls night out",
+            "article_description": "<p>Obtain your team of good friends together and enjoy the night with us<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Group_1709.png",
+            "article_title": "Quick and easy step to join the event",
+            "article_description": "<p>With just 3 easy steps, you can claim the ticket and join us with the event<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Frame_549_3180d548-10ac-41d7-834c-9bb5db0f0816.png",
+            "article_title": "COME AND ENJOY WITH US",
+            "article_description": "<p>We cannot wait to meet you there!<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509",
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5",
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf"
+      ],
+      "settings": {
+        "section_subtitle": "",
+        "section_title": "",
+        "choose_layout_option": "zigzag_content"
+      }
+    },
+    "16568664073a5d9866": {
+      "type": "featured-product",
+      "blocks": {
+        "16568664074f2785ce-0": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "body"
+          }
+        },
+        "d62c6239-32ca-4eac-8369-770d4639ec51": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<h2 style=\"text-align:Left; font-size: 60px; font-body-family: Agrandir-Regular, sans-serif; font-heading-weight: 400;\">Lady Night \nOut<\/h2>"
+          }
+        },
+        "a28a3edc-54a0-4dd8-a6cc-e0b5d0f89161": {
+          "type": "text",
+          "settings": {
+            "text": "Enjoy 1 free drink & 1 free snack with the claimed ticket. The treat is on us!",
+            "text_style": "body"
+          }
+        },
+        "16568664074f2785ce-2": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "16568664074f2785ce-3": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "16568664074f2785ce-4": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "16568664074f2785ce-5": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "16568664074f2785ce-6": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false
+          }
+        }
+      },
+      "block_order": [
+        "16568664074f2785ce-0",
+        "d62c6239-32ca-4eac-8369-770d4639ec51",
+        "a28a3edc-54a0-4dd8-a6cc-e0b5d0f89161",
+        "16568664074f2785ce-2",
+        "16568664074f2785ce-3",
+        "16568664074f2785ce-4",
+        "16568664074f2785ce-5",
+        "16568664074f2785ce-6"
+      ],
+      "settings": {
+        "product": "lady-night-out",
+        "color_scheme": "background-1",
+        "secondary_background": false,
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1656868668f47464bb",
+    "16568689392ee56752",
+    "16568694744d20ee92",
+    "16568664073a5d9866"
+  ]
+}

@@ -1,0 +1,241 @@
+<script src="{{ 'newsletter-advanced.js' | asset_url }}" defer="defer"></script>
+
+{{ 'newsletter-advanced.scss.css' | asset_url | stylesheet_tag }}
+
+<section class="newsletter-advanced">
+  <div class="page-width">
+    <div class="newsletter-advanced__wrap">
+      {%- if section.settings.logo != blank -%}
+        <div class="newsletter-advanced__logo center">
+          <img src="{{ section.settings.logo | image_url: width: 191 }}">
+        </div>
+      {% endif %}
+      {%- if section.settings.title != blank or section.settings.description != blank -%}
+          <div class="newsletter-advanced__heading center">
+            {%- if section.settings.title != blank -%}
+              <h2 class="newsletter-advanced__heading__title section-title-h3 uppercase">{{ section.settings.title }}</h2>
+            {% endif %}
+            {%- if section.settings.description != blank -%}
+              <p class="newsletter-advanced__heading__description">{{ section.settings.description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      <form action="" class="newsletter-advanced__form">
+        {%- liquid
+          assign contact_book_id = settings.addressbook_id_glenfiddich
+
+          if theme.name == "Glenfiddich"
+            assign contact_book_id = settings.addressbook_id_glenfiddich
+          elsif theme.name == "The balvenie"
+            assign contact_book_id = settings.addressbook_id_balvenie
+          elsif theme.name == "Monkey shoulder"
+            assign contact_book_id = settings.addressbook_id_monkey_shoulder
+          elsif theme.name == "Hendrick's"
+            assign contact_book_id = settings.addressbook_id_hendrick
+          endif
+        -%}
+        <input type="hidden" name="contactBookID" id="contactBookID" 
+          value="{{ contact_book_id }}"
+        >
+
+        <div class="wrap-field">      
+          <label class="wrap-field__label" for="RegisterForm-email">
+            {{ section.settings.email_label }}
+          </label>
+          <span class="wrap-field__required">{{ 'customer.register.required' | t }}</span>
+          <input
+            required
+            type="email"
+            name="RegisterForm-email"
+            class="wrap-field__input"
+            id="RegisterForm-email"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-required="true"
+            onkeyup=""
+            placeholder="{{ section.settings.email_placeholder }}"
+          >
+          <span class="error-message error-message--email">{{ 'customer.register.error-mail' | t }}</span>
+        </div>
+
+        <div class="wrap-field">     
+          <label class="wrap-field__label" for="FirstName">
+            {{ 'customer.register.first_name' | t }}
+          </label>
+          <span class="wrap-field__required">{{ 'customer.register.required' | t }}</span>
+          <input
+            required
+            type="text"
+            name="customer[first_name]"
+            class="wrap-field__input input_name"
+            id="FirstName"
+            onkeyup="validateName()"
+            autocomplete="off"
+            placeholder="{{ 'customer.register.first_name' | t }}"
+          >
+          <span id="errFName" class="error-message">{{ 'customer.register.error_name' | t }}</span>
+        </div>
+
+        <div class="wrap-field">
+          <label class="wrap-field__label" for="LastName">
+            {{ 'customer.register.last_name' | t }}
+          </label>
+          <span class="wrap-field__required">{{ 'customer.register.required' | t }}</span>
+          <input
+            required
+            type="text"
+            name="customer[last_name]"
+            class="wrap-field__input input_name"
+            id="LastName"
+            onkeyup="validateName()".
+            autocomplete="off"
+            placeholder="{{ 'customer.register.last_name' | t }}"
+          >
+          <span id="errLName" class="error-message">{{ 'customer.register.error_name' | t }}</span>
+        </div>
+
+        <div class="wrap-field">     
+          <label class="wrap-field__label" for="RegisterForm-birthday">
+            {{ 'customer.register.date_of_birth' | t }}
+          </label>
+          <span class="wrap-field__required">{{ 'customer.register.required' | t }}</span>
+          <div class="wrap-field__input-flex">
+            <input
+              required
+              type="number"
+              name="customer[note][BirthDay][Date]"
+              class="wrap-field__input"
+              id="RegisterForm-birthday-date"
+              aria-required="true"
+              placeholder="{{ 'customer.register.date' | t }}"
+              onkeyup=""
+              min="1"
+              max="31"
+              onkeypress="return isNumberKey(event)"
+              oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
+            >
+            <input
+              required
+              type="number"
+              name="customer[note][BirthDay][Month]"
+              class="wrap-field__input"
+              id="RegisterForm-birthday-month"
+              aria-required="true"
+              placeholder="{{ 'customer.register.month' | t }}"
+              onkeyup=""
+              min="1"
+              max="12"
+              onkeypress="return isNumberKey(event)"
+              oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
+            >
+            <input
+              required
+              type="number"
+              name="customer[note][BirthDay][Year]"
+              class="wrap-field__input"
+              id="RegisterForm-birthday-year"
+              aria-required="true"
+              placeholder="{{ 'customer.register.year' | t }}"
+              onkeyup=""
+              min="1900"
+              onkeypress="return isNumberKey(event)"
+              oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);"
+            >
+          </div>
+          <span id="errDOB" class="error-message">{{ 'customer.register.error-dob' | t }}</span>
+        </div>
+
+        {%- if section.settings.disclaimer != blank -%}
+          <div class="newsletter-advanced__form__disclaimer form-checkbox checkbox-required">
+            <input 
+              type="checkbox" 
+              class="form-checkbox__input"
+              id="newsletter-advanced-checkbox" 
+              name="newsletter-advanced-checkbox" 
+              value="1"
+            >
+            <label for="newsletter-advanced-checkbox" class="form-checkbox__label rich-text-wrap">
+              {{ section.settings.disclaimer }}
+            </label>
+          </div>
+          <span class="error-message error-checkbox">Please check this box if you want to proceed.</span>
+        {% endif %}
+        <div class="newsletter-advanced__form__btn center">
+          <!-- <button id="submit-btn" class="button-global button-global--white button-global--brand button-global--grey3-bg newsletter-advanced-submit"> -->
+          <button id="submit-btn" class="button button--primary newsletter-advanced-submit">
+            <span>{{ section.settings.button_label }}</span>
+          </button>
+        </div>
+        <p class="result-mess"></p>
+      </form>
+    </div>
+    <div class="thankyou-page center">
+      <h4 class="thankyou-page__title uppercase">THANKS FOR SUBCRIBING</h4>
+      <p class="thankyou-page__text">Your email is successfully submitted.<br>
+        Check your inbox for future updates.</p>
+      <div class="thankyou-page__btn-group">
+        <a href="/index" class="thankyou-page__btn-group__item button-global button-global--white button-global--grey3-bg button-global--brand">Keep browsing</a>
+        <a href="/account/login" class="thankyou-page__btn-group__item button-global button-global--secondary button-global--brand button-global--grey3-color">Register an account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Advance",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter Advance"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "STAY IN THE KNOW"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "You will be among the first to hear exciting news and gain exclusive access to all things Glenfiddich. Join us for a richer and more meaningful journey."
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Email Address"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "<p>By providing your email address, you consent to our Terms and Conditions and Privacy Policy and agree to receive marketing updates. You can unsubscribe at any time.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "CTA label",
+      "default": "SUBMIT"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Advance"
+    }
+  ]
+}
+{% endschema %}

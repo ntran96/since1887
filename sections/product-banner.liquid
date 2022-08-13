@@ -1,0 +1,146 @@
+{{ 'product-banner.scss.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Get product by product url in setting {% endcomment %}
+{%- assign handle = section.settings.product_link | split: "/" | last -%}
+
+{% for product in collections['all'].products %}
+  {%- if product.handle == handle -%}
+    {%- assign product_data = product -%}
+  {%- endif -%}
+{% endfor %}
+{% comment %} End Get product by product url in setting {% endcomment %}
+
+<section class="product-banner">
+  <div class="product-banner__wrap">
+    <div class="product-banner__background">
+      {%- if section.settings.image_mb != blank -%}
+        <img class="image-mobile" src="{{ section.settings.image_mb | image_url: width: 700 }}" alt="background mobile">
+      {%- endif -%}
+      {%- if section.settings.image != blank -%}
+        <img class="image-desktop" src="{{ section.settings.image | image_url: width: 1920 }}" alt="background mobile">
+      {%- endif -%}
+    </div>
+    <div class="product-banner__content">
+      <div class="product-banner__content__info">
+        <div class="page-width">
+          <div class="product-banner__content__wrap">
+            {%- if product_data.metafields.data.cover_bottle != blank -%}
+              <div class="product-banner__content__info__image">
+                <img src="{{ product_data.metafields.data.cover_bottle | img_url: 'x500' }}" >
+              </div>
+            {%- endif -%}
+            <div class="product-banner__content__info__text">
+              {%- if section.settings.subheading != blank -%}
+                <p class="product-banner__content__info__subheading">{{ section.settings.subheading }}</p>
+              {%- endif -%}
+              {%- if product_data.title != blank -%}
+                <h3 class="product-banner__content__info__product-name">
+                  <a href="{{section.settings.product_link}}" role="link">{{ product_data.title }}</a>
+                </h3>
+              {%- endif -%}
+              {%- if product_data.description != blank -%}
+                <p class="product-banner__content__info__product-desc">{{ product_data.description }}</p>
+              {%- endif -%}
+              {%- if section.settings.button_text != blank -%}
+              <a class="product-banner__content__info__btn" href="{{section.settings.product_link}}" role="link">{{ section.settings.button_text }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% for flavour in product_data.metafields.data_flavour %}
+        {% assign countFlavour = forloop.length | divided_by: 2 %}
+      {% endfor %}
+      {%- if countFlavour > 0 -%}
+      <div class="product-banner__content__flavour">
+        <ul class="flavour-list list-unstyled">
+          {% for i in (1..countFlavour) %}
+            {% assign imgFlavour = 'flavour_' | append:i %}
+            {% assign nameFlavour = 'flavour_name_' | append:i %}
+            {% assign imgFlavour = product_data.metafields.data_flavour[imgFlavour] %}
+            {% assign nameFlavour = product_data.metafields.data_flavour[nameFlavour] %}
+            
+            {%- if imgFlavour != blank or nameFlavour != blank -%}
+              <li class="flavour-list__item">
+                {%- if imgFlavour != blank -%}
+                    <img class="flavour-list__item__image" src="{{ imgFlavour | img_url: 'medium' }}" >
+                  {% endif %}
+                  {%- if nameFlavour != blank -%}
+                    <span class="flavour-list__item__name">{{ nameFlavour }}</span>
+                  {% endif %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {%- if countFlavour > 0 -%}
+  <div class="product-banner__content__flavour product-banner__content__flavour--mobile">
+    <ul class="flavour-list list-unstyled">
+      {% for i in (1..countFlavour) %}
+        {% assign imgFlavour = 'flavour_' | append:i %}
+        {% assign nameFlavour = 'flavour_name_' | append:i %}
+        {% assign imgFlavour = product_data.metafields.data_flavour[imgFlavour] %}
+        {% assign nameFlavour = product_data.metafields.data_flavour[nameFlavour] %}
+        
+        {%- if imgFlavour != blank or nameFlavour != blank -%}
+          <li class="flavour-list__item">
+            {%- if imgFlavour != blank -%}
+                <img class="flavour-list__item__image" src="{{ imgFlavour | img_url: 'medium' }}" >
+              {% endif %}
+              {%- if nameFlavour != blank -%}
+                <span class="flavour-list__item__name">{{ nameFlavour }}</span>
+              {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Product Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Banner"
+    },
+    {
+      "type": "url",
+      "id": "product_link",
+      "label": "Product Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mb",
+      "label": "Banner Image on mobile"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "pick of the week",
+      "label": "Sub heading"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "default": "Discover",
+      "label": "Button Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Banner"
+    }
+  ]
+}
+{% endschema %}

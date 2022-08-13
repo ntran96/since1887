@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "class_custom": "global-font"
+      }
+    },
+    "1656936375f6e0ffec": {
+      "type": "slideshow",
+      "blocks": {
+        "1656936374fa3d4cb9-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_1715_923e524d-9d5d-4d43-817d-27882d830108.png",
+            "image_mb": "shopify:\/\/shop_images\/Group_1716.png",
+            "subheading": "",
+            "heading": "Celebrate our launching",
+            "descriptions": "Celebrate the launching of our website with our award winning single malt whiskies",
+            "button_text": "",
+            "link": "",
+            "heading_size": "h2",
+            "text_alignment": "right",
+            "background_color": "",
+            "text_color": "#fdf8f8"
+          }
+        }
+      },
+      "block_order": [
+        "1656936374fa3d4cb9-1"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "image_overlay_opacity": 50,
+        "autoplay": false,
+        "cycle_speed": 5,
+        "enable_loop": false,
+        "effect_transition": "false",
+        "enable_dots": false,
+        "enable_arrows": false,
+        "autoheight": false,
+        "swiper_color": "#fff",
+        "show_text_below": false
+      }
+    },
+    "16568694744d20ee92": {
+      "type": "featured-article",
+      "blocks": {
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Group_1708.png",
+            "article_title": "Enjoy our special price!",
+            "article_description": "<p>Save 15% on everything through 8th of July<\/p>",
+            "button_text": "Explore our core range",
+            "button_link": "shopify:\/\/collections"
+          }
+        },
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/D_Component_1.jpg",
+            "article_title": "Shower the one you love with special gifts",
+            "article_description": "<p>Personalise a bottle of Glenfiddich whisky with a unique label containing a name and a personal message. Send a unique present to someone you love!<\/p>",
+            "button_text": "Personalized bottle",
+            "button_link": "shopify:\/\/pages\/personalize-detail"
+          }
+        },
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Glenfiddich_21_year_old_colour.gif",
+            "article_title": "Enjoy our special bundle",
+            "article_description": "<p>Don't know where to start? Then explore our suggested bundle for your special occasion<\/p>",
+            "button_text": "Surprised me",
+            "button_link": "shopify:\/\/products\/glenfiddich-12-year-old-and-monkey-shoulder-the-original"
+          }
+        }
+      },
+      "block_order": [
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509",
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5",
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf"
+      ],
+      "settings": {
+        "section_subtitle": "",
+        "section_title": "",
+        "choose_layout_option": "zigzag_content"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1656936375f6e0ffec",
+    "16568694744d20ee92"
+  ]
+}

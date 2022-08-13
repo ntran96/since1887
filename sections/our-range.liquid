@@ -1,0 +1,205 @@
+{{ 'our-range.scss.css' | asset_url | stylesheet_tag }}
+<style>
+  .our-range {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    {% if section.settings.bg_image %}
+      background-image: url({{ section.settings.bg_image | img_url: '1200x1200' }});
+      background-size: cover;
+      background-position: center;
+    {% endif %}
+  }
+
+  @media (max-width: 768px) {
+    .our-range {
+      padding: 56px 0;
+    }
+  }
+
+  .product-range__title--top {
+    font-family: var(--font-highlight-family);
+  }
+  .product-range__title--bottom {
+    font-family: var(--font-heading-family);
+  }
+</style>
+
+<div class="our-range">
+  <div class="our-range__wrap">
+    <div class="our-range__wrap__content page-width">
+      <h2 class="our-range__wrap__content__title">{{ 'our-range.title' | t }}</h2>
+      <p class="our-range__wrap__content__subtitle">{{ 'our-range.subtitle' | t }}</p>
+    </div>
+
+    {%- capture featured_data_slider -%}
+      data-component-class-name='.our-range__slide'
+      data-pagination=true
+      data-navigation=true
+      data-slides-per-view-mobile=1.15
+      data-slides-per-view-tablet=1.5
+      data-slides-per-view-laptop=2
+      data-slides-per-view-desktop=2
+    {%- endcapture -%}
+    <swiper-component class="our-range__slide slider-mobile-gutter" {{ featured_data_slider }}>
+      <div class="swiper-custom swiper-container our-range__slide__container">
+        <div class="swiper-wrapper our-range__wrap__product">
+        {% for block in section.blocks %}
+          <div id="Slide-{{ block.id }}-{{ forloop.index }}" class="swiper-slide product-slide">
+            <div class="product-range product-range--{{ forloop.index }}">
+              <style>
+                .product-range--{{ forloop.index }} {
+                  background-image: url({{ block.settings.product_image_mobile | img_url: '1200x1200' }});
+                  height: auto;
+                }
+                
+                @media (min-width: 1024px) {
+                  .product-range--{{ forloop.index }} {
+                    text-align: {{ block.settings.text_align }}; 
+                    background-image: url({{ block.settings.product_image_desktop | img_url: '1200x1200' }});
+                  }
+                }
+              </style>
+              <h3 class="product-range__title__wrap">
+                <span class="product-range__title product-range__title--top"
+                  style="color: {{ block.settings.color_title_top }};">
+                  {{ block.settings.product_title_top }}
+                </span>
+                <span class="product-range__title product-range__title--bottom"
+                  style="color: {{ block.settings.color_title_bottom }};">
+                  {{ block.settings.product_title_bottom }}
+                </span>
+              </h3>
+              <a href="{{ block.settings.product_url }}" class="ms-button ms-button--secondary product-range__link">{{ 'our-range.button_label' | t }}</a>
+            </div>
+          </div>  
+        {% endfor %}
+        </div>
+      </div>
+    </swiper-component>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our range",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top section",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom section",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color section"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image section"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product range",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Custom text align"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text align",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Custom product title top"
+        },
+        {
+          "type": "text",
+          "id": "product_title_top",
+          "label": "Product title top"
+        },
+        {
+          "type": "color",
+          "id": "color_title_top",
+          "label": "Color product title top"
+        },
+        {
+          "type": "header",
+          "content": "Custom product title bottom"
+        },
+        {
+          "type": "text",
+          "id": "product_title_bottom",
+          "label": "Product title bottom"
+        },
+        {
+          "type": "color",
+          "id": "color_title_bottom",
+          "label": "Color product title bottom"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product url"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image_mobile",
+          "label": "Product image mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image_desktop",
+          "label": "Product image desktop"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our range",
+      "blocks": [
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

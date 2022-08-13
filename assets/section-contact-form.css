@@ -1,0 +1,74 @@
+.contact {
+  font-family: var(--font-global-family);
+}
+
+.contact .page__title {
+  font-family: var(--font-global-family);
+}
+
+.contact img {
+  max-width: 100%;
+}
+
+.contact .form__message {
+  align-items: flex-start;
+}
+
+.contact .page__header {
+  padding-top: 0;
+}
+
+.contact .icon-success {
+  margin-top: 0.2rem;
+}
+
+.contact .field {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact .field {
+    margin-bottom: 2rem;
+  }
+}
+
+.contact__button {
+  margin-top: -10px;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .contact__button {
+    margin-top: -10px;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contact__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+  }
+}
+
+.contact .success-message {
+  color: #199B4D;
+  font-size: var(--global-text-fs);
+  text-align: center;
+  justify-content: center;
+  margin: -15px 0 25px;
+}
+
+.contact .wrap-field {
+  margin-bottom: 35px;
+}
+
+@media screen and (min-width: 750px) {
+  .contact .success-message {
+    margin: -30px 0 40px;
+  }
+
+  .contact .wrap-field {
+    margin-bottom: 50px;
+  }
+}

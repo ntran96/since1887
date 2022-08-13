@@ -1,0 +1,79 @@
+$mobile-tablet: 768px;
+$font-size-ex-smaller: 10px;
+
+.breadcrum-checkout {
+  display: flex;
+  font-family: var(--font-global-family);
+  font-size: var(--global-text-fs);
+  justify-content: center;
+  
+  .breadcrum-checkout__item {
+    color: var(--black);
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    width: 75px;
+    
+    @media (min-width: $mobile-tablet) {
+      margin-right: 30px;
+      width: 160px;
+    }
+    
+    &:last-child {
+      margin-right: 0;
+
+      .breadcrum-checkout__icon {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    .breadcrum-checkout__link {
+      display: inline-flex;
+      color: var(--black);
+      align-items: center;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .breadcrum-checkout__icon {
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+        height: 2px;
+        width: 100%;
+        background-color: var(--black);
+        z-index: 0;
+        
+        @media (min-width: $mobile-tablet) {
+          width: 120px;
+        }
+      }
+
+      svg {
+        width: 55px;
+        height: 55px;
+
+        @media (min-width: $mobile-tablet) {
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+  
+    .breadcrum-checkout__text {
+      text-align: center;
+      font-size: $font-size-ex-smaller;
+
+      @media (min-width: $mobile-tablet) {
+        font-size: var(--global-text-fs);
+      }
+    }
+  }
+}

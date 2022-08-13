@@ -1,0 +1,62 @@
+<div class="account__tab__edit-profile" id="edit-profile">
+  <div class="edit-profile__wrap__input">
+    <div class="wrap-field">
+      <label for="FirstName" class="wrap-field__label">
+        {{ 'customer.edit_profile.first_name' | t }}
+      </label>
+      <span class="wrap-field__required">{{ 'customer.edit_profile.required' | t }}</span>
+      <input id="FirstName" onkeyup="validateName()" value="{{ customer.first_name }}" type="text" class="wrap-field__input">
+      <span id="errFName" class="error-message">{{ 'customer.edit_profile.error-text' | t }}</span>
+    </div>
+    <div class="wrap-field">
+      <label for="LastName" class="wrap-field__label">
+        {{ 'customer.edit_profile.last_name' | t }}
+      </label>
+      <span class="wrap-field__required">{{ 'customer.edit_profile.required' | t }}</span>
+      <input id="LastName" onkeyup="validateName()" value="{{ customer.last_name }}" type="text" class="wrap-field__input">
+      <span id="errLName" class="error-message">{{ 'customer.edit_profile.error-text' | t }}</span>
+    </div>
+    <div class="wrap-field">
+      <label for="edit-DOB" class="wrap-field__label">
+        {{ 'customer.edit_profile.date_of_birth' | t }}
+      </label>
+      <span class="wrap-field__required">{{ 'customer.edit_profile.required' | t }}</span>
+      <input id="edit-DOB" type="date" min="1900-01-01" class="wrap-field__input">
+      <span id="errDOB" class="error-message">{{ 'customer.edit_profile.error_dob' | t }}</span>
+    </div>
+  </div>
+  <div class="edit-profile__wrap__button">
+    <button id="updateProfile" class="button-global">
+      {{ 'customer.edit_profile.update' | t }}
+    </button>
+    <button id="cancelUpdate" class="button-global button-global--secondary">
+      {{ 'customer.edit_profile.cancel' | t }}
+    </button>
+  </div>
+</div>
+
+
+<!-- style date picker icon -->
+<style>
+::-webkit-search-cancel-button,
+::-webkit-clear-button {
+  -webkit-appearance: none;
+  background-image: url('{{ "date-picker.png" | asset_url }}');
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+  height: 20px;
+  margin-right: 0;
+  width: 22px;
+}
+
+::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  background-image: url('{{ "date-picker.png" | asset_url }}');
+  width: 20px;
+  height: 22px;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: .5rem;
+}
+</style>

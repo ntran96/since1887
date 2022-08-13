@@ -1,0 +1,139 @@
+.cart-template {
+  font-family: var(--font-global-family);
+  font-size: var(--global-text-fs);
+  line-height: calc(1 + 0.5 / var(--font-body-scale));
+  color: var(--black);
+}
+
+.cart-template .page-width {
+  max-width: 1110px;
+}
+
+.cart-template * {
+  font-family: var(--font-global-family);
+}
+
+cart-items {
+  display: block;
+}
+
+.cart__empty-text,
+.is-empty .cart__contents,
+cart-items.is-empty .page__header:not(.cart__warnings),
+.is-empty .free-gifts-cart,
+.is-empty .cart__footer {
+  display: none;
+}
+
+.is-empty .cart__empty-text,
+.is-empty .cart__warnings {
+  display: block;
+}
+
+.cart__warnings {
+  display: none;
+  text-align: center;
+  padding-bottom: 60px;
+}
+
+.cart__login-paragraph {
+  letter-spacing: .03em;
+  margin: 15px 0;
+}
+
+.cart__login-paragraph a {
+  text-underline-offset: .02em;
+  font-weight: 600;
+}
+
+.cart__items--disabled {
+  pointer-events: none;
+}
+
+.cart__footer {
+  padding-bottom: 60px;
+}
+
+.cart-total__discount,
+.cart__footer .totals {
+  padding: 10px 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.cart-total__discount .cart-total + .cart-total {
+  padding-top: 10px;
+}
+
+.tax-note {
+  display: block;
+  font-size: calc(var(--global-text-fs) - 6px);
+  letter-spacing: .045em;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.cart__ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.cart__footer .cart__ctas:first-child {
+  align-items: flex-end;
+}
+
+.cart__ctas > *:not(noscript:first-child) + * {
+  margin-top: 10px;
+}
+
+.cart__footer > div:only-child {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.cart__footer .cart__ctas + .js-contents {
+  margin-top: 60px;
+}
+
+@media screen and (min-width: 768px) {
+  .tax-note {
+    padding: 15px 0;
+  }
+
+  .cart__ctas {
+    margin-top: 45px;
+  }
+
+  .cart__contents > * + * {
+    margin-top: 0;
+  }
+
+  .cart__items + .cart__footer {
+    grid-column: 2;
+  }
+
+  .cart__footer {
+    padding-bottom: 84px;
+  }
+
+  .cart__footer-wrapper:last-child {
+    padding-top: 0;
+  }
+
+  [data-shopify-buttoncontainer] {
+    justify-content: flex-end;
+  }
+
+  .cart__warnings {
+    padding-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cart__login-paragraph > span {
+    display: block;
+  }
+}
+
+

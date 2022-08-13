@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "4782072a-477d-4de9-b4f9-4dbcdb7a44f9": {
+          "type": "collection",
+          "settings": {
+            "collection": "flagship-range"
+          }
+        },
+        "d5caa0fb-6979-48dc-a959-d1136721d586": {
+          "type": "collection",
+          "settings": {
+            "collection": "grand-series"
+          }
+        },
+        "1b91d5b1-81b0-4b84-96b5-7494a71f2103": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundle-specials"
+          }
+        }
+      },
+      "block_order": [
+        "4782072a-477d-4de9-b4f9-4dbcdb7a44f9",
+        "d5caa0fb-6979-48dc-a959-d1136721d586",
+        "1b91d5b1-81b0-4b84-96b5-7494a71f2103"
+      ],
+      "settings": {
+        "heading": "Find your whisky — The CollectionS",
+        "title": "OUR AWARD-WINNING SINGLE MALT WHISKIES",
+        "show_all_collection": false,
+        "sort": "alphabetical",
+        "image_ratio": "adapt",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

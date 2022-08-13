@@ -1,0 +1,252 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+{{ 'collection-list.scss.css' | asset_url | stylesheet_tag }}
+{{ 'collection-list-item.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="collection-list-section section-{{ section.id }}-padding">
+  <div class="page-width">
+    <h5 class="collection-list-heading">{{ section.settings.heading | escape }}</h5>
+    <h1 class="collection-title title title--primary">{{ section.settings.title | escape }}</h1>
+    {%- liquid
+      case section.settings.sort
+        when 'products_high' or 'products_low'
+          assign collections = collections | sort: 'all_products_count'
+        when 'date' or 'date_reversed'
+          assign collections = collections | sort: 'published_at'
+      endcase
+
+      if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+        assign collections = collections | reverse
+      endif
+
+      assign products_to_show_setting = section.settings.products_to_show | plus: 0
+    -%}
+  </div>
+
+  <!-- Show All Collection -->
+  {%- if section.settings.show_all_collection -%}
+    <ul class="collection-list list-unstyled{% if section.settings.enable_alt_background %} alt-background{% endif%}" role="list">
+      {%- for collection in collections -%}
+        {%- if collection.all_products_count > 0 -%}
+          <li class="collection-list__item">
+            <div class="page-width">
+              {% render 'collection-list-item', 
+                card_collection: collection, 
+                media_aspect_ratio: section.settings.image_ratio, 
+                columns: 3, 
+                products_to_show: products_to_show_setting,
+                show_product_number : section.settings.show_product_number
+              %}
+            </div>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  <!-- Show selected collections -->
+  {%- if section.blocks.size > 0 -%}
+    <ul class="collection-list list-unstyled{% if section.settings.enable_alt_background %} alt-background{% endif%}" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.collection.all_products_count > 0 -%}
+          <li class="collection-list__item">
+            <div class="page-width">
+              {% render 'collection-list-item', 
+                card_collection: block.settings.collection, 
+                media_aspect_ratio: section.settings.image_ratio, 
+                columns: 3, 
+                products_to_show: products_to_show_setting,
+                show_product_number : section.settings.show_product_number
+              %}
+            </div>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Listing",
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Choose Collection"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Collections Heading",
+      "default": "Find your whisky — The CollectionS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Collections Title",
+      "default": "OUR AWARD-WINNING SINGLE MALT WHISKIES"
+    },
+    {
+      "type": "header",
+      "content": "Show All Collections"
+    },
+    {
+      "type": "paragraph",
+      "content": "If you don't want to show all the collections, uncheck the checkbox under and add the collections you want to show through the blocks."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_collection",
+      "label": "Show All Collections",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_number",
+      "label": "Show the number of products in the corresponding category",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_alt_background",
+      "label": "Enable alternating background colour",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top padding mobile",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom padding mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        {
+          "value": "alphabetical",
+          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
+        },
+        {
+          "value": "date_reversed",
+          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
+        },
+        {
+          "value": "date",
+          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
+        },
+        {
+          "value": "products_high",
+          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
+        },
+        {
+          "value": "products_low",
+          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
+        }
+      ],
+      "default": "alphabetical",
+      "label": "t:sections.main-list-collections.settings.sort.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-list-collections.settings.image_ratio.label",
+      "info": "t:sections.main-list-collections.settings.image_ratio.info"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.featured-collection.settings.products_to_show.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Product Listing"
+    }
+  ]
+}
+{% endschema %}
+ 

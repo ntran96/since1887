@@ -1,0 +1,16 @@
+<div class="page page--login">
+  <h1 class="page__title">{{ 'customer.account.title' | t }}</h1>
+  <nav class="page__nav">
+    <div class="page__nav__top">
+      <button class="page__nav__top__link page__nav__top__link--register" onclick="openContent(event, 'register', 'tab', 'register')">{{ 'customer.register-title' | t }}</button>
+      <button class="page__nav__top__link page__nav__top__link--login active" onclick="openContent(event, 'loginForm', 'tab', 'loginForm')">{{ 'customer.log_in' | t }}</button>
+    </div>
+    <div class="page__nav__content" id="register">
+      {% include 'register-form' %}
+    </div>
+    <div class="page__nav__content active" id="loginForm">
+      {% include 'login-form' %}
+    </div>
+  </nav>
+</div>
+<script src="{{ 'nav-tab.js' | asset_url }}"></script>

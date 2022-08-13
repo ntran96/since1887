@@ -1,0 +1,140 @@
+{% assign pages = section.settings.pages_has_header_brand | split: ', ' %}
+
+{% if section.settings.top_header_menu != blank  %}
+<div class="top-header" data-header-top>
+  <div class="top-header__wrap">
+    <div class="page-width">
+      <h1 class="top-header__heading">
+        {% if section.settings.shop_logo %}
+          <img src="{{ section.settings.shop_logo | img_url: "medium"}}" alt="" class="top-header__heading__logo">
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </h1>
+      <nav class="top-header__nav">
+        {% assign linklist = section.settings.top_header_menu %}
+        {% for link in linklists[linklist].links %}
+          <li class="top-header__nav__item
+            {% if theme.name == link.title %}
+              {% if request.page_type == 'index' or
+                request.page_type == 'list-collections' or
+                request.page_type == 'collection' or 
+                request.page_type == 'product'
+              %} 
+                active
+              {% endif %}
+            {% endif %}"
+            {% if theme.name == link.title %}
+              id="{{ link.handle }}"
+            {% endif %}
+          >
+            <a class="top-header__nav__link top-header__nav__link--{{ forloop.index }}" 
+            href="{{ link.url }}"
+            >
+              <img class="top-header__nav__link__image" src="{{ link.handle | append: '.png' | file_url }}" alt="{{ link.title }}">
+              <img class="top-header__nav__link__image top-header__nav__link__image--active" src="{{ link.handle | append: '-active.png' | file_url }}" alt="{{ link.title }}">
+            </a>
+          </li>
+          {% if theme.name == link.title %}
+            {% for pageName in pages %}
+              {% if page.template_suffix == pageName %}
+                <script>
+                  document.getElementById('{{ link.handle }}').classList.add('active')
+                </script>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </nav>
+      <div class="top-header__dropdown has-dropdown">
+        <div class="has-dropdown__wrap" onclick="openDropDown()">
+          <div class="top-header__heading--extra active">
+            <h1 class="top-header__heading active">
+              {% if section.settings.shop_logo %}
+                <img src="{{ section.settings.shop_logo | img_url: "medium"}}" alt="" class="top-header__heading__logo">
+              {% else %}
+                {{ shop.name }}
+              {% endif %}
+            </h1>
+            <button class="dropdown-btn">
+              {% render 'icon', name: 'arrow-down-white'%}
+            </button>
+          </div>
+          {% for pageName in pages %}
+            {% if page.template_suffix == pageName or request.page_type == pageName %}
+              <!-- Check active menu on mobile -->
+              {%- liquid
+                for link in linklists[linklist].links
+                  if theme.name == link.title
+                    assign class_link_handle = link.handle | prepend:'top-header__dropdown__item--'
+                    assign class_link_index = forloop.index | prepend: 'top-header__nav__link--'
+                    assign alt_img = link.title
+                    assign src_img_active = link.handle | append: '-active.png' | file_url 
+                  endif
+                endfor
+              -%}
+                <div class="top-header__dropdown__item top-header__nav__item active {{ class_link_handle }}">
+                  <div class="top-header__nav__link {{ class_link_index }}">
+                    <img class="top-header__nav__link__image top-header__nav__link__image--active" src="{{ src_img_active }}" alt="{{ alt_img }}">
+                  </div>
+                </div>
+              <button class="dropdown-btn">
+                {% render 'icon-arrow-down' %}
+              </button>
+              <script>
+                document.querySelector('.top-header__heading--extra').classList.remove('active')
+              </script>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="dropdown-content">
+          <ul class="dropdown-menu">
+            {% for link in linklists[linklist].links %}
+              <li class="dropdown-menu__item
+                {% if theme.name == link.title %}
+                  dropdown-menu__item--{{ link.handle }}
+                  {% if request.page_type == 'index' or
+                    request.page_type == 'list-collections' or
+                    request.page_type == 'collection' or 
+                    request.page_type == 'product'
+                  %}
+                    active
+                  {% endif %}
+                {% endif %} top-header__nav__item">
+                <a class="top-header__nav__link top-header__nav__link--{{ forloop.index }}"
+                  href="{{ link.url }}" 
+                >
+                  <img class="top-header__nav__link__image" src="{{ link.handle | append: '.png' | file_url }}" alt="{{ link.title }}">
+                  <img class="top-header__nav__link__image top-header__nav__link__image--active" src="{{ link.handle | append: '-active.png' | file_url }}" alt="{{ link.title }}">
+                </a>
+              </li>
+              {% if theme.name == link.title %}
+                {% for pageName in pages %}
+                  {% if page.template_suffix == pageName %}
+                    <script>
+                      document.querySelector('.dropdown-menu__item--{{ link.handle }}').classList.add('active')
+                    </script>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="top-header__wrap-btn">
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="top-header__link top-header__link--account link--white" 
+            href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          >
+            {% render 'icon-account' %}
+          </a>
+        {% endif %}
+        <a class="top-header__link top-header__link--cart link--white" href="{{ routes.cart_url }}" id="cart-icon-bubble">
+          {% render 'icon-cart' %}
+          (<span class="cart-count error-color">{% if checkout %}{{ checkout.item_count }}{% else %}{{ cart.item_count }}{% endif %}</span>)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

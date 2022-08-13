@@ -1,0 +1,119 @@
+{{ 'section-title-with-line.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+  .title-with-line-{{ section.id }} .title-with-line__line {
+    background: {{ section.settings.line_color }};
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+{%- endstyle -%}
+
+{%- if section.settings.title != blank -%}
+  <section class="title-with-line title-with-line-{{ section.id }} section-{{ section.id }}-padding">
+    <div class="title-with-line__wrap title-alignment--{{ section.settings.title_alignment }}">
+      <h2 class="title-with-line__text section-title-h3 uppercase">{{ section.settings.title }}</h2>
+      <div class="title-with-line__line"></div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Section title with line",
+  "settings": [
+    {
+      "type": "header",
+      "content": "section title with line"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "section title with line"
+    }, 
+    {
+      "type": "color_background",
+      "id": "line_color",
+      "label": "Line Color",
+      "default": "#DB613A"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Title alignment"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top padding mobile",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom padding mobile",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section title with line"
+    }
+  ]
+}
+{% endschema %}

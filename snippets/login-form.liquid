@@ -1,0 +1,192 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer recover">
+  <h4 class="page__title" id="recover" tabindex="-1">
+    {{ 'customer.recover_password.title' | t }}
+  </h4>
+  <div>
+    <p>
+      {{ 'customer.recover_password.subtext' | t }}
+    </p>
+  
+    {%- form 'recover_customer_password', name: 'form' -%}
+    <input type="hidden" name="return_to" value="{{ routes.account_login_url }}?reset=EmailSent"/>
+      <div class="wrap-field">
+        <label class="wrap-field__label" for="RecoverEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
+        <span class="wrap-field__required">{{ 'customer.login_page.required' | t }}</span>
+        <input type="email"
+          value=""
+          name="email"
+          class="wrap-field__input"
+          id="RecoverEmail"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="off"
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="RecoverEmail-email-error"
+            autofocus
+          {% endif %}
+          placeholder="{{ 'customer.login_page.email' | t }}"
+          required
+        >
+        <span class="error-message">{{ 'customer.login_page.error-email' | t }}</span>
+      </div>
+      {%- if form.errors -%}
+        <small id="RecoverEmail-email-error" class="form__message">
+          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13">
+            <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+            <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+            <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+            <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+          </svg>
+          {{ form.errors.messages['form'] }}
+        </small>
+      {%- endif -%}
+  
+      <button class="button-global button-global--white">
+        {{ 'customer.login_page.submit' | t }}
+      </button>
+  
+      <a id="btnLogin" href="#login">
+        {{ 'customer.login_page.cancel' | t }}
+      </a>
+    {%- endform -%}
+  </div>
+</div>
+<div class="customer login">
+  <div>
+    {%- form 'customer_login', name: 'form' -%}
+      {%- if form.errors -%}
+        <div class="form-error">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      
+      <div class="wrap-field">
+        <label class="wrap-field__label" for="CustomerEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
+        <input
+          class="wrap-field__input"
+          type="email"
+          name="customer[email]"
+          id="CustomerEmail"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          {% if form.errors contains 'form' %}
+            aria-invalid="true"
+          {% endif %}
+          placeholder="{{ 'customer.login_page.email' | t }}"
+          required
+        >
+        <span class="error-message error-message--email">{{ 'customer.register.error-mail' | t }}</span>
+      </div>
+
+      {%- if form.password_needed -%} 
+        <div class="wrap-field">
+          <label class="wrap-field__label" for="CustomerPassword">
+            {{ 'customer.login_page.password' | t }}
+          </label>        
+          <input
+            class="wrap-field__input"
+            type="password"
+            value=""
+            name="customer[password]"
+            id="CustomerPassword"
+            autocomplete="off"
+            {% if form.errors contains 'form' %}
+              aria-invalid="true"
+            {% endif %}
+            placeholder="{{ 'customer.login_page.password' | t }}"
+            required
+          >
+          <span class="error-message">{{ 'customer.login_page.error-text' | t }}</span>
+        </div>
+        <a id="btnRecover" href="#recover">
+          {{ 'customer.login_page.forgot_password' | t }}
+        </a>
+      {%- endif -%}
+
+      <button class="button-global button-global--white">
+        {{ 'customer.login_page.sign_in' | t }}
+      </button>
+
+      <div class="text-wrap">
+        {{ 'customer.login_page.question' | t }} 
+        <a href="{{ routes.account_register_url }}">
+          {{ 'customer.login_page.register' | t }}
+        </a>
+      </div>
+      
+    {%- endform -%}
+  </div>
+  
+  {%- if shop.checkout.guest_login -%}
+    <div>
+      <hr>
+      <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+
+      {%- form 'guest_login' -%}
+        <button>
+          {{ 'customer.login_page.guest_continue' | t }}
+        </button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>
+<div class="customer recover-result">
+  <h3 class="form__message" tabindex="-1" autofocus>
+    {{ 'customer.recover_password.title_success' | t }}
+  </h3>
+  <div class="form__message__subtitle">
+    {{ 'customer.recover_password.success' | t }}
+  </div>
+  <a href="{{ routes.account_login_url }}" class="form__message__button btn btn--primary">
+    {{ 'customer.login_page.return_login' | t }}
+  </a>
+</div>
+
+<script>
+  let btnLogin = document.getElementById('btnLogin')
+  let btnRecover = document.getElementById('btnRecover')
+  let elLogin = document.querySelector('.customer.login')
+  let elRecover = document.querySelector('.customer.recover')
+
+  btnRecover.onclick = function () {
+    document.querySelector('.page__nav__top').setAttribute('hidden', 'hidden')
+    document.querySelector('.page--login > .page__title').setAttribute('hidden', 'hidden')
+    elRecover.classList.add('active')
+    elLogin.classList.remove('active')
+  }
+  
+  btnLogin.onclick = function () {
+    document.querySelector('.page__nav__top').removeAttribute('hidden')
+    document.querySelector('.page--login > .page__title').removeAttribute('hidden')
+    elRecover.classList.remove('active')
+    elLogin.classList.add('active')
+  }
+  
+  let urlLogin = window.location.href
+  let urlHref = urlLogin.split('#')
+  let urlParam = urlLogin.split('=')
+  
+  if (urlHref[1] == 'recover') {
+    document.querySelector('.page__nav__top').setAttribute('hidden', 'hidden')
+    document.querySelector('.page--login > .page__title').setAttribute('hidden', 'hidden')
+    elRecover.classList.add('active')
+  } else {
+    elLogin.classList.add('active')
+  }
+
+  if (urlParam[1] == 'EmailSent') {
+    document.querySelector('.recover-result').classList.add('active')
+    document.querySelector('.page__nav__top').classList.add('hidden')
+    document.querySelector('.page--login > .page__title').classList.add('hidden')
+    document.querySelector('.login').classList.remove('active')
+    document.querySelector('.recover').classList.remove('active')
+  }
+</script>

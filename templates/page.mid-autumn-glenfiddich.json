@@ -1,0 +1,244 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "class_custom": "global-font"
+      }
+    },
+    "1656868668f47464bb": {
+      "type": "image-banner",
+      "settings": {
+        "layout": "full_bleed",
+        "no_ratio": false,
+        "image": "shopify:\/\/shop_images\/Glenfiddich-Snow-Skin-Mooncakes_660.webp",
+        "image_overlay_opacity": 50,
+        "subheading": "10 Sep 2022",
+        "heading": "MID-AUTUMN",
+        "descriptions": "Comes to the Valley of the Deer",
+        "button_text": "",
+        "link": "",
+        "heading_size": "h3",
+        "highlight_description": false,
+        "desktop_content_alignment": "center",
+        "background_color": "",
+        "text_color": "#ffffff",
+        "subheading_color": "",
+        "show_text_below": false
+      }
+    },
+    "16568689392ee56752": {
+      "type": "our-event",
+      "blocks": {
+        "8e72a923-357d-4916-b142-e0a3158ce8e4": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/whisky-snow-skin-mooncakes1.png",
+            "event_date": "",
+            "event_title": "GIFT BOX CONTAINING 4 WHISKY-FILLED PASTRIES",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "83d8a4a9-5d41-4ca8-965d-31a62310ab54": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/crop2.png",
+            "event_date": "",
+            "event_title": "The Glenfiddich Our Original Twelve mooncake",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "8f542ca8-5a45-4fbf-919c-904339c39b54": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/crop3.png",
+            "event_date": "",
+            "event_title": "Glenfiddich Our Solera Fifteen snow skin mooncake",
+            "button_text": "",
+            "event_link": ""
+          }
+        },
+        "e5103db0-55dc-46c9-bb01-40f1a7c3bdf5": {
+          "type": "event_item",
+          "settings": {
+            "event_image": "shopify:\/\/shop_images\/cake.jpg",
+            "event_date": "",
+            "event_title": "limited edition inspired by flavours reminiscent",
+            "button_text": "",
+            "event_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "8e72a923-357d-4916-b142-e0a3158ce8e4",
+        "83d8a4a9-5d41-4ca8-965d-31a62310ab54",
+        "8f542ca8-5a45-4fbf-919c-904339c39b54",
+        "e5103db0-55dc-46c9-bb01-40f1a7c3bdf5"
+      ],
+      "settings": {
+        "section_subtitle": "Glenfiddich x Chun Tsubaki",
+        "section_title": "Whisky-Infused Snow Skin Mooncakes"
+      }
+    },
+    "16568694744d20ee92": {
+      "type": "featured-article",
+      "blocks": {
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/glenfiddich_12_00531213-6e90-4a98-ba5a-a4ea391c0772.jpg",
+            "article_title": "DUSK DESCENDS, <br>THE TWILIGHT MOON RISES",
+            "article_description": "<p>Celebrate this Mid-Autumn with Glenfiddich<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/crop.warm.jpg",
+            "article_title": "Enjoy boozy mooncakes",
+            "article_description": "<p>As a gift with every purchase of twin bottles of the Glenfiddich Our Original Twelve or a bottle of the Glenfiddich Our Solera Fifteen <\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf": {
+          "type": "article_item",
+          "disabled": true,
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/233414815_1244653609289784_1563608463355884095_n.jpg",
+            "article_title": "COME AND ENJOY WITH US",
+            "article_description": "<p>We cannot wait to meet you there!<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "e1902dcf-aeda-4cac-8c20-e89fba17b509",
+        "230b65e1-a0a0-4e8f-b264-ccded3e056d5",
+        "b5772a9e-3e6b-4aed-8ac2-d1040a6b67bf"
+      ],
+      "settings": {
+        "section_subtitle": "",
+        "section_title": "",
+        "background_color": "#FFFFFF",
+        "text_color": "#000000",
+        "choose_layout_option": "zigzag_content"
+      }
+    },
+    "16568664073a5d9866": {
+      "type": "featured-product",
+      "blocks": {
+        "16568664074f2785ce-0": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "body"
+          }
+        },
+        "4198d319-0f2f-404b-82be-af266e1cfb6d": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h2"
+          }
+        },
+        "d62c6239-32ca-4eac-8369-770d4639ec51": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<h2 style=\"text-align:Left; font-size: 60px; font-body-family: Agrandir-Regular, sans-serif; font-heading-weight: 400;\">Pre-order Mooncakes <\/h2>"
+          }
+        },
+        "a28a3edc-54a0-4dd8-a6cc-e0b5d0f89161": {
+          "type": "text",
+          "settings": {
+            "text": "Pre-order is now available",
+            "text_style": "body"
+          }
+        },
+        "16568664074f2785ce-2": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "16568664074f2785ce-3": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "16568664074f2785ce-4": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "16568664074f2785ce-5": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "16568664074f2785ce-6": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false
+          }
+        }
+      },
+      "block_order": [
+        "16568664074f2785ce-0",
+        "4198d319-0f2f-404b-82be-af266e1cfb6d",
+        "d62c6239-32ca-4eac-8369-770d4639ec51",
+        "a28a3edc-54a0-4dd8-a6cc-e0b5d0f89161",
+        "16568664074f2785ce-2",
+        "16568664074f2785ce-3",
+        "16568664074f2785ce-4",
+        "16568664074f2785ce-5",
+        "16568664074f2785ce-6"
+      ],
+      "settings": {
+        "product": "snowskin-moon-cake",
+        "color_scheme": "background-1",
+        "secondary_background": false,
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "1657782599177b2980": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "heading": "Video",
+        "heading_size": "section-title-h3",
+        "heading_alignment": "center",
+        "description_heading": "Section Description",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": true,
+        "color_scheme": "background-1",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1656868668f47464bb",
+    "16568689392ee56752",
+    "16568694744d20ee92",
+    "16568664073a5d9866",
+    "1657782599177b2980"
+  ]
+}

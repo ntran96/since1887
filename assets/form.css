@@ -1,0 +1,93 @@
+/* Checkbox */
+.form-checkbox {
+  display: flex;
+}
+
+.form-checkbox__input[type=checkbox] {
+  width: 18px;
+  margin: 0;
+}
+
+.form-checkbox__label {
+  width: calc(100% - 18px);
+  display: inline-block;
+  padding-left: 10px;
+}
+
+@media screen and (min-width: 750px) {}
+
+/* Radio Input */
+.form-radio {
+  display: inline-flex;
+}
+
+.form-radio .radio-input {
+  width: 0;
+  margin: 0;
+}
+
+.form-radio .radio-circle {
+  position: relative;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.form-radio .radio-circle::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.form-radio .radio-input:checked~label::after {
+  display: block;
+}
+
+.form-radio .radio-label {
+  display: inline-block;
+  width: calc(100% - 24px);
+  padding-left: 10px;
+}
+
+/* form-input only border bottom */
+.form-input--border-bottom {
+  background: transparent;
+  border: none !important;
+  border-bottom: 1px solid #ffffff !important;
+  color: #ffffff;
+  width: 85px;
+}
+
+@media screen and (min-width: 768px) {
+  .form-input--border-bottom {
+    width: 92px;
+  }
+}
+
+
+.form-input--border-bottom::placeholder {
+  color: #ffffff;
+}
+
+/* Hide Input Number Arrows */
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

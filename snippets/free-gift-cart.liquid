@@ -1,0 +1,63 @@
+{%- if section.settings.show_free_gift -%}
+  <div class="free-gifts-cart hidden" data-free-gifts-cart>
+    <div class="free-gifts__inner free-gift__spend-more hidden">
+      <h2 class="h3 free-gift__heading medium-hide large-up-hide center">
+        {{ 'sections.cart.free_gift.heading' | t }}
+      </h2>
+
+      <div class="d-flex flex-wrap">
+        <div class="free-gift__image-container"> 
+          
+        </div>
+
+        <div class="free-gift__info">
+          <h2 class="h3 free-gift__heading small-hide">
+            {{ 'sections.cart.free_gift.heading' | t }}
+          </h2>
+
+          <p class="free-gift__paragraph">
+            {{ 'sections.cart.free_gift.spend_more_html' | t }}     
+          </p>
+
+          <div class="button_wrapper small-hide">
+            <a href="{{ settings.btn_empty_link | default: routes.all_products_collection_url }}" class="btn btn--primary">
+              {{ 'general.continue_shopping' | t }}
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="button_wrapper medium-hide large-up-hide center">
+        <a href="{{ settings.btn_empty_link | default: routes.all_products_collection_url }}" class="btn btn--primary">
+          {{ 'general.continue_shopping' | t }}
+        </a>
+      </div>
+    </div>
+
+    <div class="free-gifts__inner free-gift__selected hidden">
+      <div class="free-gift__info center">
+        <h2 class="h3 free-gift__heading">
+          {{ 'sections.cart.free_gift.heading' | t }}
+        </h2>
+
+        <p class="free-gift__paragraph">
+          <span>
+            {{ 'sections.cart.free_gift.by_spending' | t }}
+            <span data-amount></span>
+            {{ 'sections.cart.free_gift.you_qualify_for_html' | t }}
+          </span>  
+          <span>
+            {{ 'sections.cart.free_gift.free_gift_mes' | t }}
+          </span>             
+        </p>
+      </div>
+
+      <div class="free-gifts d-flex flex-wrap">
+
+      </div>
+
+      <div class="error_message error-color center"></div>
+    </div>
+  </div>
+{%- endif -%}

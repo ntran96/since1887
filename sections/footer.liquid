@@ -1,0 +1,610 @@
+<script src="{{ 'footer.js' | asset_url }}" defer="defer"></script>
+
+{{ 'footer.scss.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'form.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'form.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+
+.footer-brand {
+  background: {{section.settings.background_top}};
+  color: {{section.settings.text_color_top}}}
+
+.footer-brand a {
+  color: {{section.settings.link_color_top}}}
+
+.footer-global {
+  background: {{section.settings.background_bottom}};
+  color: {{section.settings.text_color_bottom}}}
+
+.footer-global a {
+  color: {{section.settings.link_color_bottom}};
+}
+
+.footer__brand-list__item__image::after {
+  color: {{section.settings.link_color_bottom}};
+  background: {{section.settings.background_bottom}};
+}
+
+{%- endstyle -%}
+
+<footer class="footer">
+  <!-- Footer Brand -->
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        if block.type == 'glenfiddich_footer'
+          assign brand_class = 'footer-brand--glenfiddich'
+        elsif block.type == 'monkey_shoulder_footer'
+          assign brand_class = 'footer-brand--monkey'
+        endif
+      -%}
+      <div class="footer-brand {{ brand_class }}">
+        <div class="page-width container">
+
+          <!-- Glenfiddich footer -->
+          {%- if block.type == 'glenfiddich_footer' -%}
+            <!-- Footer Logo -->
+            {%- if section.settings.logo != blank -%}
+              {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+              <div class="footer__logo">
+                {{ section.settings.logo | image_url: width: section.settings.width | image_tag:
+                  widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                  height: logo_height,
+                  width: section.settings.logo_width,
+                  alt: logo_alt
+                }}
+              </div>
+            {%- else -%}
+            <div class="footer__logo">
+              <h3 class="footer__logo__shop-name"> {{ shop.name }}</h3>
+            </div>
+            {%- endif -%}
+            <div class="footer__group">
+              <!-- Footer Menu Link -->
+              {%- if block.settings.footer_menu != blank -%}
+                <div class="footer__col footer__col--md-1">
+                  <ul class="footer__link-list menu-links list-unstyled">
+                    {%- for link in block.settings.footer_menu.links -%}
+                      <li class="menu-links__item">
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+              <div class="footer__col footer__col--md-2">
+                <div class="footer__social-newsletter">
+                  <!-- Footer Social List -->
+                  {% if block.settings.show_social %}
+                    <div class="footer__social">
+                      <p class="block-label">
+                        {{ 'sections.footer.social_block_label' | t }}
+                      </p>
+                      {% include 'social-list' %}
+                    </div>
+                  {% endif %}
+                  <!-- Footer Newsletter -->
+                  {%- if section.blocks.size > 0 -%}
+                    {% if block.settings.show_newsletter %}
+                      <div class="footer__newsletter-CTA">
+                        <a class="footer__newsletter-CTA__link" href="{{ block.settings.newsletter_link }}">
+                          <span class="uppercase">{{ block.settings.newsletter_text }}</span>
+                          {% render 'icon-arrow-right-large' %}
+                        </a>
+                        {% if block.settings.newsletter_description != blank %}
+                          <div class="footer__newsletter-CTA__description">
+                            {{ block.settings.newsletter_description }}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <!-- Monkey Shoulder footer -->
+          {%- if block.type == 'monkey_shoulder_footer' -%}
+            <div class="ms-footer__wrap">
+              <div class="ms-footer__top">
+                {%- if section.settings.logo != blank -%}
+                  {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+                  {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+                  <div class="ms-footer__logo">
+                    {{ section.settings.logo | image_url: width: section.settings.width | image_tag:
+                      widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                      height: logo_height,
+                      width: section.settings.logo_width,
+                      alt: logo_alt
+                    }}
+                  </div>
+                {%- else -%}
+                <div class="ms-footer__logo">
+                  <h3 class="ms-footer__logo__shop-name"> {{ shop.name }}</h3>
+                </div>
+                {%- endif -%}
+                <div class="ms-footer__social">
+                  {% if block.settings.show_social %}
+                    {% include 'social-list' %}
+                  {%- endif -%}
+                  {% if block.settings.hashtag != blank %}
+                    {% assign tags = block.settings.hashtag | split: ", " %}
+                      <ul class="ms-footer__social__tags list-unstyled">
+                        {% for tag in tags %}
+                          <li>{{ tag }}</li>
+                        {%- endfor -%}
+                      </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="ms-footer__content">
+                {%- if block.settings.footer_menu != blank -%}
+                  <ul class="ms-footer__menu list-unstyled">
+                    {%- for link in block.settings.footer_menu.links -%}
+                      <li class="ms-footer__menu__item">
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+              <div class="ms-footer__bottom">
+                {%- if block.settings.copywrite != blank -%}
+                  <p class="ms-footer__copywrite">{{ block.settings.copywrite }}</p>
+                {%- endif -%}
+                {%- if block.settings.footer_menu != blank -%}
+                  <div class="ms-footer__drink-responsibly rich-text-wrap">{{ block.settings.drink_responsibly }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+        </div>
+      </div>
+    {%- endfor -%}
+  {% endif %}
+
+  <!-- Footer Global -->
+  <div class="footer-global">
+    <div class="page-width container">
+      <div class="footer__brand-shop">
+        <!-- Footer Shop Name -->
+        {%- if section.settings.shop_name != blank -%}
+          <span class="footer__brand-shop__shop-name">
+            {{ section.settings.shop_name }}
+          </span>
+        {%- endif -%}
+        <!-- Footer Brand List -->
+        {% assign brandlist = section.settings.brand_list %}
+        {%- if brandlist != blank -%}
+          <ul class="footer__brand-list">
+            {% for link in linklists[brandlist].links %}
+              <li class="footer__brand-list__item">
+                <a class="footer__brand-list__item__link" 
+                href="{{ link.url }}"
+                >
+                  <img class="footer__brand-list__item__image" src="{{ link.handle | append: '-footer.png' | file_url }}" alt="{{ link.title }}" width="100" height="40">
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {%- endif -%}
+      </div>
+      <!-- Footer Copyright -->
+      {%- if section.settings.copyright != blank -%}
+        <div class="footer__info__copyright">
+          {{ section.settings.copyright }}
+        </div>
+      {%- endif -%}
+      <!-- Footer Payment Method -->
+      {% if section.settings.show_payment_icons %}
+        {% assign payment_string = 'visa,visa_electron,master,maestro,american_express,solo,amazon_payments,apple_pay,wallet' %}
+        {% assign methods = payment_string | split: ',' %}
+        <div class="footer__payment-method">
+          <span class="footer__payment-method__label"> {{ 'sections.footer.payment_method_accept_text' | t }} </span>
+          <ul class="footer__payment-method__list payment-methods list-unstyled">  
+            {% for method in methods %}
+            {%- assign display_current_method = method | prepend: 'payment_display_' -%}
+              {% if section.settings[display_current_method] %}
+                {%- assign current_method_icon = method | prepend: 'icon_' -%}
+                <li>
+                  <img src="{{ section.settings[current_method_icon] | img_url: 'x32' }}" alt="{{ method }}" width="32" height="23">
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      <!-- Footer Menu Bottom -->
+      {% assign menubottom = section.settings.menu_bottom %}
+      {%- if menubottom != blank -%}
+        <ul class="footer__menu-bottom list-unstyled">
+          {% for link in linklists[menubottom].links %}
+            <li class="footer__menu-bottom__item">
+              <a href="{{ link.url }}" {% if link.handle == 'drink-responsibly' %} target="_blank" {% endif %}>
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% assign pages = section.settings.pages_has_footer_brand | split: ", " %}
+{% for pageName in pages %}
+  {% if page.template_suffix == pageName or request.page_type == pageName %}
+    <script>
+      if (document.querySelector('.footer-brand.footer-brand--glenfiddich')) {
+        document.querySelector('.footer-brand.footer-brand--glenfiddich').classList.add('show');
+      }
+    </script>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "glenfiddich_footer",
+      "name": "Glenfiddich Footer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Glenfiddich Footer"
+        },
+        {
+          "type": "link_list",
+          "id": "footer_menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show Social",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Newsletter CTA",
+          "info": "Newsletter CTA Setting"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_newsletter",
+          "label": "Show Newsletter CTA",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "newsletter_text",
+          "label": "Newsletter CTA Text",
+          "default": "Stay in the know"
+        },
+        {
+          "type": "url",
+          "id": "newsletter_link",
+          "label": "Newsletter CTA Link"
+        },
+        {
+          "type": "richtext",
+          "id": "newsletter_description",
+          "label": "Newsletter CTA Description",
+          "default": "<p>Keep in touch with us to receive the latest news, recomnendation, surveys and updates.</p>"
+        }
+      ]
+    },
+    {
+      "type": "monkey_shoulder_footer",
+      "name": "Monkey Soulder Footer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Monkey Soulder Footer"
+        },
+        {
+          "type": "link_list",
+          "id": "footer_menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show Social",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "hashtag",
+          "label": "Hashtag",
+          "default": "#MonkeyShoulder, #MadeForMixing",
+          "info": "Please enter each hashtag separated by commas (, )."
+        },
+        {
+          "type": "text",
+          "id": "copywrite",
+          "label": "Copywrite",
+          "default": "© Monkey Shoulder, 2021. All rights reserved."
+        },
+        {
+          "type": "html",
+          "id": "drink_responsibly",
+          "label": "Drink responsibly"
+        }
+      ]
+    }
+  ],
+  "settings": [ 
+    {
+      "type": "header",
+      "content": "Footer Top",
+      "info": "Footer Top Setting"
+    },
+    {
+      "type": "color_background",
+      "id": "background_top",
+      "label": "Background Top",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color_top",
+      "label": "Text Color Top",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color_top",
+      "label": "Link Color Top",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "pages_has_footer_brand",
+      "label": "Pages has Footer brand",
+      "default": "index, collection, list-collections, product, our-story, personalize, personalize.personalize-detail",
+      "info": "Please enter the template_suffix or page_type of pages you want to display Footer Brand, each template_suffix separated by commas (, )."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "default": 100,
+      "unit": "t:sections.header.settings.logo_width.unit",
+      "label": "t:sections.header.settings.logo_width.label"
+    },
+    {
+      "type": "header",
+      "content": "Social Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_twitter_icon",
+      "label": "Twitter Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_facebook_icon",
+      "label": "Facebook Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_pinterest_icon",
+      "label": "Pinterest Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_instagram_icon",
+      "label": "Instagram Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_tiktok_icon",
+      "label": "Tiktok Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_tumblr_icon",
+      "label": "Tumblr Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_snapchat_icon",
+      "label": "Snapchat Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_youtube_icon",
+      "label": "Youtube Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_vimeo_icon",
+      "label": "Vimeo Icon"
+    },
+    {
+      "type": "header",
+      "content": "Footer Bottom",
+      "info": "Footer Bottom Setting"
+    },
+    {
+      "type": "color_background",
+      "id": "background_bottom",
+      "label": "Background Bottom",
+      "default": "#1A1825"
+    },
+    {
+      "type": "color",
+      "id": "text_color_bottom",
+      "label": "Text Color Bottom",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color_bottom",
+      "label": "Link Color Bottom",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "shop_name",
+      "label": "Shop Name",
+      "default": "SINCE1887.SG"
+    },
+    {
+      "type": "link_list",
+      "id": "brand_list",
+      "label": "Brand List"
+    },
+    {
+      "type": "header",
+      "content": "Guide upload logo image of brand menu footer"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload logo image [here](https://since1887staging.myshopify.com/admin/settings/files). The name of the logo image is the same as the name of the title with -footer.png. Example: Title: Glenfiddich; Image: glenfiddich-footer.png"
+    },
+    {
+      "type": "html",
+      "id": "copyright",
+      "label": "Copyright"
+    },
+    {
+      "type": "header",
+      "content": "payment icons setting"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Display payment icons for"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_visa",
+      "label": "Visa"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_visa_electron",
+      "label": "Visa Electron"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_american_express",
+      "label": "American Express"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_master",
+      "label": "Master"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_maestro",
+      "label": "Maestro"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_paypal",
+      "label": "Paypal"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_amazon_payments",
+      "label": "Amazon Payments"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_apple_pay",
+      "label": "Apple Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_display_wallet",
+      "label": "Google Wallet"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_visa",
+      "label": "Visa image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_visa_electron",
+      "label": "Visa Electron image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_master",
+      "label": "Master image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_american_express",
+      "label": "American Express image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_maestro",
+      "label": "Maestro image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_paypal",
+      "label": "Paypal image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_amazon_payments",
+      "label": "Amazon Payments image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_apple_pay",
+      "label": "Apple Pay image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_wallet",
+      "label": "Google Wallet image"
+    },
+    {
+      "type": "header",
+      "content": "Menu Bottom"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_bottom",
+      "label": "Menu Bottom"
+    }
+  ]
+}
+
+{% endschema %}

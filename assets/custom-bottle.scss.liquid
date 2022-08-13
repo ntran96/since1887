@@ -1,0 +1,462 @@
+$tablet-screen: 768px;
+$desktop-screen: 1024px;
+$desktop-screen-large: 1400px;
+
+$color-primary-background: {{ settings.primary_background }};
+$color-grey3-text: {{ settings.grey3_color }};
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+
+  @media (min-width: $desktop-screen) {
+    padding: 40px 0;
+  }
+
+  .progress-bar__step {
+    width: 33.3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 190px;
+
+    
+    &:first-child {
+      .progress-bar__step__icon {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+     &:last-child {
+      .progress-bar__step__icon {
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .progress-bar__step__icon {
+      width: 55px;
+      height: 55px;
+      border: 1px solid #121212;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      margin: 0 0 5px;
+      position: relative;
+
+      @media (min-width: $desktop-screen) {
+        margin: 0 0 15px;
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background: #000000;
+
+        @media (min-width: $desktop-screen) {
+          width: 80px;
+        }
+      }
+
+      &:before {
+        right: 100%;
+      }
+
+      &:after {
+        left: 100%;
+      }
+
+      svg, path {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .progress-bar__step__text {
+      font-size: calc(var(--font-size-base) - 4px);
+      display: inline-block;
+      padding: 0 26px;
+      text-align: center;
+
+      @media (min-width: $desktop-screen) {
+        font-size: var(--font-size-base);
+        padding: 0 15px;
+      }
+    }
+
+    &.active {
+      .progress-bar__step__icon {
+        background: #121212;
+
+        svg, path {
+          fill: white;
+        }
+      }
+    }
+  }
+}
+
+.custom-bottle-section__heading {
+  font-size: var(--font-size-h5);
+  text-align: center;
+  color: $color-grey3-text;
+  margin: 0 0 45px;
+
+  @media (min-width: $desktop-screen) {
+    font-size: var(--font-size-h4);
+  }
+}
+
+.add-message__form__heading__desc {
+  margin: 0 auto 45px;
+
+  @media (min-width: $desktop-screen) {
+    text-align: center;
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+}
+
+.choose-bottle {
+  margin-bottom: 60px;
+
+  @media (min-width: $desktop-screen) {
+    margin-bottom: 80px;
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .choose-bottle-list {
+    @media (min-width: $desktop-screen) {
+      padding-top: 10px;
+    }
+  }
+
+  .choose-bottle-item {
+    text-align: center;
+    cursor: pointer;
+    padding: 0 5px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: $desktop-screen) {
+      padding: 0 15px;
+    }
+
+    &:hover {
+      .choose-bottle-item__image {
+        img {
+          filter: grayscale(0);
+        }
+      }
+    }
+
+    &.active {
+      .choose-bottle-item__image {
+        padding: 0;
+
+        img {
+          filter: grayscale(0);
+        }
+      }
+    }
+
+    .choose-bottle-item__image {
+      height: 400px;
+      padding: 25px 30px;
+      margin-bottom: 30px;
+      transition: all 0.5s;
+
+      @media (min-width: $desktop-screen) {
+        height: 250px;
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      img {
+        max-height: 100%;
+        width: auto;
+        filter: grayscale(100%);
+        transition: all 0.5s;
+      }
+    }
+
+    .choose-bottle-item__price {
+      font-family: {{settings.highlight_font_name}};
+      font-size: calc(var(--font-size-large-text) - 2px);
+      letter-spacing: -0.06em;
+
+      @media (min-width: $desktop-screen) {
+        font-size: var(--font-size-large-text);
+      }
+    }
+
+    .choose-bottle-item__product-name {
+      font-size: var(--font-size-base);
+      color: $color-grey3-text;
+      margin: 5px 0 0;
+      font-family: var(--font-heading-family);
+      line-height: 1.2;
+
+      @media (min-width: $desktop-screen) {
+        margin: 10px 0 0;
+      }
+    }
+
+    .choose-bottle-item__variant-box {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .custom-select {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+.add-message {
+  padding-bottom: 70px;
+
+  .custom-bottle-section__heading {
+    margin-bottom: 10px;
+  }
+
+  .add-message__form {
+    padding-top: 15px;
+
+    @media (min-width: $desktop-screen) {
+      padding-top: 0;
+
+      .d-flex.item {
+        align-items: center;
+      }
+    }
+
+    .add-message__form__heading {
+      margin-bottom: 30px;
+
+      @media (min-width: $desktop-screen) {
+        margin-bottom: 25px;
+      }
+
+      .add-message__form__heading__title {
+        font-size: var(--font-size-large-text);
+        margin: 0;
+      }
+    }
+
+    .add-message__form__image,
+    .add-message__form__content {
+      flex: 0 0 100%;
+      max-width: 100%;
+
+      @media (min-width: $desktop-screen) {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+
+    .add-message__form__image {
+      width: 100%;
+
+      @media (min-width: $desktop-screen) {
+        padding: 60px;
+      }
+
+      .add-message__form__image__inner {
+        height: 0;
+        position: relative;
+        padding-bottom: 100%;
+
+        @media (min-width: $desktop-screen) {
+        }
+
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .add-message__form__content {
+      margin-top: 35px;
+
+      @media (min-width: $desktop-screen) {
+        padding-left: 75px;
+        margin-top: 60px;
+      }
+    }
+
+    .d-mobile {
+      @media (min-width: $desktop-screen) {
+        display: none;
+      }
+    }
+
+    .d-desktop {
+      display: none;
+
+      @media (min-width: $desktop-screen) {
+        display: block;
+      }
+    }
+
+    .wrap-field {
+      margin-bottom: 35px;
+    }
+  }
+
+  .add-message__form__content__btn {
+    padding-top: 20px;
+
+    .btn__submit-persionalize {
+      display: block;
+      font-family: var(--font-button-family);
+      font-size: calc(var(--font-size-default-btn) + 6px);
+      padding: 9px 22px 3px;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.custom-select {
+  position: relative;
+  border: 1px solid var(--border-input);
+  margin: 30px auto 0;
+  max-width: 300px;
+}
+
+.choose-bottle-item__select {
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+  padding: 15px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 2;
+  appearance: none;
+  border: none;
+  margin: 0 auto;
+  
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+.choose-bottle-item__select + .icon-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 30px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.personalize-label__wrapper {
+  font-family: CeraCompactCY, sans-serif;
+  font-size: 13.4px;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  font-weight: 900;
+  text-transform: capitalize;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  transform: translateY(-50%);
+  z-index: 2;
+  margin-top: -3px;
+
+  @media (min-width: $tablet-screen) {
+    font-size: 16px;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: $desktop-screen-large) {
+    font-size: 22px;
+  }
+
+  > span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    min-height: 1em;
+    text-transform: uppercase;
+
+    &:first-child {
+      font-size: 23.45px;
+
+      @media (min-width: $tablet-screen) {
+        font-size: 25px;
+      }
+
+      @media (min-width: 1200px) {
+        font-size: 28px;
+      }
+
+      @media (min-width: $desktop-screen-large) {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+.custom-bottle-section {
+  .product-form {
+    display: block;
+  }
+  
+  .product-form__error-message-wrapper:not([hidden]) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product-form__error-message-wrapper svg {
+    flex-shrink: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.7rem;
+    margin-top: 1px;
+  }
+  
+  .loading-overlay__spinner {
+    display: inline-flex;
+    position: relative;
+    top: 4px;
+    margin-left: 5px;
+  }
+}

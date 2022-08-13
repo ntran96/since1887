@@ -1,0 +1,326 @@
+//add class
+function addClass() {
+  document.querySelectorAll('.field__input-wrapper').forEach( el => {
+    el.classList.add('wrap-field')
+    el.classList.remove('.field__input-wrapper')
+  })
+  
+  document.querySelectorAll('.field__label').forEach( el => {
+    el.classList.add('wrap-field__label')
+    el.classList.remove('field__label')
+  })
+  
+  document.querySelectorAll('.field__input').forEach( el => {
+    el.classList.add('wrap-field__input')
+    el.classList.remove('field__input')
+  })
+  
+  document.querySelectorAll('.field').forEach( el => {
+    let spanRequired = document.createElement('span')
+    spanRequired.classList.add('wrap-field__required')
+    spanRequired.innerHTML = '{{ "checkout.required" | t }}'
+    el.classList.add('wrap-field')
+    el.append(spanRequired)
+    el.classList.remove('field')
+  })
+
+  let btnLink = document.querySelector('.layout-flex__item > a') || false
+  if (btnLink) {
+    btnLink.classList.add('layout-flex__item__link')
+  }
+
+  let visuallyHidden = document.querySelector('.visually-hidden-if-js') || false
+  if (visuallyHidden) {
+    visuallyHidden.classList.add('section__title')
+    visuallyHidden.classList.add('order-summary__title')
+    visuallyHidden.classList.remove('visually-hidden-if-js')
+  }
+
+  if (document.querySelector('.step[data-step="payment_method"')) {
+    let orderDiscount = document.querySelector('.order-summary__section--discount') || false
+    if (orderDiscount)
+      orderDiscount.classList.add('hidden')
+    let discountElDesktop = document.querySelector('.section--reductions.hidden-on-desktop') || false
+    if (discountElDesktop) {
+      discountElDesktop.classList.add('hidden')
+    }
+  }
+
+  let btnCountinute = document.querySelector('.step__footer__continue-btn') || false
+  if (btnCountinute) {
+    btnCountinute.classList.add('btn--primary')
+    if (document.querySelector('.step[data-step="contact_information"')) { 
+      if (Shopify.Checkout.requiresShipping == true) {
+        btnCountinute.innerHTML = '{{ "checkout.continute_delivery" | t }}'
+      } else {
+        btnCountinute.innerHTML = '{{ "checkout.continute_payment" | t }}'
+      }
+    } else if (document.querySelector('.step[data-step="shipping_method"')) {
+      document.querySelector('.step__footer__previous-link > .step__footer__previous-link-content').innerHTML = '{{ "checkout.return_delivery" | t }}'
+    } else if (document.querySelector('.step[data-step="payment_method"')) {
+      btnCountinute.innerHTML = '{{ "checkout.complete_order" | t }}'
+      if (Shopify.Checkout.requiresShipping == true) {
+        document.querySelector('.step__footer__previous-link > .step__footer__previous-link-content').innerHTML = '{{ "checkout.return_delivery_method" | t }}'
+      } else {
+        document.querySelector('.step__footer__previous-link > .step__footer__previous-link-content').innerHTML = '{{ "checkout.return_delivery" | t }}'
+      }
+    } else if (document.querySelector('.step[data-step="thank_you"')) {
+      btnCountinute.innerHTML = '{{ "checkout.continute_shopping" | t }}'
+    }
+  }
+  
+  let cardExpiry = document.querySelector('.wrap-field[data-credit-card-expiry]') || false
+  if (cardExpiry) {
+    cardExpiry.classList.add('wrap-field--left')
+  }
+
+  let cardCvv = document.getElementById('error-for-verification_value') || false
+  if (cardCvv) {
+    cardCvv.innerHTML = "{{ 'checkout.error_cvv' | t }}"
+  }
+}
+
+// remove child
+function deleteChild() {
+  let address2 = document.querySelector('.wrap-field[data-address-field="address2"]') || false
+  if (address2) {
+    address2.removeChild(address2.lastElementChild)
+  }
+}
+
+// append child
+function addChild() {
+  let countryTag = document.querySelector('.wrap-field[data-address-field="country"]') || false
+  let zipTag = document.querySelector('.wrap-field[data-address-field="zip"]') || false
+  let cityTag = document.querySelector('.wrap-field[data-address-field="city"]') || false
+  let inputCity = document.getElementById('checkout_billing_address_city') || false
+
+  if (zipTag) {
+    zipTag.classList.add('wrap-field--left', 'field--half')
+    zipTag.after(countryTag)
+    countryTag.classList.add('field--half')
+    countryTag.after(cityTag)
+    cityTag.classList.remove('field--half', 'field--third')
+  }
+
+  let firstNameTag = document.querySelector('.wrap-field[data-address-field="first_name"]') || false
+  if (firstNameTag) {
+    firstNameTag.classList.add('wrap-field--left')
+  }
+  let lastNameTag = document.querySelector('.wrap-field[data-address-field="last_name"]') || false
+  let phoneTag = document.querySelector('.wrap-field[data-address-field="phone"]') || false
+  if (lastNameTag) {
+    lastNameTag.after(phoneTag)
+  }
+
+  let selectAddressShipping = document.getElementById('checkout_shipping_address_id') || false
+  if (selectAddressShipping) {
+    selectAddressShipping.onchange = function () {
+      setTimeout(function () {
+        zipTag.after(countryTag)
+        zipTag.classList.add('wrap-field--left', 'field--half')
+        countryTag.classList.add('field--half')
+        lastNameTag.after(phoneTag) 
+        countryTag.after(cityTag)
+        cityTag.classList.remove('field--half', 'field--third')
+        document.querySelector('.wrap-field__label[for="checkout_shipping_address_phone"]').innerHTML = '{{ "checkout.phone" | t }}'
+        document.getElementById('checkout_shipping_address_phone').placeholder = '{{ "checkout.phone_placeholder" | t }}'
+      }, 0.1)
+    }
+  }
+
+  let selectAddressBilling = document.getElementById('checkout_billing_address_id') || false
+  if (selectAddressBilling) {
+    selectAddressBilling.onchange = function () {
+      setTimeout(function () {
+        zipTag.after(countryTag)
+        zipTag.classList.add('wrap-field--left', 'field--half')
+        countryTag.classList.add('field--half')
+        lastNameTag.after(phoneTag) 
+        countryTag.after(cityTag)
+        cityTag.classList.remove('field--half', 'field--third')
+        document.querySelector('.wrap-field__label[for="checkout_billing_address_phone"]').innerHTML = '{{ "checkout.phone" | t }}'
+        document.getElementById('checkout_billing_address_phone').placeholder = '{{ "checkout.phone_placeholder" | t }}'
+      }, 0.1)
+    }
+  }
+
+  let addressBilling = document.getElementById('checkout_different_billing_address_true') || false
+  if (addressBilling) {
+    addressBilling.onchange = function () {
+      setTimeout(function () {
+        if (countryTag) {
+          countryTag.setAttribute('selected', 'selected')
+        }
+        let addressField = document.querySelector('.address-fields')
+        addressField.querySelectorAll('input').forEach(input => {
+          input.value = ''
+        })
+        document.querySelector('option[data-code="SG"]').setAttribute('selected', 'selected');
+        cityTag.classList.add('hidden');
+      }, 0.1)
+    }
+  }
+
+  let addressSelect = document.getElementById('checkout_billing_address_country') || false
+  if (addressSelect) {
+    addressSelect.onchange = function () {
+      setTimeout(function () {
+        if (zipTag) {
+          zipTag.after(countryTag)
+          zipTag.classList.add('wrap-field--left', 'field--half')
+          countryTag.classList.add('field--half')
+          countryTag.after(cityTag)
+          cityTag.classList.remove('field--half', 'field--third')
+        } 
+        if (zipTag.classList.contains('hidden')) {
+          let address2 = document.querySelector('.wrap-field[data-address-field="address2"]') || false
+          if (address2) {
+            address2.after(countryTag)
+            countryTag.classList.remove('field--half')
+            countryTag.after(cityTag)
+            cityTag.classList.remove('field--half', 'field--third')
+          }
+        }
+        let province = document.querySelector('.wrap-field[data-address-field="province"]') || false
+        if (province) {
+          province.classList.remove('field--third')
+        }
+        lastNameTag.after(phoneTag) 
+        document.querySelector('.wrap-field__label[for="checkout_billing_address_phone"]').innerHTML = '{{ "checkout.phone" | t }}'
+        document.getElementById('checkout_billing_address_phone').placeholder = '{{ "checkout.phone_placeholder" | t }}'
+      }, 0.1)
+    }
+  }
+}
+
+// add attribute
+function addAttribute() {
+  setTimeout(function () {
+    if(document.getElementById('checkout_shipping_address_phone')) {
+      document.getElementById('checkout_shipping_address_phone').onkeypress = function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode < 48 || charCode > 57))
+          return false;
+        return true;
+      }
+    }
+  }, 0.1)
+}
+
+//change content tag
+function changeContent() {
+  document.querySelectorAll('.order-summary-toggle__icon-wrapper').forEach(el => {
+    el.innerHTML = `<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.96356 3.69373C1.66403 4.05316 1.5 4.50623 1.5 4.9741V14.75C1.5 16.4069 2.84315 17.75 4.5 17.75H13.5C15.1569 17.75 16.5 16.4069 16.5 14.75V4.9741C16.5 4.50623 16.336 4.05316 16.0364 3.69373L14.5997 1.96963C14.2197 1.51365 13.6568 1.25 13.0632 1.25H4.93675C4.34319 1.25 3.78029 1.51365 3.40031 1.96963L1.96356 3.69373Z" stroke="#1A1825" stroke-width="1.5"/>
+    <path d="M1.5 4.625H16.5" stroke="#1A1825" stroke-width="1.5"/>
+    <path d="M12 8C12 9.65685 10.6569 11 9 11C7.34315 11 6 9.65685 6 8" stroke="#1A1825" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`
+  })
+
+  let processingEl = document.querySelector('.full-page-overlay__content') || false
+  if (processingEl) {
+    processingEl.querySelector('.icon-svg--spinner').innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-270 364 66 66"><path d="M-237 428c-17.1 0-31-13.9-31-31s13.9-31 31-31v-2c-18.2 0-33 14.8-33 33s14.8 33 33 33 33-14.8 33-33h-2c0 17.1-13.9 31-31 31z"></path></svg>`
+    processingEl.querySelector('.icon-svg--spinner').classList.remove('icon-svg--color-accent')
+  }
+
+  let titleDelivery = document.getElementById('section-delivery-title') || false
+  if (Shopify.Checkout.requiresShipping == true) {
+    if (titleDelivery) {
+      titleDelivery.innerHTML = '{{ "checkout.delivery_address" | t }}'
+    }
+  } else {
+    if (titleDelivery) {
+      titleDelivery.innerHTML = '{{ "checkout.billing_address" | t }}'
+    }
+  }
+
+  let textDelivery = document.querySelector('.total-line--shipping > .total-line__name > span')
+  if(textDelivery) {
+    textDelivery.innerHTML = '{{ "checkout.delivery" | t }}'
+  }
+
+  let errorTextEmail = document.getElementById('error-for-email_or_phone') || false
+  if (errorTextEmail) {
+    errorTextEmail.innerHTML = "{{ 'checkout.error_mail' | t }}" 
+  }
+
+  let phoneLabel =  document.querySelector('.wrap-field__label[for="checkout_shipping_address_phone"]') || false
+  if (phoneLabel) {
+    phoneLabel.innerHTML = '{{ "checkout.phone" | t }}'
+    document.getElementById('checkout_shipping_address_phone').placeholder = '{{ "checkout.phone_placeholder" | t }}'
+  }
+  
+  if (document.getElementById('error-for-phone')) {
+    document.getElementById('error-for-phone').innerHTML = '{{ "checkout.error_phone" | t }}'
+  }
+
+  let phoneLabelBilling =  document.querySelector('.wrap-field__label[for="checkout_billing_address_phone"]') || false
+  if (phoneLabelBilling) {
+    phoneLabelBilling.innerHTML = '{{ "checkout.phone" | t }}'
+    document.getElementById('checkout_billing_address_phone').placeholder = '{{ "checkout.phone_placeholder" | t }}'
+  }
+
+  let formDiscount = document.querySelector('.order-summary__section--discount .fieldset .wrap-field') || false
+  if (formDiscount) {
+    formDiscount.removeChild(formDiscount.lastElementChild)
+    formDiscount.querySelector('.wrap-field__label').classList.add('wrap-field__label--heading')
+    formDiscount.querySelector('.wrap-field__label').innerHTML = "{{ 'shopify.checkout.order_summary.gift_card_and_discount_label' | t }}"
+    document.getElementById('checkout_reduction_code').placeholder = "{{ 'shopify.checkout.order_summary.gift_card_and_discount_placeholder' | t }}"
+    formDiscount.prepend(formDiscount.querySelector('.wrap-field__label'))
+  }
+  
+  let labelEmail = document.querySelector('.wrap-field__label[for="checkout_email_or_phone"]') || false
+  if (labelEmail) {
+    labelEmail.innerHTML = '{{ "checkout.email" | t }}'
+    document.getElementById('checkout_email_or_phone').placeholder = '{{ "checkout.email" | t }}'
+  }
+  
+  let iconSuccess = document.querySelector('.os-header__hanging-icon') || false
+  if (iconSuccess) {
+    iconSuccess.innerHTML = `<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="35" cy="35" r="35" fill="#121212"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M32.8721 45.7382C32.2074 45.7382 31.5356 45.4841 31.0275 44.9725L22.7648 36.7133C21.7451 35.6935 21.7451 34.0438 22.7648 33.024C23.7846 32.0042 25.4344 32.0042 26.4541 33.024L32.8721 39.4351L47.5459 24.7648C48.5656 23.7451 50.2154 23.7451 51.2352 24.7648C52.2549 25.7846 52.2549 27.4344 51.2352 28.4541L34.7168 44.9725C34.2087 45.4841 33.5404 45.7382 32.8721 45.7382Z" fill="white"/>
+    <path d="M32.8721 45.7382C32.2074 45.7382 31.5356 45.4841 31.0275 44.9725L22.7648 36.7133C21.7451 35.6935 21.7451 34.0438 22.7648 33.024C23.7846 32.0042 25.4344 32.0042 26.4541 33.024L32.8721 39.4351L47.5459 24.7648C48.5656 23.7451 50.2154 23.7451 51.2352 24.7648C52.2549 25.7846 52.2549 27.4344 51.2352 28.4541L34.7168 44.9725C34.2087 45.4841 33.5404 45.7382 32.8721 45.7382" stroke="#121212" stroke-width="2"/>
+    </svg>
+    `
+  }
+  
+  let cardInfo = document.querySelector('div[data-payment-subform="required"]') || false
+  if (cardInfo) {
+    document.querySelector('.wrap-field__label[for="checkout_credit_card_number"]').innerHTML = '{{ "checkout.card_number" | t }}'
+    
+    document.querySelector('.wrap-field__label[for="checkout_credit_card_name"]').innerHTML = '{{ "checkout.name_card" | t }}'
+    
+    document.querySelector('.wrap-field__label[for="checkout_credit_card_expiry"]').innerHTML = '{{ "checkout.expiration_date" | t }}'
+    
+    document.querySelector('.wrap-field__label[for="checkout_credit_card_verification_value"]').innerHTML = '{{ "checkout.security_code" | t }}'
+    
+    document.querySelector('.radio__label[for="checkout_different_billing_address_false"]').innerHTML = '{{ "checkout.same_delivery" | t }}'
+  }
+}
+
+document.addEventListener('page:load', () => {
+  addClass();
+  deleteChild();
+  addChild();
+  changeContent();
+  addAttribute();
+});
+
+document.addEventListener('page:change',  () => {
+  addClass();
+  deleteChild();
+  addChild();
+  changeContent();
+  addAttribute();
+});
+
+document.addEventListener('rebuy.refresh',  () => {
+  addClass();
+  deleteChild();
+  addChild();
+  changeContent();
+  addAttribute();
+});

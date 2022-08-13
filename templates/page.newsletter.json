@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 100,
+        "padding_bottom": 60,
+        "class_custom": "global-font"
+      }
+    },
+    "1658314039606c3898": {
+      "type": "newsletter-advanced",
+      "settings": {
+        "logo": "shopify:\/\/shop_images\/glenfiddich-logo-large-black.png",
+        "title": "STAY IN THE KNOW",
+        "description": "You will be among the first to hear exciting news and gain exclusive access to all things Glenfiddich. Join us for a richer and more meaningful journey.",
+        "email_label": "Email Address",
+        "email_placeholder": "Email Address",
+        "disclaimer": "<p>By providing your email address, you consent to our Terms and Conditions and Privacy Policy and agree to receive marketing updates. You can unsubscribe at any time.<\/p>",
+        "button_label": "SUBMIT"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1658314039606c3898"
+  ]
+}

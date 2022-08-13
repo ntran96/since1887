@@ -1,0 +1,240 @@
+{{ 'our-event.scss.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .our-event__heading__subtitle {
+    font-weight: {{ section.settings.section_subtitle_font_weight }};
+  }
+
+  .our-event__heading__title {
+    color: {{ section.settings.color_section_title }};
+    font-size: {{ section.settings.font_size_mobile }}px;
+  }
+  @media (min-width: 768px) {
+    .our-event__heading__title {
+      font-size: {{ section.settings.font_size_desktop }}px
+    }
+  }
+
+  .our-event__content__item__date {
+    color: {{ section.settings.color_event_date }};
+  }
+
+  .our-event__content__item__button {
+    letter-spacing: {{ section.settings.letter_spacing_button | divided_by: 100.0 }}em;
+    margin-top: {{ section.settings.margin_top_button_mobile }}px;
+  }
+  @media (min-width:768px) {
+    .our-event__content__item__button {
+      margin-top: {{ section.settings.margin_top_button }}px;
+    }
+  }
+</style>
+
+<section class="our-event">
+  <div class="page-width">
+    {%- if section.settings.section_subtitle != blank or section.settings.section_title != blank -%}
+      <div class="our-event__heading">
+        {%- if section.settings.section_subtitle != blank -%}
+          <p class="our-event__heading__subtitle {% if theme.name == 'Monkey shoulder' %}
+          our-event__heading__subtitle--ms{% endif %}">{{ section.settings.section_subtitle }}</p>
+        {% endif %}
+        {%- if section.settings.section_title != blank -%}
+          <h3 class="our-event__heading__title">
+            {{ section.settings.section_title }}
+          </h3>
+        {% endif %}
+      </div>
+    {% endif %}
+    {%- if section.blocks.size > 0 -%}
+      <ul class="our-event__content grid grid--1-col grid--2-col-tablet list-unstyled{% if theme.name == 'Monkey shoulder' %}
+        our-event__content--ms{% endif %}">
+        {%- for block in section.blocks -%}
+          <li class="our-event__content__item grid__item">
+            <a class="our-event__content__item__image" role="link" href="{{block.settings.event_link}}">
+              <img src="{{ block.settings.event_image | img_url: '720x720' }}" alt="{{ block.settings.event_title }}">
+            </a>
+            {%- if block.settings.event_date != blank -%}
+              <p class="our-event__content__item__date">{{ block.settings.event_date }}</p>
+            {% endif %}
+            {%- if block.settings.event_title != blank -%}
+            <a class="our-event__content__item__title-link" role="link" href="{{block.settings.event_link}}">
+              <h5 class="our-event__content__item__title {% if theme.name == 'Monkey shoulder' %}
+                our-event__content__item__title--ms{% endif %}">
+              {{block.settings.event_title}}
+            </h5>
+            </a>
+            {% endif %}
+            {%- if block.settings.button_text != blank -%}
+              <a class="our-event__content__item__button 
+                {% if block.settings.type_button == 'btn-primary-ms' %}ms-button {% elsif block.settings.type_button == 'btn-secondary-ms' %} ms-button ms-button--secondary{% endif %}"
+                href="{{block.settings.event_link}}">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Event",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "event_item",
+      "name": "Event Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "event_image",
+          "label": "Event Image"
+        },
+        {
+          "type": "text",
+          "id": "event_date",
+          "label": "Event Date",
+          "default": "17th May 2022. London"
+        },
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event Title",
+          "default": "Simon Berger X Glenfiddich Whisky"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Discover"
+        },
+        {
+          "type": "url",
+          "id": "event_link",
+          "label": "Event Link"
+        },
+        {
+          "type": "select",
+          "id": "type_button",
+          "label": "Type Button",
+          "options": [
+            {
+              "value": "btn-link",
+              "label": "Button Link"
+            },         
+            {
+              "value": "btn-primary-ms",
+              "label": "Button Primary MS"
+            },          
+            {
+              "value": "btn-secondary-ms",
+              "label": "Button Secondary MS"
+            }          
+          ],
+          "default": "btn-link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Our Event"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Our Events"
+    },
+    {
+      "type": "select",
+      "id": "section_subtitle_font_weight",
+      "label": "Section Subtitle Font Weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Enjoy our exclusive events"
+    },
+    {
+      "type": "color",
+      "id": "color_section_title",
+      "label": "Color Section Title"
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Font Size Title Mobile",
+      "min": 20,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "label": "Font Size Title Desktop",
+      "min": 20,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 54
+    },
+    {
+      "type": "color",
+      "id": "color_event_date",
+      "label": "Color Event Date"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing_button",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "%em",
+      "label": "Letter-spacing button",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "margin_top_button",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin top button",
+      "default": 37
+    },
+    {
+      "type": "range",
+      "id": "margin_top_button_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin top button mobile",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Event"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "class_custom": "global-font"
+      }
+    },
+    "165545669222246486": {
+      "type": "slideshow",
+      "blocks": {
+        "16554566922867e775-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_1754.jpg",
+            "subheading": "",
+            "heading": "personaliSed whisky bottles",
+            "descriptions": "An ideal gift with a personalised message",
+            "button_text": "Get started",
+            "link": "shopify:\/\/pages\/personalize-detail",
+            "heading_size": "h3",
+            "text_alignment": "left",
+            "background_color": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "16554566922867e775-0"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "image_overlay_opacity": 50,
+        "autoplay": true,
+        "cycle_speed": 5,
+        "enable_loop": false,
+        "effect_transition": "false",
+        "enable_dots": false,
+        "enable_arrows": true,
+        "autoheight": false,
+        "swiper_color": "#ffffff",
+        "show_text_below": false
+      }
+    },
+    "1655456696f91f6e8b": {
+      "type": "featured-article",
+      "blocks": {
+        "93ca4622-f179-4a85-bdb2-40c6e9c7815f": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/D_Component_1.jpg",
+            "article_title": "The perfect gift for any occasion",
+            "article_description": "<p>Create a personalised label for a 12 or 18 year old. take the opportunity to bottle and personalise a cask strength 15 year old.<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "89d9a223-f33b-4692-8399-38430782de47": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/Group_1758.png",
+            "article_title": "Quick and easy",
+            "article_description": "<p>1. Choose a bottle you desire. <\/p><p>2. Add a message. you can preview how it would look on the final product. <\/p><p>3. Relax and wait for your unique Glenfiddich bottle to arrive.<\/p>",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "c773a1ed-dd8b-42b3-b253-cf40f5bf1e38": {
+          "type": "article_item",
+          "settings": {
+            "article_image": "shopify:\/\/shop_images\/D_Component_3.jpg",
+            "article_title": "let’s get your bottle personaliSed",
+            "article_description": "<p>Create a personalised label for a 12, 15, 18 or 21 year old. For some products, you can even choose to personalise the twin bundle.<\/p>",
+            "button_text": "Get started",
+            "button_link": "shopify:\/\/pages\/personalize-detail"
+          }
+        }
+      },
+      "block_order": [
+        "93ca4622-f179-4a85-bdb2-40c6e9c7815f",
+        "89d9a223-f33b-4692-8399-38430782de47",
+        "c773a1ed-dd8b-42b3-b253-cf40f5bf1e38"
+      ],
+      "settings": {
+        "section_subtitle": "",
+        "section_title": "",
+        "choose_layout_option": "zigzag_content"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165545669222246486",
+    "1655456696f91f6e8b"
+  ]
+}

@@ -1,0 +1,100 @@
+.ms-newsletter {
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: cover;
+  overflow: hidden;
+  background-size: auto 667px;
+
+  .ms-newsletter__wrap {
+    padding: 222px 20px 150px;
+
+    @media (min-width: 768px) {
+      padding: 270px 20px 160px;
+    }
+  }
+
+  .ms-newsletter__box {
+    position: relative;
+    border: 8px solid #FAAF4B;
+    padding: 40px 16px;
+    min-height: 350px;
+    background-color: #FFF5E9;
+    margin: 0 auto;
+    max-width: 490px;
+
+    @media (min-width: 768px) {
+      padding: 40px;
+      min-height: 360px;
+    }
+    
+    @media (min-width: 1200px) {
+      padding: 40px 80px;
+      max-width: 660px;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      height: calc(100% + 230px);
+      top: -60px;
+      width: 170px;
+
+      @media (max-width: 767px) {
+        background-color: transparent;
+        background-size: auto 100%;
+        height: 92px;
+        width: calc(100vw - 60px);
+        background-repeat: no-repeat;
+      }
+    }
+
+    &::before {
+      left: -135px;
+
+      @media (max-width: 767px) {
+        background-position: 100% 100%;
+        left: -55px;
+        top: calc(100% - 20px);
+      }
+    }
+
+    &::after {
+      right: -135px;
+
+      @media (max-width: 767px) {
+        background-position: 0 100%;
+        bottom: calc(100% - 30px);
+        right: -30px;
+        top: auto;
+      }
+    }
+  }
+
+  .ms-newsletter__title {
+    margin: 0;
+
+    @media (min-width: 768px) {
+      margin-bottom: 4px;
+    }
+  }
+
+  .ms-newsletter__desc {
+    font-size: calc(var(--font-size-base) + 2px);
+
+    @media (min-width: 768px) {
+      font-size: calc(var(--font-size-base) + 8px);
+    }
+  }
+
+  .ms-newsletter__button {
+    margin-top: 24px;
+
+    @media (min-width: 1200px) {
+      margin-top: 40px;
+    }
+  }
+}

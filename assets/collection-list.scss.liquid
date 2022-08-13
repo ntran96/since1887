@@ -1,0 +1,59 @@
+// Breakpoint
+$tablet-screen: 768px;
+$desktop-screen: 1024px;
+$desktop-screen-large: 1440px;
+
+$secondary_background: {{ settings.secondary_background }};
+
+.collection-list-section {
+  // padding-top: 60px;
+
+  // @media (min-width: $desktop-screen) {
+  //   padding-top: 90px;
+  // }
+
+  .collection-list-heading {
+    font-size: var(--font-size-h5);
+    text-transform: uppercase;
+    margin: 0 0 30px;
+    line-height: 26.4px;
+
+    @media (min-width: $desktop-screen) {
+      margin: 0 0 60px;
+    }
+  }
+
+  .collection-title {
+    text-transform: uppercase;
+    font-size: calc(var(--font-size-h2) - 40px);
+    margin: 0;
+
+    @media (min-width: $desktop-screen) {
+      margin: 0 0 20px;
+      font-size: var(--font-size-h2);
+    }
+  }
+
+  .collection-list__item {
+    padding: 45px 0;
+
+    @media (min-width: $desktop-screen) {
+      padding: 90px 0;
+    }
+
+    &:first-child {
+      padding-top: 50px;
+    }
+  }
+
+  .alt-background {
+    .collection-list__item {
+
+      &:nth-child(even) {
+        background: $secondary_background;
+      }
+    }
+  }
+}
+
+

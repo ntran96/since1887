@@ -1,0 +1,108 @@
+{{ 'ms-newsletter-section.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+.ms-newsletter {
+  background-color: {{ section.settings.background_color }};
+  background-image: url({{ section.settings.background_pattern | img_url : '2048x2048' }});
+}
+
+.ms-newsletter__box:before {
+  background-image: url({{ section.settings.hand_graphic_bottom | img_url : 'large' }});
+}
+
+.ms-newsletter__box:after {
+  background-image: url({{ section.settings.hand_graphic_top | img_url : 'large' }});
+}
+
+@media screen and (min-width: 768px) {
+  .ms-newsletter__box:before {
+    background-image: url({{ section.settings.hand_graphic_left | img_url : 'large' }});
+  }
+  
+  .ms-newsletter__box:after {
+    background-image: url({{ section.settings.hand_graphic_right | img_url : 'large' }});
+  }
+}
+{%- endstyle -%}
+
+<section class="ms-newsletter">
+   <div class="ms-newsletter__wrap">
+    <div class="ms-newsletter__box center">
+      <h2 class="ms-newsletter__title uppercase">{{ section.settings.title }}</h2>
+      <div class="ms-newsletter__desc rich-text-wrap">{{ section.settings.description }}</div>
+      <a class="ms-newsletter__button ms-button" href="{{ section.settings.button_url }}">{{ section.settings.button_label }}</a>
+    </div>
+   </div>
+</section>
+
+{% schema %}
+{
+  "name": "MS Newsletter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "MS Newsletter"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#FAD7AA"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_pattern",
+      "label": "Background pattern"
+    },
+    {
+      "type": "image_picker",
+      "id": "hand_graphic_top",
+      "label": "Hand graphic top"
+    },
+    {
+      "type": "image_picker",
+      "id": "hand_graphic_left",
+      "label": "Hand graphic left"
+    },
+    {
+      "type": "image_picker",
+      "id": "hand_graphic_right",
+      "label": "Hand graphic right"
+    },
+    {
+      "type": "image_picker",
+      "id": "hand_graphic_bottom",
+      "label": "Hand graphic bottom"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Stay in the mix"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Got a thirst for the latest shenanigans? Sign up for updates and we’ll keep you up to speed with the fast-spinning world of Monkey Shoulder. All spirit. No spam.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "sign up"
+    },
+    {
+      "type": "url",
+      "id": "button_url", 
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MS Newsletter"
+    }
+  ]
+}
+{% endschema %}

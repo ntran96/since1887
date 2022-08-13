@@ -1,0 +1,319 @@
+{{ 'get-mixing.scss.css' | asset_url | stylesheet_tag }}
+{{ 'audio.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .get-mixing-{{ section.id }} {
+    background: {{ section.settings.background_color }}
+  }
+
+  .get-mixing-{{ section.id }} .get-mixing-item__image::before {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+
+<section class="get-mixing get-mixing-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.image_logo != blank %}
+      <div class="get-mixing__logo center">
+        <img src="{{ section.settings.image_logo | image_url: width: 300 }}"> 
+      </div>
+    {%- endif -%}
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="get-mixing__heading">
+        {% if section.settings.title != blank %}
+          <h2 class="get-mixing__heading__title uppercase center {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {% if section.settings.description != blank %}
+          <div class="get-mixing__heading__desc rich-text-wrap center">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+  
+  {%- if section.blocks.size > 0 -%}
+    {% assign block_type = '' %}
+    {% for block in section.blocks %}
+      {% assign block_type = block.type %}
+    {% endfor %}
+    {%- comment -%}Get mixing slide Image{%- endcomment -%}
+      {%- capture get_mixing_slider_image -%}
+      data-component-class-name='.get-mixing__slide--image'
+      data-pagination=true
+      data-navigation=true
+      data-slides-per-view-mobile=1.2
+      data-slides-per-view-tablet=2
+      data-slides-per-view-laptop=3.5
+      data-slides-per-view-desktop=4.5
+      {%- endcapture -%}
+    {%- comment -%}Get mixing slide Audio{%- endcomment -%}
+      {%- capture get_mixing_slider_audio -%}
+        data-component-class-name='.get-mixing__slide--audio'
+        data-pagination=true
+        data-navigation=true
+        data-slides-per-view-mobile=1.2
+        data-slides-per-view-tablet=2.5
+        data-slides-per-view-laptop=3.5
+        data-slides-per-view-desktop=3.5
+      {%- endcapture -%}
+
+    <swiper-component class="get-mixing__slide {% if block_type == 'audio' %}get-mixing__slide--audio {% else %}get-mixing__slide--image{% endif %}" 
+      {% if block_type == 'audio' %} {{ get_mixing_slider_audio }} {% else %} {{ get_mixing_slider_image }} {% endif %}>
+      <div class="swiper-custom swiper-container get-mixing__slide__wrap">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.type == 'image' %}
+              <style>
+                #get-mixing-item-{{ block.id }} .get-mixing-item__image {
+                  border: {{ section.settings.border_thickness_mobile }}px solid {{ block.settings.border_color }};
+                }
+
+                @media screen and (min-width: 1200px) {
+                  #get-mixing-item-{{ block.id }} .get-mixing-item__image {
+                    border: {{ section.settings.border_thickness }}px solid {{ block.settings.border_color }};
+                  }
+                }
+              </style>
+              <div class="get-mixing-item swiper-slide" id="get-mixing-item-{{ block.id }}">
+                <div class="get-mixing-item__image">
+                  <img src="{{ block.settings.image | image_url: width: 500 }}"> 
+                </div>
+                <h4 class="get-mixing-item__name uppercase">{{ block.settings.cocktail_name }}</h4>
+              </div>
+            {% elsif block.type == 'audio' %}
+              <div class="audio__iframe swiper-slide" id="audio__iframe-{{ block.id }}">
+                <div class="audio__iframe__content audio__iframe__content--relative audio__iframe__content--{{ forloop.index }}">
+                  {% style %}
+                    .audio__iframe__content--{{ forloop.index }} .iframe {
+                      border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+                      background-image: url({{ block.settings.audio_bg | img_url: '720x720' }});
+                    }
+                  {% endstyle %}
+                  <iframe class="iframe iframe--block" width="100%" height="100%"
+                  src="{{ block.settings.url_audio }}" frameborder="0">
+                  </iframe>
+                  <!-- <button class="audio__iframe__content__btn-play">
+                    {% include 'icon-play-iframe' %}
+                  </button> -->
+                </div>
+              </div>
+            {% endif %}
+          {%- endfor -%}
+        </div>
+        <div class="swiper-custom-pagination">&nbsp;</div>
+      </div>
+    </swiper-component>
+
+    {% if block_type == 'audio' %}
+    <div class="get-mixing__button">
+      <a target="_blank" href="{{ section.settings.url_all_mix}}" class="ms-button">See all mixes on mixclound </a>
+    </div>
+    {% endif %}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Get Mixing",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Cocktail image"
+        },
+        {
+          "type": "text",
+          "id": "cocktail_name",
+          "label": "Cocktail name",
+          "default": "Ginger Monkey"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#FAD7AA"
+        }
+      ]
+    },
+    {
+      "type": "audio",
+      "name": "Audio",
+      "settings": [
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "Audio Border Width",
+          "min": 1,
+          "max": 20,
+          "unit": "px",
+          "step": 1,
+          "default": 8
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Audio Border Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "audio_bg",
+          "label": "Audio Background"
+        },
+        {
+          "type": "url",
+          "id": "url_audio",
+          "label": "URL audio"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Get Mixing"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Get Mixing"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Small - h3"
+        },
+        {
+          "value": "h2",
+          "label": "Medium - h2"
+        },
+        {
+          "value": "h1",
+          "label": "Large - h1"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    }, 
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFF5E9"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_thickness_mobile",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Border thickness mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 130
+    },
+    {
+      "type": "url",
+      "id": "url_all_mix",
+      "label": "Url All Mixcloud"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Get Mixing"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,140 @@
+<script src="{{ 'newsletter-sign-up.js' | asset_url }}" defer="defer"></script>
+
+{{ 'newsletter-sign-up.scss.css' | asset_url | stylesheet_tag }}
+
+<section class="newsletter-sign-up">
+  <div class="page-width">
+    <div class="newsletter-sign-up__wrap">
+      <form action="" class="newsletter-sign-up__form">
+        {%- if section.settings.title != blank or section.settings.description != blank -%}
+          <div class="newsletter-sign-up__form__heading">
+            {%- if section.settings.title != blank -%}
+              <h2 class="newsletter-sign-up__form__title section-title-h3 uppercase">{{ section.settings.title }}</h2>
+            {% endif %}
+            {%- if section.settings.description != blank -%}
+              <p class="newsletter-sign-up__form__description">{{ section.settings.description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="newsletter-sign-up__form__content">
+          {%- liquid
+            if theme.name == "Glenfiddich"
+              assign contact_book_id = settings.addressbook_id_glenfiddich
+            elsif theme.name == "The balvenie"
+              assign contact_book_id = settings.addressbook_id_balvenie
+            elsif theme.name == "Monkey shoulder"
+              assign contact_book_id = settings.addressbook_id_monkey_shoulder
+            elsif theme.name == "Hendrick's"
+              assign contact_book_id = settings.addressbook_id_hendrick
+            endif
+          -%}
+          <input type="hidden" name="contactBookID" id="contactBookID" 
+            value="{{ contact_book_id }}"
+          >
+          <div class="wrap-field">      
+            <label class="wrap-field__label" for="newsletter-email">
+              {{ section.settings.email_label }}
+            </label>
+            <span class="wrap-field__required">{{ 'customer.register.required' | t }}</span>
+            <input
+              type="email"
+              name="newsletter-email"
+              class="wrap-field__input"
+              id="newsletter-email"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              aria-required="true"
+              onkeyup=""
+              placeholder="{{ section.settings.email_placeholder }}"
+            >
+          </div>
+          <span class="error-message email-error"></span>
+          {%- if section.settings.disclaimer != blank -%}
+            <div class="newsletter-sign-up__form__disclaimer form-checkbox checkbox-required">
+              <input 
+                type="checkbox" 
+                class="form-checkbox__input"
+                id="newsletter-checkbox" 
+                name="newsletter-checkbox" 
+                value="1"
+              >
+              <label for="newsletter-checkbox" class="form-checkbox__label">
+                {{ section.settings.disclaimer }}
+              </label>
+            </div>
+            <span class="error-message checkbox-error"></span>
+          {% endif %}
+          <div class="newsletter-sign-up__form__btn">
+            <button class="button-global button-global--white newsletter-submit">
+              <span>{{ section.settings.button_label }}</span>
+            </button>
+          </div>
+          <p class="result-mess"></p>
+        </div>
+      </form>
+    </div>
+    {%- if section.settings.event_text != blank -%}
+      <h3 class="newsletter-sign-up__event-text section-title-h3 uppercase">{{ section.settings.event_text }}</h3>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter signup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter signup"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "COMING SOON"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Hendrick’s Gin store will be available soon. You can sign up to be notified when the store is open."
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Email Address"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "<p>By providing your email address, you consent to our Terms and Conditions and Privacy Policy and agree to receive marketing updates. You can unsubscribe at any time.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "CTA label",
+      "default": "notify me"
+    },
+    {
+      "type": "text",
+      "id": "event_text", 
+      "label": "Event text",
+      "default": "OR, CHECK OUT OUR EVENT"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter signup"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,336 @@
+<h3 id="title-order" class="account__tab__title">{{ 'customer.orders.title' | t }}</h2>
+
+{% paginate customer.orders by 10 %}
+  {%- if customer.orders.size > 0 -%}
+    <table role="table" class="account__tab__table" id="table">
+      <caption class="visually-hidden">{{ 'customer.orders.title' | t }}</caption>
+      <thead role="rowgroup">
+        <tr role="row">
+          <th class="account__tab__table__title" id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.order.title' | t }}</th>
+          <th class="account__tab__table__title" id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+          <th class="account__tab__table__title" id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+          <th class="account__tab__table__title" id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.delivery_address' | t }}</th>
+          <!-- <th class="account__tab__table__title" id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.status' | t }}</th> -->
+          <th></th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+        {%- for order in customer.orders -%}
+          <tr role="row">
+            <td class="account__tab__table__content"
+              id="RowOrder"
+              role="cell"
+              headers="ColumnOrder"
+              data-label="{{ 'customer.orders.order_number' | t }}"
+            >
+              {{ order.id }}
+            </td>
+            <td class="account__tab__table__content" headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+              {{ order.created_at | date: '%d/%m/%Y' }}
+            </td>
+            <td class="account__tab__table__content" headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+              {{ order.total_price | money_with_currency }}</td>
+            <td class="account__tab__table__content" headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.delivery_address' | t }}">
+              <div>
+                <span class="account__tab__table__content__customer-name">
+                  {{ order.shipping_address.first_name }} {{ order.shipping_address.last_name }}
+                </span>
+                <span class="account__tab__table__content__address">
+                  {{ order.shipping_address.address1 }}
+                </span>
+              </div>
+            </td>
+            <!-- <td class="account__tab__table__content account__tab__table__content--status" headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.status' | t }}">
+              {{ order.fulfillment_status }}
+            </td> -->
+            <td class="account__tab__table__content">
+              <button class="button-global button-global--white button-view" onclick="openOrder(event, {{ order.id }}, 'order', {{ order.id }})">{{ 'customer.order.view' | t }}</button>
+              <!-- {% if order.fulfillment_status != 'fulfilled' %}
+                <a href="{{ order.order_status_url }}">{{ 'customer.order.track' | t }}</a>
+              {% endif %} -->
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  {%- else -%}
+    <p>{{ 'customer.orders.none' | t }}</p>
+  {%- endif -%}
+
+  {%- if paginate.pages > 1 -%}
+    {%- if paginate.parts.size > 0 -%}
+      <nav id="pagination" class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+        <ul role="list">
+        {%- if paginate.previous -%}
+          <li>
+            <a href="{{ paginate.previous.url }}&tab=myOrder" aria-label="{{ 'general.pagination.previous' | t }}">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <li>
+              <a href="{{ part.url }}&tab=myOrder" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+            </li>
+          {%- else -%}
+            {%- if part.title == paginate.current_page -%}
+              <li aria-current="page">
+                <span aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+              </li>  
+            {%- else -%}
+              <li>
+                <span>{{ part.title }}</span>
+              </li>  
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+          <li>
+            <a href="{{ paginate.next.url }}&tab=myOrder" aria-label="{{ 'general.pagination.next' | t }}" >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  {%- endif -%}
+{% endpaginate %}
+
+{% paginate customer.orders by 10 %}
+  {% for order in customer.orders %}
+  <div class="order-info" id="{{ order.id }}">
+    <button class="button-global button-global--grey order-info__btn">
+      {% include 'icon-arrow-left-black' %}
+      {{ 'customer.order.back' | t }}
+    </button>
+    <h4 class="account__tab__title">{{ 'customer.order.title' | t }} {{ order.id }}</h4>
+    <div class="order-info__top">
+      <div class="order-info__top__wrap">
+        <div class="order-info__title">{{ 'customer.order.order_date' | t }}</div>
+        <span class="order-info__top__wrap__content">{{ order.created_at | date: '%d/%m/%Y' }}</span>
+      </div>
+      <div class="order-info__top__wrap">
+        <div class="order-info__title">{{ 'customer.order.order_status' | t }}</div>
+        <span class="order-info__top__wrap__content">{{ order.fulfillment_status }}</span>
+      </div>
+      <div class="order-info__top__wrap">
+        <a href="{{ order.order_status_url }}" class="order-info__top__link order-info__title order-info__title--uppercase">{{ 'customer.order.track' | t }}</a>
+      </div>
+    </div>
+    <div class="order-info__center">
+      <table>
+        <thead>
+          <th class="order-info__title order-info__title--uppercase">{{ 'customer.order.product' | t }}</th>
+          <th class="order-info__title order-info__title--uppercase order-info__title--center">{{ 'customer.order.quantity' | t }}</th>
+          <th class="order-info__title order-info__title--uppercase order-info__title--right">{{ 'customer.order.subtotal' | t }}</th>
+        </thead>
+        <tbody>
+          {% for item in order.line_items %}
+            <tr class="border">
+              <td class="product">
+                <a class="product__link" href="{{ item.product.url }}">
+                  <img class="product__image" src="{{ item.product.featured_image | img_url: 'medium'}}" alt="">
+                </a>
+                <div class="product__text">
+                  <span class="product__text__brand">{{ item.product.vendor }}</span>
+                  <a href="{{ item.product.url }}" class="product__text__title">
+                    {{ item.product.title }}
+                  </a>
+                </div>
+              </td>
+              <td class="product-quantity">{{ item.quantity }}</td>
+              <td class="price-order">{{ item.product.price | money_with_currency }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td></td>
+            <td class="order-info__title order-info__title--center">{{ 'customer.order.subtotal' | t }}</td>
+            <td class="price-order price-order__subtotal">{{ order.subtotal_price | money_with_currency }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="order-info__title order-info__title--center">{{ 'customer.order.delivery' | t }}</td>
+            <td class="price-order price-order__shipping">{{ order.shipping_price | money_with_currency }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="order-info__title order-info__title--center">{{ 'customer.order.discount' | t }}</td>
+            <td class="price-order price-order__discount">-{{ order.total_discounts | money_with_currency }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="order-info__title order-info__title--uppercase order-info__title--right">{{ 'customer.order.total' | t }}</td>
+            <td class="price-order price-order__total">{{ order.total_price | money_with_currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="order-info__center order-info__center--mobile">
+      <div class="wrap-content">
+        <div class="wrap-content__title">{{ 'customer.order.product' | t }}</div>
+        <div class="wrap-content__title">{{ 'customer.order.subtotal' | t }}</div>
+      </div>
+      <div class="order-info__center__content">
+        {% for item in order.line_items %}
+          <div class="wrap-content">
+            <div class="wrap-content__product">
+              <div class="wrap-content__product__img">
+                <a class="wrap-content__product__link" href="{{ item.product.url }}">
+                  <img src="{{ item.product.featured_image | img_url }}" alt="">
+                </a>
+                <div class="wrap-content__product__text">
+                  <span>{{ item.product.vendor }}</span>
+                  <a class="wrap-content__title" href="{{ item.product.url }}">{{ item.product.title }}</a>
+                </div>
+              </div>
+              <span class="wrap-content__quantity">{{ 'customer.order.quantity' | t }}: {{ item.quantity }}</span>
+            </div>
+            <div class="wrap-content__subtotal">
+              {{ item.product.price | money_with_currency }}
+            </div>
+          </div>
+        {% endfor %}
+        <div class="wrap-content wrap-content--no-border">
+          <div class="order-info__title">{{ 'customer.order.subtotal' | t }}</div>
+          <div>{{ order.subtotal_price | money_with_currency }}</div>
+        </div>
+        <div class="wrap-content wrap-content--no-border">
+          <div class="order-info__title">{{ 'customer.order.delivery' | t }}</div>
+          <div>{{ order.shipping_price | money_with_currency }}</div>
+        </div>
+        <div class="wrap-content">
+          <div class="order-info__title">{{ 'customer.order.discount' | t }}</div>
+          <del>{{ order.total_discounts | money_with_currency }}</del>
+        </div>
+        <div class="wrap-content">
+          <div class="order-info__title">{{ 'customer.order.total' | t }}</div>
+          <div class="wrap-content__total">{{ order.total_price | money_with_currency }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="order-info__bottom">
+      <h5 class="order-info__bottom__title">{{ 'customer.order.title-info' | t }}</h5>
+      <div class="order-info__bottom__wrap order-info__bottom__wrap--shipping">
+        <div>
+          <div class="order-info__bottom__wrap__title">{{ 'customer.order.delivery_address' | t }}</div>
+          <div class="order-info__bottom__wrap__content">
+            <span>
+              {{ order.customer.first_name }} {{ order.customer.last_name }}
+            </span>
+            <span class="order__address">
+              {{ order.shipping_address.address1 }}
+            </span>
+            <span>
+              {{ order.shipping_address.country }} {{ order.shipping_address.zip }}
+            </span>
+            <span>
+              {{ 'customer.addresses.phone' | t }} {{ order.shipping_address.phone }}
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="order-info__bottom__wrap__title">{{ 'customer.order.delivery_method' | t }}</div>
+          <span>{{ order.shipping_method.title }}</span>
+        </div>
+      </div>
+      <div class="order-info__bottom__wrap order-info__bottom__wrap--billing">
+        <div>
+          <div class="order-info__bottom__wrap__title">{{ 'customer.order.billing_address' | t }}</div>
+          <div class="order-info__bottom__wrap__content">
+            <span>
+              {{ order.customer.first_name }} {{ order.customer.last_name }}
+            </span>
+            <span>
+              {{ order.billing__address.address1 }}
+            </span>
+            <span>
+              {{ order.billing_address.country }} {{ order.billing_address.zip }}
+            </span>
+            <span>
+              {{ 'customer.addresses.phone' | t }} {{ order.billing_address.phone }}
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="order-info__bottom__wrap__title">{{ 'customer.order.payment_method' | t }}</div>
+          <span>
+            {% if order.payment_details %} 
+              {% if order.payment_details.credit_card_company contains 'Visa' %}
+                {% render 'icon', name: 'visa'%}
+              {% elsif order.payment_details.credit_card_company contains 'Mastercard' %}
+                {% render 'icon', name: 'master-card'%}
+              {% elsif order.payment_details.credit_card_company contains 'American Express' %}
+                {% render 'icon', name: 'amex'%}
+              {% endif %}
+              ending with {{ order.payment_details.credit_card_number | split : ' ' | last }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endpaginate %}
+
+<script>
+  let el = document.getElementById('pagination') || false
+  function openOrder(ev, name, param, valueParam) {
+    var i, orderDetail;
+    orderDetail = document.getElementsByClassName("order-info");
+    for (i = 0; i < orderDetail.length; i++) {
+      orderDetail[i].classList.remove('active');
+    }
+    document.getElementById(name).classList.add('active');
+    document.getElementById('table').classList.add('hidden');
+    document.getElementById('title-order').classList.add('hidden');
+    if (el) {
+      el.classList.add('hidden');
+    }
+    const params = new URLSearchParams(window.location.search);
+    params.set(param, valueParam);
+    window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
+  }
+
+let urlParam = window.location.search.substring(1);
+let paramInfo = urlParam.split('&');
+var objParam = {};
+paramInfo.forEach(function(property) {
+  var tup = property.split('=');
+  objParam[tup[0]] = tup[1];
+});
+
+let btnBack = document.querySelectorAll('.order-info__btn');
+for (let i = 0; i < btnBack.length; i++) {
+  const btn = btnBack[i];
+  btn.addEventListener('click', function () {
+    if (objParam.page) {
+      window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?page=${objParam.page}&tab=myOrder`));
+    } else
+      window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?tab=myOrder`));
+    document.getElementById('table').classList.remove('hidden');
+    document.getElementById('title-order').classList.remove('hidden');
+    if (el) {
+      el.classList.remove('hidden');
+    }
+    this.parentElement.classList.remove('active');
+  })
+}
+
+// Check param active order
+if (objParam.order) {
+  document.getElementById(`${objParam.order}`).classList.add('active');
+  document.getElementById('table').classList.add('hidden');
+  document.getElementById('title-order').classList.add('hidden');
+  if (el) {
+    el.classList.add('hidden');
+  }
+}
+</script>

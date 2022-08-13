@@ -1,0 +1,80 @@
+// Breakpoint
+$tablet-screen: 768px;
+$desktop-screen: 1024px;
+$desktop-screen-large: 1440px;
+
+$color-grey3: {{ settings.grey3_color }};
+
+.newsletter-advanced {
+  padding: 20px 0 67px;
+
+  @media (min-width: $desktop-screen) {
+    padding: 50px 0 80px;
+  }
+
+  .newsletter-advanced__logo {
+    margin-bottom: 40px;
+
+    @media (min-width: $desktop-screen) {
+      margin-bottom: 36px;
+    }
+  }
+
+  .newsletter-advanced__heading {
+    margin: 0 auto 24px;
+    max-width: 580px;
+
+    @media (min-width: $desktop-screen) {
+      margin: 0 auto 40px;
+    }
+  }
+
+  .newsletter-advanced__heading__title {
+    @media (min-width: $desktop-screen) {
+      line-height: 60px;
+    }
+  }
+
+  .newsletter-advanced__heading__description {
+    margin: 20px 0 0;
+
+    @media (min-width: $desktop-screen) {
+      margin: 27px 0 0;
+    }
+  }
+
+  .newsletter-advanced__form__disclaimer {
+    font-size: calc(var(--global-text-fs) - 2px); 
+
+    .form-checkbox__label {
+      a {
+        font-size: inherit;
+      }
+    }
+  }
+
+  .newsletter-advanced__form {
+    margin: 0 auto;
+    max-width: 450px;
+
+    @media (min-width: $desktop-screen) {
+      margin: 0 auto;
+    }
+  }
+
+  .newsletter-advanced__form__btn {
+    margin-top: 20px;
+  }
+
+  .newsletter-advanced-submit {
+    margin: 0 auto;
+  }
+
+  .newsletter-advanced__wrap.hidden {
+    display: none;
+  }
+
+  .wrap-field .wrap-field__input {
+    background: transparent;
+  }
+}

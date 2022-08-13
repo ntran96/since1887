@@ -1,0 +1,34 @@
+.discounts {
+  font-size: calc(var(--global-text-fs) - 6px);
+  letter-spacing: .045em;
+}
+
+.discounts__discount {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.discounts__discount {
+  margin-top: 5px;
+}
+
+.discounts__discount svg {
+  position: relative;
+  top: -1px;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .discounts {
+    font-size: calc(var(--global-text-fs) - 2px);
+    letter-spacing: .06em;
+  }
+
+  .discounts__discount svg {
+    width: 20px;
+    height: 20px;
+  }
+}

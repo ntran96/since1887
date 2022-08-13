@@ -1,0 +1,101 @@
+<ul class="social-list list-unstyled">
+  {%- if settings.social_twitter_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_twitter_link }}">
+        {%- if section.settings.social_twitter_icon != blank -%}
+          <img src="{{ section.settings.social_twitter_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.twitter' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_facebook_link }}">
+        {%- if section.settings.social_facebook_icon != blank -%}
+          <img src="{{ section.settings.social_facebook_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.facebook' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_pinterest_link }}">
+        {%- if section.settings.social_pinterest_icon != blank -%}
+          <img src="{{ section.settings.social_pinterest_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.pinterest' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_instagram_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_instagram_link }}">
+        {%- if section.settings.social_instagram_icon != blank -%}
+          <img src="{{ section.settings.social_instagram_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.instagram' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_tiktok_link }}">
+        {%- if section.settings.social_tiktok_icon != blank -%}
+          <img src="{{ section.settings.social_tiktok_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.tiktok' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tumblr_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_tumblr_link }}">
+        {%- if section.settings.social_tumblr_icon != blank -%}
+          <img src="{{ section.settings.social_tumblr_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.tumblr' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_snapchat_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_snapchat_link }}">
+        {%- if section.settings.social_snapchat_icon != blank -%}
+          <img src="{{ section.settings.social_snapchat_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.snapchat' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_youtube_link }}">
+        {%- if section.settings.social_youtube_icon != blank -%}
+          <img src="{{ section.settings.social_youtube_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.youtube' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_vimeo_link != blank -%}
+    <li class="social-list__item">
+      <a target="_blank" href="{{ settings.social_vimeo_link }}">
+        {%- if section.settings.social_vimeo_icon != blank -%}
+          <img src="{{ section.settings.social_vimeo_icon | img_url: 'x32' }}" alt="{{ 'general.social.links.twitter' | t }}" width="32" height="32">
+        {%- else -%}
+          {{ 'general.social.links.vimeo' | t }}
+        {%- endif -%}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

@@ -1,0 +1,118 @@
+{{ 'ms-history.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+.ms-history-{{ section.id }} .ms-history__list {
+  background: {{ section.settings.background_color }}
+}
+
+@media screen and (min-width: 1024px) {
+  .ms-history-{{ section.id }} .ms-history__list {
+    background: transparent;
+  }
+
+  .ms-history-{{ section.id }} .ms-history__item:nth-child(odd) {
+    background: {{ section.settings.background_color }}
+  }
+}
+
+{%- endstyle -%}
+
+<section class="ms-history ms-history-{{ section.id }}">
+  {%- if section.settings.title != blank -%}
+    <div class="ms-history__heading page-width">
+      <h3 class="ms-history__heading__title h1 uppercase center">{{ section.settings.title }}</h3>
+    </div>
+  {% endif %}
+  {%- if section.blocks.size > 0 -%}
+    <ul class="ms-history__list list-unstyled">
+      {%- for block in section.blocks -%}
+        <li class="ms-history__item">
+          <div class="ms-history__item__wrap page-width">
+            {%- if block.settings.title != blank or block.settings.description != blank -%}
+              <div class="ms-history__item__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="ms-history__item__title uppercase">{{ block.settings.title}}</h3>
+                {% endif %}
+                {%- if block.settings.description != blank -%}
+                  <div class="ms-history__item__description rich-text-wrap">{{ block.settings.description}}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+            {%- if block.settings.image != blank or block.settings.image_mobile != blank -%}
+              <div class="ms-history__item__image">
+                <div class="ms-history__item__image__inner">
+                  {%- if block.settings.image != blank -%}
+                    <img class="{%- if block.settings.image_mobile != blank -%}image-desktop{% endif %}" src="{{ block.settings.image | image_url: width: 1024 }}">
+                  {% endif %}
+                  {%- if block.settings.image_mobile != blank -%}
+                    <img class="{%- if block.settings.image != blank -%}image-mobile{% endif %}" src="{{ block.settings.image_mobile | image_url: width: 1024 }}">
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "MS History",
+  "blocks": [
+    {
+      "type": "history_item",
+      "name": "History Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "History Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "History Image Mobile"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "html",
+          "id": "description",
+          "label": "Description",
+          "default": "Monkey Shoulder is born of one of the oldest whisky making Scottish families in the world, William Grant & Sons. Still family owned today, William Grant & Sons has been distilling the finest Scotch whiskies since 1887."
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "MS History"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "BORN IN SCOTLAND"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FAD7AA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MS History"
+    }
+  ]
+}
+{% endschema %}

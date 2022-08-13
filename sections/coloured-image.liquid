@@ -1,0 +1,99 @@
+{{ 'coloured-image.scss.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+  .coloured-image-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+{%- endstyle -%}
+
+<section class="coloured-image coloured-image-{{ section.id }}">
+  <div class="page-width">
+    <div class="coloured-image__wrap">
+      <div class="coloured-image__image">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 850 }}">
+        {% endif %}
+      </div>
+      <div class="coloured-image__content">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="coloured-image__subtitle">{{ section.settings.subtitle }}</span>
+        {% endif %}
+        {%- if section.settings.title != blank -%}
+          <h3 class="coloured-image__title">{{ section.settings.title }}</h3>
+        {% endif %}
+        {%- if section.settings.description != blank -%}
+          <div class="coloured-image__description">{{ section.settings.description }}</div>
+        {% endif %}
+        {%- if section.settings.button_text != blank -%}
+          <a class="coloured-image__link button--link" role="link" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Couloured Image",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Couloured Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subtitle"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#DB613A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Couloured Image"
+    }
+  ]
+}
+{% endschema %}

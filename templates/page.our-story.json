@@ -1,0 +1,264 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "165552148515c66ba7": {
+      "type": "image-banner",
+      "settings": {
+        "layout": "full_bleed",
+        "image": "shopify:\/\/shop_images\/our-story-banner-bg.png",
+        "image_mb": "shopify:\/\/shop_images\/our-story-banner-bg-mobile.png",
+        "image_overlay_opacity": 50,
+        "subheading": "",
+        "heading": "Whisky MakerS of Dufftown",
+        "descriptions": "Few men have built their own distillery with their own bare hands.\nBut that’s exactly how William Grant started writing our story.",
+        "button_text": "",
+        "link": "",
+        "heading_size": "h2",
+        "highlight_description": true,
+        "desktop_content_alignment": "center",
+        "background_color": "",
+        "text_color": "#ffffff",
+        "subheading_color": "",
+        "show_text_below": false
+      }
+    },
+    "165554551071411947": {
+      "type": "our-founder",
+      "settings": {
+        "title": "OUR FOUNDER, <br> A VISIONARY",
+        "subtitle": "For 20 years William Grant nurtured a dream to make the ‘best dram in the valley’. With the help of his family, he finally achieved that vision.",
+        "image": "shopify:\/\/shop_images\/founder-image.png",
+        "description": "For 20 years William Grant nurtured a dream to make the ‘best dram in the valley’. With the help of his family, he finally achieved that vision.\n <br>\n<br>\nIn the summer of 1886, with his seven sons and two daughters by his side, William set out to fulfil a lifelong ambition. Together they began building his Distillery by hand, stone by stone. After a single year of work it was ready and William named it Glenfiddich, Gaelic for Valley of the Deer.\n <br>\n<br>\nWilliam’s passion, determination and pioneering spirit continues to guide us today. Glenfiddich is one of the few single malt distilleries to remain entirely family owned and is now the World's Most Awarded Single Malt* Scotch Whisky, a true reflection of our founder’s innovative nature, passed down through the generations."
+      }
+    },
+    "165554552605157829": {
+      "type": "our-story",
+      "blocks": {
+        "011c9192-e528-470e-966c-87d7632d7047": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/time-line-1_79938c8d-1179-4620-8c77-4897c918ac07.png",
+            "image_background": "shopify:\/\/shop_images\/time-line-1.png",
+            "image_overlay_opacity": 85,
+            "year": "1887",
+            "description": "William Grant fulfils a lifelong ambition and starts building his own distillery with the help of his nine children and a single stone mason. He names it Glenfiddich, Gaelic for Valley of the Deer. After a year of hard labour the first drop of spirit falls from our copper stills on Christmas Day 1887."
+          }
+        },
+        "4af950e3-89b7-43d3-8cfc-9cdf09a4cd6a": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/timeline-2.png",
+            "image_background": "shopify:\/\/shop_images\/timeline-2.png",
+            "image_overlay_opacity": 85,
+            "year": "1923",
+            "description": "Prohibition is in full swing. William’s grandson Grant Gordon joins the family firm, surprises the industry and increases whisky production. As the decade and the law turns, we are one of only six distilleries still operating in Scotland. Ready to meet a new surge in demand for fine, aged whiskies."
+          }
+        },
+        "d8d05045-0417-4b78-affc-3b732427d5e3": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active.png",
+            "image_background": "shopify:\/\/shop_images\/Active.png",
+            "image_overlay_opacity": 85,
+            "year": "1957",
+            "description": "Charles Gordon, William’s great grand son, insists on having coppersmiths onsite at the Distillery. They are rare and skilled craftsmen, always on hand to build and tend to our uniquely shaped and sized copper stills."
+          }
+        },
+        "71241ef0-6a26-4fe3-8400-c50e0918297f": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_67d7d819-1cf2-4140-a5d4-c7a08cd6a8ef.png",
+            "image_background": "shopify:\/\/shop_images\/Active_67d7d819-1cf2-4140-a5d4-c7a08cd6a8ef.png",
+            "image_overlay_opacity": 85,
+            "year": "1959",
+            "description": "Soon after coppersmiths are brought onsite, Gordon Grant builds up a dedicated cooperage. Never underestimating the importance of casks in developing exceptional whiskies, our onsite cooperage is one of the few that remain in distilleries today."
+          }
+        },
+        "9574120e-a997-49aa-9f78-6677ed0aede7": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_c1e8199a-06ae-4620-919e-1e34ecbc5c01.png",
+            "image_background": "shopify:\/\/shop_images\/Active_c1e8199a-06ae-4620-919e-1e34ecbc5c01.png",
+            "image_overlay_opacity": 85,
+            "year": "1961",
+            "description": "Water, air and malted barley. A trinity expertly crafted to make a Glenfiddich whisky. It inspires influential 20th century designer Hans Schleger to create a radical design of the time, our triangular bottle."
+          }
+        },
+        "d9d058fa-26f1-4538-b828-1da1630c6c0e": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_b7edaa08-5934-4f8c-96c5-0a48d8fdcadb.png",
+            "image_background": "shopify:\/\/shop_images\/Active_b7edaa08-5934-4f8c-96c5-0a48d8fdcadb.png",
+            "image_overlay_opacity": 85,
+            "year": "1963",
+            "description": "Sandy Grant Gordon, great grandson of William, is so proud of our single malt that he makes Glenfiddich the first to be actively promoted outside Scotland. Consumers around the world used to drinking blended whisky, are initiated to the delights of single malt. Until then a well-kept secret of the Scots."
+          }
+        },
+        "71c96285-ff2d-4532-9715-2963c6207257": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_07f9e9a1-778b-4b22-bdd8-9e7ac2cf5fcb.png",
+            "image_background": "shopify:\/\/shop_images\/Active_07f9e9a1-778b-4b22-bdd8-9e7ac2cf5fcb.png",
+            "image_overlay_opacity": 85,
+            "year": "1887",
+            "description": "A special time at our Distillery. We celebrate our 100 year anniversary with a centenary bottling commemorating our founder and his dream to create ‘the best dram in the valley’."
+          }
+        },
+        "02c92ef1-bd88-46bc-9005-ec5efb77ab37": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_8cb9c051-0439-469c-8298-5d389568474d.png",
+            "image_background": "shopify:\/\/shop_images\/Active_8cb9c051-0439-469c-8298-5d389568474d.png",
+            "image_overlay_opacity": 85,
+            "year": "1991",
+            "description": "One of the most collectable and rare whiskies is released. The first ever vatting of our 50 Year Old. Married to perfection from nine casks laid down in the 1930s, we honour each of William Grant‘s children who helped to build our family distillery."
+          }
+        },
+        "0da15692-a2bf-4cf1-928f-761f4f9db9c9": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-1.png",
+            "image_background": "shopify:\/\/shop_images\/Active-1.png",
+            "image_overlay_opacity": 85,
+            "year": "1998",
+            "description": "Independent as ever, invention flourishes at Glenfiddich. With over 35 years of experience and industry-wide recognition, our fifth Malt Master creates the Solera Vat. A pioneering process used to craft our 15 Year Old. An expression, which to this day is awarded for its complex and intense flavours."
+          }
+        },
+        "4bb3932d-62a3-4b81-bd7a-5ab27e5bc3f5": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-2.png",
+            "image_background": "shopify:\/\/shop_images\/Active-2.png",
+            "image_overlay_opacity": 85,
+            "year": "2001",
+            "description": "We release the oldest single malt whisky. In 1937, cask 843 was filled and began its 64-year journey. Along the way, while ten consecutive Warehouse Masters watched over it, the angels took their share. Leaving only 61 bottles of this very rare whisky."
+          }
+        },
+        "1d82fa47-66a5-4906-9c11-299f8345cadc": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-3.png",
+            "image_background": "shopify:\/\/shop_images\/Active-3.png",
+            "image_overlay_opacity": 85,
+            "year": "2009",
+            "description": "The second vatting of our 50 Year Old. Only 50 hand-blown, individually numbered bottles are released each year. Hallmarked in Scottish silver and finished in hand-stitched leather. Just like the leather-bound journal William carefully kept."
+          }
+        },
+        "33ab024a-f2a6-4c07-a834-b4e727c52d8c": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-4.png",
+            "image_background": "shopify:\/\/shop_images\/Active-4.png",
+            "image_overlay_opacity": 85,
+            "year": "2010",
+            "description": "Glenfiddich pays homage to its origins in the Valley of the Deer with a striking new package design for its flagship range.\nThe bold new look celebrates Glendiddich’s maverick beginnings and family-run heritage and combines it with a more sophisticated and elegant design. The 12 Year Old has been given a refined makeover and is now known as the ‘Our Original Twelve’, as a clear nod to the brand’s signature expression. Meanwhile, the 15 Year Old has been rebranded as ‘Our Solera Fifteen’, as a more overt celebration of the brand’s Solera system; a true innovation in the whisky industry whilst the 18 Year Old is ‘Our Small Batch eighteen’ emphasising on how it is nurtured and matured in small batches."
+          }
+        },
+        "e92c73c0-aa83-4ed5-8cb0-3659cbae8645": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active_4885f493-84f9-45f9-b39d-ec53a05980f8.png",
+            "image_background": "shopify:\/\/shop_images\/Active_4885f493-84f9-45f9-b39d-ec53a05980f8.png",
+            "image_overlay_opacity": 85,
+            "year": "2011",
+            "description": "The most expensive single malt sells at auction. We honour Scotland’s oldest woman, admired and respected for her achievements in education. Janet Sheed Roberts is the last grandchild of our founder. Only 11 bottles of Janet Sheed Roberts Reserve are released worldwide. Each are auctioned for charity, setting world records."
+          }
+        },
+        "fad5d1a3-0e15-46e2-9b0a-25e0fa2eeea2": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-5.png",
+            "image_background": "shopify:\/\/shop_images\/Active-5.png",
+            "image_overlay_opacity": 85,
+            "year": "2019",
+            "description": "Our Flagship range gets a new design. The bold new look pays homage to its origins in the valley of the deer and celebrates Glenfiddich's maverick beginnings and family run heritage with a more sophisticated and elegant design."
+          }
+        },
+        "3f4164da-a8e9-49ed-b744-188e47ec6dc2": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-6.png",
+            "image_background": "shopify:\/\/shop_images\/Active-6.png",
+            "image_overlay_opacity": 85,
+            "year": "2021",
+            "description": "Glenfiddich continues to push boundaries in whisky innovation by launching a series of 15 limited edition liquor NFTs. Each NFT corresponds to a physical, exceptional bottle of a 1973 46 year old Armagnac cask finish Single Malt Scotch Whisky."
+          }
+        },
+        "f87fa858-2280-4378-93f1-9244dedd310a": {
+          "type": "story_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Active-7.png",
+            "image_background": "shopify:\/\/shop_images\/Active-7.png",
+            "image_overlay_opacity": 85,
+            "year": "2021",
+            "description": "Our 1950s collection was auctioned at Distillers one of one auction for over £1m.\nProceeds from the auction benefit the youth action fund, which has been created by the distillers’ charity focusing on supporting disadvantaged young people in Scotland, transforming their life chances and empowering them to create positive change in their lives and communities."
+          }
+        }
+      },
+      "block_order": [
+        "011c9192-e528-470e-966c-87d7632d7047",
+        "4af950e3-89b7-43d3-8cfc-9cdf09a4cd6a",
+        "d8d05045-0417-4b78-affc-3b732427d5e3",
+        "71241ef0-6a26-4fe3-8400-c50e0918297f",
+        "9574120e-a997-49aa-9f78-6677ed0aede7",
+        "d9d058fa-26f1-4538-b828-1da1630c6c0e",
+        "71c96285-ff2d-4532-9715-2963c6207257",
+        "02c92ef1-bd88-46bc-9005-ec5efb77ab37",
+        "0da15692-a2bf-4cf1-928f-761f4f9db9c9",
+        "4bb3932d-62a3-4b81-bd7a-5ab27e5bc3f5",
+        "1d82fa47-66a5-4906-9c11-299f8345cadc",
+        "33ab024a-f2a6-4c07-a834-b4e727c52d8c",
+        "e92c73c0-aa83-4ed5-8cb0-3659cbae8645",
+        "fad5d1a3-0e15-46e2-9b0a-25e0fa2eeea2",
+        "3f4164da-a8e9-49ed-b744-188e47ec6dc2",
+        "f87fa858-2280-4378-93f1-9244dedd310a"
+      ],
+      "settings": {
+        "title": "Here is our story."
+      }
+    },
+    "1655521500932cbcac": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Where next?",
+        "heading_size": "title-smaller",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "frontpage",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "slide_button_position": "slider-buttons--right",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "background-1",
+        "columns_tablet": 2,
+        "columns_mobile": "1",
+        "image_ratio": "square",
+        "show_metafield_image": true,
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_price": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165552148515c66ba7",
+    "165554551071411947",
+    "165554552605157829",
+    "1655521500932cbcac"
+  ]
+}

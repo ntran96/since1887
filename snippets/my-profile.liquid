@@ -1,0 +1,45 @@
+<div class="account__tab__content-top">
+  <h3 class="account__tab__title">{{ 'customer.account.profile' | t }}</h1>
+  <span class="account__tab__sub-title">{{ 'customer.account.details' | t }}</span>
+  <button class="account__tab__content-top__btn" id="btnEdit" aria-expanded="false">
+    {% render 'icon-edit'%}
+  </button>
+  {% include 'edit-profile' %}
+  <div class="account__tab__content-top__wrap">
+    <dl>
+      <dt class="account__tab__content-top__wrap__title">
+        {{ 'customer.account.name' | t }}
+      </dt>
+      <dd class="account__tab__content-top__wrap__value account__tab__content-top__wrap__value--name">
+        {{ customer.name }}
+      </dd>
+    </dl>
+    <dl>
+      <dt class="account__tab__content-top__wrap__title">
+        {{ 'customer.account.date' | t }}
+      </dt>
+      <dd id="dateOfBirth" class="account__tab__content-top__wrap__value account__tab__content-top__wrap__value--dob">
+      </dd>
+    </dl>
+    <dl>
+      <dt class="account__tab__content-top__wrap__title">
+        {{ 'customer.account.email' | t }}
+      </dt>
+      <dd class="account__tab__content-top__wrap__value account__tab__content-top__wrap__value--mail">
+        {{ customer.email }}
+      </dd>
+    </dl>
+  </div>
+</div>
+<div class="account__tab-bottom">
+  <h3 class="account__tab__sub-title">
+    {{ 'customer.change_password.title' | t }}
+  </h3>
+  <p class="update-pass-success">{{ 'customer.reset_password.success_text' | t }}</p>
+  <div data-pw>  
+    <button id="changePasswordButton" class="accoutn-bottom__btn button-global button-global--white" aria-expanded="false">{{ 'customer.change_password.change' | t }}</button>
+    <a href="{{ routes.account_reset_password }}">{{ customer.password }}</a>
+    {% include 'reset-password-form' %}
+  </div>
+</div>  
+<script src="{{ 'account.js' | asset_url }}" defer></script>

@@ -1,0 +1,260 @@
+{{ 'checkout-breadcrum.scss.css' | asset_url | stylesheet_tag }}
+
+{% if checkout.requires_shipping == false %}{% comment %} Breadcrum when product needn't shipping {% endcomment %}
+  {% if content_for_layout contains 'data-step="contact_information"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--current">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'delivery-info-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.delivery_info' | t }}
+      </span>
+    </li>
+    <li class="breadcrum-checkout__item">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'payment-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.payment' | t }}
+      </span>
+    </li>
+  </ul>
+  {% elsif content_for_layout contains 'data-step="payment_method"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=contact_information" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'delivery-info-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_info' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--current">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'payment-checkout-fill' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.payment' | t }}
+      </span>
+    </li>
+  </ul>
+  {% elsif content_for_layout contains 'data-step="review"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=contact_information" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'delivery-info-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_info' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=payment_method" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'payment-checkout-fill' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.payment' | t }}
+        </span>
+      </a>
+    </li>
+  </ul>
+  {% endif %}
+{% else %} {% comment %} Breadcrum when product need shipping {% endcomment %}
+  {% if content_for_layout contains 'data-step="contact_information"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--current">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'delivery-info-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.delivery_info' | t }}
+      </span>
+    </li>
+    <li class="breadcrum-checkout__item">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'shipping-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.delivery_method' | t }}
+      </span>
+    </li>
+    <li class="breadcrum-checkout__item">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'payment-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.payment' | t }}
+      </span>
+    </li>
+  </ul>
+  {% elsif content_for_layout contains 'data-step="shipping_method"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=contact_information" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'delivery-info-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_info' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--current">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'shipping-checkout-fill' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.delivery_method' | t }}
+      </span>
+    </li>
+    <li class="breadcrum-checkout__item">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'payment-checkout' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.payment' | t }}
+      </span>
+    </li>
+  </ul>
+  {% elsif content_for_layout contains 'data-step="payment_method"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=contact_information" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'delivery-info-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_info' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=shipping_method" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'shipping-checkout-fill' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_method' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--current">
+      <span class="breadcrum-checkout__icon">
+        {% render "icon", name: 'payment-checkout-fill' %}
+      </span>
+      <span class="breadcrum-checkout__text">
+        {{ 'checkout.payment' | t }}
+      </span>
+    </li>
+  </ul>
+  {% elsif content_for_layout contains 'data-step="review"' %}
+  <ul class="breadcrum-checkout">
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'cart-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.cart' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=contact_information" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'delivery-info-checkout' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_info' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=shipping_method" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'shipping-checkout-fill' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.delivery_method' | t }}
+        </span>
+      </a>
+    </li>
+    <li class="breadcrum-checkout__item breadcrum-checkout__item--complete">
+      <a href="/cart/checkout?step=payment_method" class="breadcrum-checkout__link">
+        <span class="breadcrum-checkout__icon">
+          {% render "icon", name: 'payment-checkout-fill' %}
+        </span>
+        <span class="breadcrum-checkout__text">
+          {{ 'checkout.payment' | t }}
+        </span>
+      </a>
+    </li>
+  </ul>
+  {% endif %}
+{% endif %}

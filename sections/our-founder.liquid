@@ -1,0 +1,67 @@
+{{ 'our-founder.scss.css' | asset_url | stylesheet_tag }}
+
+<section class="our-founder">
+  <div class="our-founder__wrap">
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <div class="our-founder__heading">
+        {%- if section.settings.title != blank -%}
+          <h3 class="our-founder__heading__title uppercase">{{ section.settings.title }}</h3>
+        {% endif %}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="our-founder__heading__subtitle uppercase">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    {%- if section.settings.image != blank or section.settings.description != blank -%}
+      <div class="our-founder__info">
+        {%- if section.settings.image != blank -%}
+          <div class="our-founder__info__image">
+            <img src="{{ section.settings.image | image_url: width: 800 }}">
+          </div>
+        {% endif %}
+        {%- if section.settings.description != blank -%}
+          <p class="our-founder__info__desc">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Founder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Our Founder"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "OUR FOUNDER, A VISIONARY"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "For 20 years William Grant nurtured a dream to make the ‘best dram in the valley’. With the help of his family, he finally achieved that vision"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Founder"
+    }
+  ]
+}
+{% endschema %}
